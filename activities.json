@@ -274,10 +274,10 @@
       "id": 31,
       "age": "9-12",
       "location": "indoor",
-      "materials": ["tape"],
+      "materials": ["tape", "paper", "scissors"],
       "independent": true,
       "duration": "long",
-      "text": "Tape maze: Create a maze on the floor with tape and have your child navigate it with a cotton ball using a straw."
+      "text": "Tape maze engineering: Design an elaborate maze with multiple levels using tape, paper bridges, and obstacles."
     },
     {
       "id": 32,
@@ -286,7 +286,7 @@
       "materials": ["paper", "pencils"],
       "independent": true,
       "duration": "medium",
-      "text": "Comic strip creation: Make a 3-panel comic about your day."
+      "text": "Graphic novel creation: Develop characters and draw a 3-page comic story with speech bubbles."
     },
     {
       "id": 33,
@@ -295,16 +295,16 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Photography scavenger hunt: Take photos of specific items or themes."
+      "text": "Photo story challenge: Take 5 photos that tell a story without words, then have others guess the plot."
     },
     {
       "id": 34,
       "age": "9-12",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["paper", "tape"],
       "independent": false,
       "duration": "quick",
-      "text": "Minute to win it challenges: Set up quick challenges like stacking cups in a minute."
+      "text": "Paper structure challenge: Build a structure using exactly 5 sheets of paper and 12 inches of tape that can hold a book."
     },
     {
       "id": 35,
@@ -313,7 +313,7 @@
       "materials": ["ball"],
       "independent": false,
       "duration": "medium",
-      "text": "HORSE basketball: Take turns making trick shots."
+      "text": "Basketball skill drill: Create a course with different shooting spots worth varying points."
     },
     {
       "id": 36,
@@ -322,16 +322,16 @@
       "materials": ["cards"],
       "independent": true,
       "duration": "medium",
-      "text": "Card game tournament: Play multiple rounds of simple card games."
+      "text": "Card game marathon: Play 3 different card games back-to-back, keeping cumulative scores."
     },
     {
       "id": 37,
       "age": "9-12",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["paper", "scissors", "tape"],
       "independent": true,
       "duration": "long",
-      "text": "DIY escape room: Create simple puzzles around a theme."
+      "text": "Escape room design: Create 3 puzzle boxes with paper clues, locked with tape seals."
     },
     {
       "id": 38,
@@ -340,7 +340,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Flashlight tag: Play tag at dusk using flashlights."
+      "text": "Flashlight treasure hunt: Hide objects and create a glow-in-the-dark map using flashlight clues."
     },
     {
       "id": 39,
@@ -349,16 +349,16 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Lip sync battle: Perform songs with dramatic lip syncing."
+      "text": "Music video challenge: Lip sync and choreograph a full song performance."
     },
     {
       "id": 40,
       "age": "9-12",
       "location": "outdoor",
-      "materials": ["none"],
+      "materials": ["ball", "tape"],
       "independent": true,
       "duration": "long",
-      "text": "Obstacle course challenge: Time each other through a homemade course."
+      "text": "Olympic challenge course: Design 5 different ball games with tape-marked courts and keep score."
     },
     {
       "id": 41,
@@ -367,7 +367,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "DIY podcast: Record a short podcast about a topic they love."
+      "text": "Podcast production: Record a 10-minute episode about a topic they're passionate about."
     },
     {
       "id": 42,
@@ -376,7 +376,7 @@
       "materials": ["paper", "pencils"],
       "independent": true,
       "duration": "medium",
-      "text": "Pictionary tournament: Play with increasingly difficult words."
+      "text": "Pictionary tournament: Play with custom-drawn word cards in multiple difficulty levels."
     },
     {
       "id": 43,
@@ -385,7 +385,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Geocaching: Try this real-world treasure hunting game using GPS."
+      "text": "Geocaching adventure: Find 3 local geocaches or create your own hidden container."
     },
     {
       "id": 44,
@@ -394,7 +394,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "TikTok challenge: Create a dance or comedy video together."
+      "text": "TikTok challenge: Film and edit three 15-second creative videos."
     },
     {
       "id": 45,
@@ -403,7 +403,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "MasterChef challenge: Cook a meal with mystery ingredients."
+      "text": "MasterChef challenge: Cook a three-course meal using only available ingredients."
     },
     {
       "id": 46,
@@ -412,7 +412,7 @@
       "materials": ["ball"],
       "independent": true,
       "duration": "medium",
-      "text": "Spikeball: Play this energetic game if you have the set, or improvise."
+      "text": "Spikeball tournament: Set up a bracket competition with customized rules."
     },
     {
       "id": 47,
@@ -421,7 +421,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Movie marathon with themes: Watch back-to-back movies in a specific genre."
+      "text": "Film festival: Watch 3 short films from different genres and discuss them."
     },
     {
       "id": 48,
@@ -430,7 +430,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "DIY science experiments: Try simple experiments like baking soda volcanoes."
+      "text": "Science fair: Conduct 3 simple experiments and record the results."
     },
     {
       "id": 49,
@@ -439,7 +439,7 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Night hike: Explore familiar trails after dark with flashlights."
+      "text": "Night exploration: Create a star map and identify constellations."
     },
     {
       "id": 50,
@@ -448,7 +448,7 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Family talent show: Each person performs a special talent."
+      "text": "Talent showcase: Each person prepares and performs a special talent."
     }
   ]
 }
