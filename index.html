@@ -797,4 +797,533 @@
                 e.target.classList.add('selected');
                 
                 try {
-                    localStorage.setItem('playideas-energy
+                    localStorage.setItem('playideas-energy-level', parentEnergyLevel);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+            
+            if (e.target.classList.contains('context-btn')) {
+                currentContext = e.target.getAttribute('data-context');
+                
+                const siblings = e.target.parentElement.querySelectorAll('.context-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                try {
+                    localStorage.setItem('playideas-context', currentContext);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+        });
+    
+        // Get form values
+        function getFormValues() {
+            const age = document.getElementById('age').value;
+            const kidCount = document.querySelector('.radio-btn[data-name="kid-count"].selected')?.getAttribute('data-value') || 'single';
+            const location = document.querySelector('.radio-btn[data-name="location"].selected')?.getAttribute('data-value') || 'indoor';
+            const duration = document.querySelector('.radio-btn[data-name="duration"].selected')?.getAttribute('data-value') || 'quick';
+            const availability = document.querySelector('.radio-btn[data-name="availability"].selected')?.getAttribute('data-value') || 'available';
+            const cleanup = document.querySelector('.radio-btn[data-name="cleanup"].selected')?.getAttribute('data-value') || 'any';
+            
+            const selectedMaterials = Array.from(document.querySelectorAll('.material-tag.selected'))
+                .map(tag => tag.getAttribute('data-value'));
+            
+            return {
+                age,
+                kidCount,
+                location,
+                duration,
+                availability,
+                cleanup,
+                materials: selectedMaterials,
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+        }
+    
+        // Filter activities based on criteria
+        function filterActivities(criteria) {
+            if (!activities || activities.length === 0) return [];
+            
+            return activities.filter(activity => {
+                // Location filter
+                if (criteria.location !== 'any' && activity.location !== 'any' && activity.location !== criteria.location) {
+                    return false;
+                }
+                
+                // Duration filter
+                if (criteria.duration !== 'any' && activity.duration !== 'any' && activity.duration !== criteria.duration) {
+                    return false;
+                }
+                
+                // Kid count filter
+                if (criteria.kidCount === 'multiple' && !activity.multiplekids) {
+                    return false;
+                }
+                
+                // Parent availability filter
+                if (criteria.availability === 'independent' && activity.parentinvolvement === 'active') {
+                    return false;
+                }
+                
+                // Cleanup filter
+                if (criteria.cleanup === 'no-mess' && activity.cleanup !== 'no') {
+                    return false;
+                }
+                if (criteria.cleanup === 'easy' && activity.cleanup === 'messy') {
+                    return false;
+                }
+                
+                // Materials filter
+                if (criteria.materials.includes('none')) {
+                    return !activity.materials || activity.materials.length === 0;
+                }
+                
+                if (criteria.materials.length > 0 && !criteria.materials.includes('none')) {
+                    const activityMaterials = activity.materials || [];
+                    const hasRequiredMaterials = activityMaterials.some(material => 
+                        criteria.materials.some(available => 
+                            material.toLowerCase().includes(available) || 
+                            available.includes(material.toLowerCase())
+                        )
+                    );
+                    if (activityMaterials.length > 0 && !hasRequiredMaterials) {
+                        return false;
+                    }
+                }
+                
+                // Context-specific filtering
+                if (criteria.context === 'rainy' && activity.location === 'outdoor') {
+                    return false;
+                }
+                if (criteria.context === 'quiet' && activity.noiselevel === 'loud') {
+                    return false;
+                }
+                if (criteria.context === 'bedtime' && (activity.energylevel === 'high' || activity.noiselevel === 'loud')) {
+                    return false;
+                }
+                if (criteria.context === 'sick' && activity.energylevel === 'high') {
+                    return false;
+                }
+                
+                // Parent energy level filter
+                if (criteria.parentEnergy === 'low' && activity.parentinvolvement === 'active') {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+    
+        // Display activity result
+        function displayActivity(activity) {
+            if (!activity) {
+                document.getElementById('result').innerHTML = `
+                    <div class="error">
+                        <h3>😅 No activities found!</h3>
+                        <p>Try adjusting your filters or selecting different materials.</p>
+                    </div>
+                `;
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+            
+            currentActivity = activity;
+            
+            const cleanupLabels = {
+                'no': 'No cleanup needed',
+                'easy': 'Easy cleanup',
+                'messy': 'Some cleanup needed'
+            };
+            
+            const involvementLabels = {
+                'minimal': 'Minimal supervision',
+                'some': 'Some guidance needed',
+                'active': 'Active participation'
+            };
+            
+            const resultHtml = `
+                <div class="activity-text">
+                    <strong style="color: var(--primary); font-size: 1.2rem;">${activity.title}</strong><br>
+                    ${activity.description}
+                </div>
+                
+                <div class="activity-meta">
+                    <span class="meta-tag parent-energy">👨‍👧 ${involvementLabels[activity.parentinvolvement] || 'Some help needed'}</span>
+                    <span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
+                    <span class="meta-tag">⏱️ ${activity.duration} activity</span>
+                    <span class="meta-tag">📍 ${activity.location}</span>
+                    ${activity.multiplekids ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
+                </div>
+                
+                ${activity.benefits ? `
+                    <div class="activity-benefits">
+                        <strong>🌟 Benefits:</strong> ${activity.benefits}
+                    </div>
+                ` : ''}
+                
+                ${activity.instructions ? `
+                    <div class="prep-instructions">
+                        <strong>📝 How to set up:</strong><br>
+                        ${activity.instructions}
+                    </div>
+                ` : ''}
+                
+                <div class="activity-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite()">
+                        ${favorites.some(fav => fav.title === activity.title) ? '💝 Saved!' : '💖 Save as Favorite'}
+                    </button>
+                    <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
+                </div>
+            `;
+            
+            document.getElementById('result').innerHTML = resultHtml;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    
+        // Generate activity
+        async function generateActivity() {
+            const criteria = getFormValues();
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) {
+                return;
+            }
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                displayActivity(null);
+                return;
+            }
+            
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            displayActivity(randomActivity);
+        }
+    
+        // Quick activity functions
+        async function quickActivity(location, duration, special) {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: location || 'any',
+                duration: duration || 'any',
+                kidCount: special === 'multiple' ? 'multiple' : 'single',
+                availability: special === 'independent' ? 'independent' : 'available',
+                cleanup: special === 'no-mess' ? 'no-mess' : 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: special === 'quiet' ? 'quiet' : currentContext
+            };
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) return;
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                displayActivity(null);
+                return;
+            }
+            
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            displayActivity(randomActivity);
+        }
+    
+        async function instantActivity() {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: 'any',
+                duration: 'any',
+                kidCount: 'any',
+                availability: 'any',
+                cleanup: 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) return;
+            
+            const filteredActivities = filterActivities(criteria);
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            displayActivity(randomActivity);
+        }
+    
+        // Handle age change
+        function handleAgeChange() {
+            const newAge = document.getElementById('age').value;
+            activitiesLoaded = false;
+            activities = [];
+        }
+    
+        // Favorites functionality
+        function toggleFavorite() {
+            if (!currentActivity) return;
+            
+            const existingIndex = favorites.findIndex(fav => fav.title === currentActivity.title);
+            
+            if (existingIndex >= 0) {
+                favorites.splice(existingIndex, 1);
+            } else {
+                favorites.push(currentActivity);
+            }
+            
+            try {
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            updateFavoriteButton();
+            if (document.querySelector('.tab-btn[onclick="showTab(\'favorites\')"]').classList.contains('active')) {
+                showFavorites();
+            }
+        }
+    
+        function updateFavoriteButton() {
+            const btn = document.querySelector('.favorite-btn');
+            if (btn && currentActivity) {
+                const isFavorite = favorites.some(fav => fav.title === currentActivity.title);
+                btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
+                btn.classList.toggle('saved', isFavorite);
+            }
+        }
+    
+        function addToPlan() {
+            if (!currentActivity) return;
+            
+            savedPlans.push({
+                activity: currentActivity,
+                addedAt: new Date()
+            });
+            
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            alert('Activity added to your plan! 📋');
+        }
+    
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('generator-tab').style.display = 'none';
+            document.getElementById('planner-tab').style.display = 'none';
+            document.getElementById('favorites-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+            
+            if (tabName === 'favorites') {
+                showFavorites();
+            }
+        }
+    
+        function showFavorites() {
+            const favoritesDiv = document.getElementById('favorites-list');
+            
+            if (favorites.length === 0) {
+                favoritesDiv.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
+                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const favoritesHtml = favorites.map(activity => `
+                <div class="favorite-item">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.title}</h4>
+                    <p style="margin-bottom: 0.5rem;">${activity.description}</p>
+                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration}</small>
+                    <button onclick="displayActivity(${JSON.stringify(activity).replace(/"/g, '&quot;')})" 
+                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
+                        🎮 Do This Activity
+                    </button>
+                    <button onclick="removeFavorite('${activity.title}')" 
+                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
+                        🗑️ Remove
+                    </button>
+                </div>
+            `).join('');
+            
+            favoritesDiv.innerHTML = favoritesHtml;
+        }
+    
+        function removeFavorite(title) {
+            favorites = favorites.filter(fav => fav.title !== title);
+            try {
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            showFavorites();
+            updateFavoriteButton();
+        }
+    
+        // Batch planning functions
+        async function planMorning() {
+            await generateBatchActivities('morning', 4);
+        }
+    
+        async function planAfternoon() {
+            await generateBatchActivities('afternoon', 3);
+        }
+    
+        async function planRainyDay() {
+            await generateBatchActivities('rainy', 5);
+        }
+    
+        async function planQuietTime() {
+            await generateBatchActivities('quiet', 3);
+        }
+    
+        async function generateBatchActivities(planType, count) {
+            const age = document.getElementById('age').value;
+            await loadActivities(age);
+            
+            if (!activitiesLoaded) return;
+            
+            let criteria = {
+                age: age,
+                location: 'any',
+                duration: 'any',
+                kidCount: 'any',
+                availability: 'any',
+                cleanup: 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: 'normal'
+            };
+            
+            // Adjust criteria based on plan type
+            switch (planType) {
+                case 'morning':
+                    // Mix of energy levels for morning
+                    break;
+                case 'afternoon':
+                    criteria.duration = 'medium';
+                    break;
+                case 'rainy':
+                    criteria.location = 'indoor';
+                    criteria.context = 'rainy';
+                    break;
+                case 'quiet':
+                    criteria.context = 'quiet';
+                    break;
+            }
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                document.getElementById('batch-results').innerHTML = `
+                    <div class="error">No activities found for this plan type. Try different settings!</div>
+                `;
+                document.getElementById('batch-results').style.display = 'block';
+                return;
+            }
+            
+            // Select random activities, avoiding duplicates
+            const selectedActivities = [];
+            const availableActivities = [...filteredActivities];
+            
+            for (let i = 0; i < Math.min(count, availableActivities.length); i++) {
+                const randomIndex = Math.floor(Math.random() * availableActivities.length);
+                selectedActivities.push(availableActivities.splice(randomIndex, 1)[0]);
+            }
+            
+            const planHtml = selectedActivities.map((activity, index) => `
+                <div class="batch-activity">
+                    <div class="batch-activity-number">Activity ${index + 1}:</div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.title}</h4>
+                    <p>${activity.description}</p>
+                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.parentinvolvement} involvement</small>
+                </div>
+            `).join('');
+            
+            document.getElementById('batch-results').innerHTML = `
+                <h4 style="margin-bottom: 1rem; color: var(--teal);">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
+                ${planHtml}
+                <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
+                        style="background: var(--success); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
+                    💾 Save This Plan
+                </button>
+            `;
+            
+            document.getElementById('batch-results').style.display = 'block';
+        }
+    
+        function savePlan(planType, activities) {
+            const plan = {
+                type: planType,
+                activities: activities,
+                createdAt: new Date()
+            };
+            
+            savedPlans.push(plan);
+            
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            alert(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
+        }
+    
+        // Initialize app
+        function init() {
+            try {
+                const savedEnergy = localStorage.getItem('playideas-energy-level');
+                if (savedEnergy) {
+                    parentEnergyLevel = savedEnergy;
+                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
+                    document.querySelectorAll('.energy-btn').forEach(btn => {
+                        if (btn.getAttribute('data-energy') !== savedEnergy) {
+                            btn.classList.remove('selected');
+                        }
+                    });
+                }
+                
+                const savedContext = localStorage.getItem('playideas-context');
+                if (savedContext) {
+                    currentContext = savedContext;
+                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
+                }
+                
+                const savedFavorites = localStorage.getItem('playideas-favorites');
+                if (savedFavorites) {
+                    favorites = JSON.parse(savedFavorites);
+                }
+                
+                const savedPlansData = localStorage.getItem('playideas-plans');
+                if (savedPlansData) {
+                    savedPlans = JSON.parse(savedPlansData);
+                }
+            } catch (e) {
+                console.log('LocalStorage not available, using defaults');
+            }
+            
+            // Load initial activities for default age
+            loadActivities('3-5');
+        }
+    
+        // Start the app
+        document.addEventListener('DOMContentLoaded', init);
+        </script>
+    </body>
+</html>
