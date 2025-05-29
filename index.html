@@ -859,12 +859,12 @@
                 }
                 
                 // Kid count filter
-                if (criteria.kidCount === 'multiple' && !activity.multiplekids) {
+                if (criteria.kidCount === 'multiple' && activity.kid_count === 'single') {
                     return false;
                 }
                 
-                // Parent availability filter
-                if (criteria.availability === 'independent' && activity.parentinvolvement === 'active') {
+                // Parent availability filter (independent vs needs supervision)
+                if (criteria.availability === 'independent' && !activity.independent) {
                     return false;
                 }
                 
@@ -878,11 +878,14 @@
                 
                 // Materials filter
                 if (criteria.materials.includes('none')) {
-                    return !activity.materials || activity.materials.length === 0;
+                    return activity.materials.includes('none');
                 }
                 
                 if (criteria.materials.length > 0 && !criteria.materials.includes('none')) {
                     const activityMaterials = activity.materials || [];
+                    if (activityMaterials.includes('none')) {
+                        return true; // Activity needs no materials, so it's always available
+                    }
                     const hasRequiredMaterials = activityMaterials.some(material => 
                         criteria.materials.some(available => 
                             material.toLowerCase().includes(available) || 
@@ -895,21 +898,20 @@
                 }
                 
                 // Context-specific filtering
-                if (criteria.context === 'rainy' && activity.location === 'outdoor') {
-                    return false;
-                }
-                if (criteria.context === 'quiet' && activity.noiselevel === 'loud') {
-                    return false;
-                }
-                if (criteria.context === 'bedtime' && (activity.energylevel === 'high' || activity.noiselevel === 'loud')) {
-                    return false;
-                }
-                if (criteria.context === 'sick' && activity.energylevel === 'high') {
+                if (criteria.context !== 'normal' && activity.contexts && !activity.contexts.includes(criteria.context)) {
                     return false;
                 }
                 
                 // Parent energy level filter
-                if (criteria.parentEnergy === 'low' && activity.parentinvolvement === 'active') {
+                if (criteria.parentEnergy === 'low' && activity.energy_required === 'high') {
+                    return false;
+                }
+                
+                // Special context filters
+                if (criteria.context === 'quiet' && activity.noise_level === 'loud') {
+                    return false;
+                }
+                if (criteria.context === 'bedtime' && (activity.energy_required === 'high' || activity.noise_level === 'loud')) {
                     return false;
                 }
                 
@@ -946,16 +948,16 @@
             
             const resultHtml = `
                 <div class="activity-text">
-                    <strong style="color: var(--primary); font-size: 1.2rem;">${activity.title}</strong><br>
-                    ${activity.description}
+                    ${activity.text}
                 </div>
                 
                 <div class="activity-meta">
-                    <span class="meta-tag parent-energy">👨‍👧 ${involvementLabels[activity.parentinvolvement] || 'Some help needed'}</span>
+                    <span class="meta-tag parent-energy">👨‍👧 ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
                     <span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
                     <span class="meta-tag">⏱️ ${activity.duration} activity</span>
                     <span class="meta-tag">📍 ${activity.location}</span>
-                    ${activity.multiplekids ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
+                    <span class="meta-tag">🔊 ${activity.noise_level}</span>
+                    ${activity.kid_count === 'multiple' ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
                 </div>
                 
                 ${activity.benefits ? `
@@ -964,16 +966,16 @@
                     </div>
                 ` : ''}
                 
-                ${activity.instructions ? `
+                ${activity.prep ? `
                     <div class="prep-instructions">
                         <strong>📝 How to set up:</strong><br>
-                        ${activity.instructions}
+                        ${activity.prep}
                     </div>
                 ` : ''}
                 
                 <div class="activity-actions">
                     <button class="favorite-btn" onclick="toggleFavorite()">
-                        ${favorites.some(fav => fav.title === activity.title) ? '💝 Saved!' : '💖 Save as Favorite'}
+                        ${favorites.some(fav => fav.id === activity.id) ? '💝 Saved!' : '💖 Save as Favorite'}
                     </button>
                     <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
                 </div>
@@ -1067,7 +1069,7 @@
         function toggleFavorite() {
             if (!currentActivity) return;
             
-            const existingIndex = favorites.findIndex(fav => fav.title === currentActivity.title);
+            const existingIndex = favorites.findIndex(fav => fav.id === currentActivity.id);
             
             if (existingIndex >= 0) {
                 favorites.splice(existingIndex, 1);
@@ -1090,7 +1092,7 @@
         function updateFavoriteButton() {
             const btn = document.querySelector('.favorite-btn');
             if (btn && currentActivity) {
-                const isFavorite = favorites.some(fav => fav.title === currentActivity.title);
+                const isFavorite = favorites.some(fav => fav.id === currentActivity.id);
                 btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
                 btn.classList.toggle('saved', isFavorite);
             }
@@ -1147,14 +1149,14 @@
             
             const favoritesHtml = favorites.map(activity => `
                 <div class="favorite-item">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.title}</h4>
-                    <p style="margin-bottom: 0.5rem;">${activity.description}</p>
-                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration}</small>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
+                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
+                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
                     <button onclick="displayActivity(${JSON.stringify(activity).replace(/"/g, '&quot;')})" 
                             style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
                         🎮 Do This Activity
                     </button>
-                    <button onclick="removeFavorite('${activity.title}')" 
+                    <button onclick="removeFavorite(${activity.id})" 
                             style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
                         🗑️ Remove
                     </button>
@@ -1164,8 +1166,8 @@
             favoritesDiv.innerHTML = favoritesHtml;
         }
     
-        function removeFavorite(title) {
-            favorites = favorites.filter(fav => fav.title !== title);
+        function removeFavorite(id) {
+            favorites = favorites.filter(fav => fav.id !== id);
             try {
                 localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
             } catch (e) {
@@ -1249,9 +1251,9 @@
             const planHtml = selectedActivities.map((activity, index) => `
                 <div class="batch-activity">
                     <div class="batch-activity-number">Activity ${index + 1}:</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.title}</h4>
-                    <p>${activity.description}</p>
-                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.parentinvolvement} involvement</small>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || `Activity ${index + 1}`}</h4>
+                    <p>${activity.text}</p>
+                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
                 </div>
             `).join('');
             
