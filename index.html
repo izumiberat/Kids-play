@@ -1152,11 +1152,11 @@
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
                     <p style="margin-bottom: 0.5rem;">${activity.text}</p>
                     <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
-                    <button onclick="displayActivity(${JSON.stringify(activity).replace(/"/g, '&quot;')})" 
+                    <button onclick="displayActivityFromFavorite('${activity.id}')" 
                             style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
                         🎮 Do This Activity
                     </button>
-                    <button onclick="removeFavorite(${activity.id})" 
+                    <button onclick="removeFavorite('${activity.id}')" 
                             style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
                         🗑️ Remove
                     </button>
@@ -1164,6 +1164,73 @@
             `).join('');
             
             favoritesDiv.innerHTML = favoritesHtml;
+        }
+        
+        // Add this new helper function:
+        function displayActivityFromFavorite(activityId) {
+            const activity = favorites.find(fav => fav.id === activityId);
+            if (activity) {
+                // Switch to the generator tab first
+                showTabProgrammatically('generator');
+                displayActivity(activity);
+            }
+        }
+        
+        // Updated showTab function to handle both event-based and programmatic calls:
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('generator-tab').style.display = 'none';
+            document.getElementById('planner-tab').style.display = 'none';
+            document.getElementById('favorites-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Handle both event-based and direct calls
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Find the correct tab button and activate it
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach(btn => {
+                    if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
+                        (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
+                        (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            if (tabName === 'favorites') {
+                showFavorites();
+            }
+        }
+        
+        // Helper function for programmatic tab switching
+        function showTabProgrammatically(tabName) {
+            // Hide all tabs
+            document.getElementById('generator-tab').style.display = 'none';
+            document.getElementById('planner-tab').style.display = 'none';
+            document.getElementById('favorites-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Find the correct tab button and activate it
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
+                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
+                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                    btn.classList.add('active');
+                }
+            });
         }
     
         function removeFavorite(id) {
