@@ -13,6 +13,8 @@
             --success: #28a745;
             --warning: #ffc107;
             --danger: #dc3545;
+            --orange: #fd7e14;
+            --purple: #6f42c1;
         }
         * {
             box-sizing: border-box;
@@ -34,127 +36,366 @@
             margin-bottom: 1.5rem;
             padding-top: 1rem;
         }
-        .form-group {
-            margin-bottom: 1.25rem;
-            background: white;
-            padding: 1.25rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        
+        /* Parent Energy Indicator */
+        .energy-check {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(253, 203, 110, 0.3);
         }
+        
+        .energy-check h3 {
+            margin-bottom: 0.75rem;
+            color: #d63031;
+        }
+        
+        .energy-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .energy-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .energy-btn.selected {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Enhanced Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .quick-actions h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 480px) {
+            .quick-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .quick-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.875rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
+            text-align: center;
+        }
+        
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(67, 97, 238, 0.4);
+        }
+        
+        .quick-btn.low-energy {
+            background: linear-gradient(135deg, var(--success), #20c997);
+        }
+        
+        .quick-btn.quiet {
+            background: linear-gradient(135deg, var(--purple), #8e44ad);
+        }
+        
+        .quick-btn.independent {
+            background: linear-gradient(135deg, var(--orange), #e17055);
+        }
+        
+        .instant-btn {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            padding: 1.25rem;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .instant-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Compact Form */
+        .compact-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            font-size: 0.9rem;
         }
-        select, .materials, .duration-options {
+        
+        select {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid #ddd;
+            border: 2px solid #e9ecef;
             border-radius: 8px;
             font-size: 1rem;
             background: white;
+            transition: border-color 0.2s;
         }
-        .materials, .duration-options {
-            columns: 2;
-            column-gap: 1rem;
+        
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
         }
-        @media (max-width: 480px) {
-            .materials, .duration-options {
-                columns: 1;
-            }
-        }
-        .checkbox-item, .radio-item {
-            margin-bottom: 0.5rem;
-            break-inside: avoid;
+        
+        .radio-group {
             display: flex;
-            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 8px;
+        
+        .radio-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            margin-bottom: 1.25rem;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            flex: 1;
+            text-align: center;
+            min-width: fit-content;
         }
-        button:hover {
-            background-color: var(--secondary);
+        
+        .radio-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
+        
+        .radio-btn:hover {
+            border-color: var(--primary);
+        }
+        
+        /* Materials as tags */
+        .materials-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .material-tag {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+        
+        .material-tag.selected {
+            background: var(--warning);
+            border-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .material-tag:hover {
+            border-color: var(--warning);
+        }
+        
+        /* Results */
         #result {
-            margin-top: 1.25rem;
-            padding: 1.25rem;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
             display: none;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
         }
+        
         .activity-text {
             font-size: 1.1rem;
             margin-bottom: 1rem;
+            line-height: 1.6;
         }
+        
         .activity-meta {
             display: flex;
             gap: 10px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-size: 0.9rem;
             color: #666;
             flex-wrap: wrap;
         }
+        
+        .meta-tag {
+            background: var(--light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .meta-tag.parent-energy {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        
         .favorite-btn {
             background-color: var(--warning);
             color: var(--dark);
-            display: block;
-            margin-top: 1rem;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        
         .favorite-btn:hover {
             background-color: #e0a800;
+            transform: translateY(-1px);
         }
+        
         .saved {
             background-color: var(--success);
             color: white;
         }
-        #favorites-list {
-            display: none;
-            margin-top: 1.25rem;
-        }
+        
+        /* Tab system */
         .tab-buttons {
             display: flex;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             gap: 0.25rem;
+            background: white;
+            padding: 0.25rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        
         .tab-btn {
             flex: 1;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px;
+            background: transparent;
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        
         .tab-btn.active {
-            background-color: var(--secondary);
+            background-color: var(--primary);
+            color: white;
         }
+        
+        /* Favorites */
+        #favorites-list {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
         .favorite-item {
             margin-bottom: 1rem;
             padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--light);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
         }
-        input[type="checkbox"], 
-        input[type="radio"] {
-            margin-right: 8px;
-            accent-color: var(--primary);
-        }
-        .loading {
+        
+        .loading, .error {
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
             color: #666;
+        }
+        
+        .error {
+            color: var(--danger);
+        }
+        
+        /* Hide native radio buttons */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* Helper text styling */
+        .helper-text {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.25rem;
         }
     </style>
 </head>
 <body>
-    <h1>PlayIdeas Generator</h1>
+    <h1>🎮 PlayIdeas</h1>
+    
+    <!-- Parent Energy Check -->
+    <div class="energy-check">
+        <h3>☕ How's your energy level today?</h3>
+        <div class="energy-buttons">
+            <div class="energy-btn selected" data-energy="low">😴 Low - Need easy wins</div>
+            <div class="energy-btn" data-energy="medium">🙂 Medium - Can do some prep</div>
+            <div class="energy-btn" data-energy="high">⚡ High - Ready for anything!</div>
+        </div>
+    </div>
     
     <div class="tab-buttons">
         <button class="tab-btn active" onclick="showTab('generator')">Get Ideas</button>
@@ -162,262 +403,387 @@
     </div>
     
     <div id="generator-tab">
-        <div class="form-group">
-            <label for="age">Child's Age:</label>
-            <select id="age" onchange="generateActivity()">
-                <option value="0-2">0-2 years</option>
-                <option value="3-5">3-5 years</option>
-                <option value="6-8">6-8 years</option>
-                <option value="9-12">9-12 years</option>
-                <option value="12+">12+ years</option>
-            </select>
+        <!-- Enhanced Quick Actions Section -->
+        <div class="quick-actions">
+            <h2>🚀 Need something NOW?</h2>
+            <div class="quick-buttons">
+                <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')">🛋️ Easy Indoor</button>
+                <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')">🧒 Independent Play</button>
+                <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')">🤫 Quiet Activity</button>
+                <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')">🌳 Outdoor Fun</button>
+            </div>
+            <button class="quick-btn instant-btn" onclick="instantActivity()">
+                ✨ SURPRISE ME! (Any activity)
+            </button>
         </div>
         
-        <div class="form-group">
-            <label>Location:</label>
-            <div class="radio-item">
-                <input type="radio" id="indoor" name="location" value="indoor" checked onchange="generateActivity()">
-                <label for="indoor">🏠 Indoor</label>
-            </div>
-            <div class="radio-item">
-                <input type="radio" id="outdoor" name="location" value="outdoor" onchange="generateActivity()">
-                <label for="outdoor">🌳 Outdoor</label>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label>Parent Availability:</label>
-            <div class="radio-item">
-                <input type="radio" id="available" name="availability" value="available" checked onchange="generateActivity()">
-                <label for="available">👨‍👧 I can play too</label>
-            </div>
-            <div class="radio-item">
-                <input type="radio" id="independent" name="availability" value="independent" onchange="generateActivity()">
-                <label for="independent">🧒 Need independent activity</label>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label>Duration:</label>
-            <div class="duration-options">
-                <div class="radio-item">
-                    <input type="radio" id="quick" name="duration" value="quick" checked onchange="generateActivity()">
-                    <label for="quick">⏱️ Quick (&lt;15 min)</label>
-                </div>
-                <div class="radio-item">
-                    <input type="radio" id="medium" name="duration" value="medium" onchange="generateActivity()">
-                    <label for="medium">⏳ Medium (15-30 min)</label>
-                </div>
-                <div class="radio-item">
-                    <input type="radio" id="long" name="duration" value="long" onchange="generateActivity()">
-                    <label for="long">⌛ Long (30+ min)</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label>Available Materials:</label>
-            <div class="materials">
-                <div class="checkbox-item"><input type="checkbox" id="paper" value="paper" onchange="generateActivity()"><label for="paper">📄 Paper</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="pencils" value="pencils" onchange="generateActivity()"><label for="pencils">✏️ Pencils/Markers</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="scissors" value="scissors" onchange="generateActivity()"><label for="scissors">✂️ Scissors</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="tape" value="tape" onchange="generateActivity()"><label for="tape">📏 Tape/Glue</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="ball" value="ball" onchange="generateActivity()"><label for="ball">🏀 Ball</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="blocks" value="blocks" onchange="generateActivity()"><label for="blocks">🧱 Blocks/Lego</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="dolls" value="dolls" onchange="generateActivity()"><label for="dolls">🧸 Dolls/Stuffed Animals</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="cards" value="cards" onchange="generateActivity()"><label for="cards">🃏 Playing Cards</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="blanket" value="blanket" onchange="generateActivity()"><label for="blanket">🛏️ Blanket</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="none" value="none" onchange="generateActivity()"><label for="none">❌ Nothing special</label></div>
-            </div>
-        </div>
-        
-        <button onclick="generateActivity()">Generate Play Idea!</button>
-        
+        <!-- Results appear here when generated -->
         <div id="result">
             <div class="loading">Loading activities...</div>
+        </div>
+        
+        <!-- Compact Custom Form -->
+        <div class="compact-form">
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">🎯 Or customize your search:</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Child's Age:</label>
+                    <select id="age" onchange="handleAgeChange()">
+                        <option value="0-2">0-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-8">6-8 years</option>
+                        <option value="9-12">9-12 years</option>
+                        <option value="12+">12+ years</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="location" data-value="indoor">🏠 Indoor</div>
+                        <div class="radio-btn" data-name="location" data-value="outdoor">🌳 Outdoor</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Duration:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="duration" data-value="quick">⏱️ Quick</div>
+                        <div class="radio-btn" data-name="duration" data-value="medium">⏳ Medium</div>
+                        <div class="radio-btn" data-name="duration" data-value="long">⌛ Long</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Your involvement:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="availability" data-value="available">👨‍👧 Can help</div>
+                        <div class="radio-btn" data-name="availability" data-value="independent">🧒 Independent</div>
+                    </div>
+                    <div class="helper-text">Independent = activities your child can do mostly alone</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>What do you have handy? (tap any that apply)</label>
+                <div class="materials-tags">
+                    <div class="material-tag" data-value="paper">📄 Paper</div>
+                    <div class="material-tag" data-value="pencils">✏️ Pencils</div>
+                    <div class="material-tag" data-value="scissors">✂️ Scissors</div>
+                    <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
+                    <div class="material-tag" data-value="ball">🏀 Ball</div>
+                    <div class="material-tag" data-value="blocks">🧱 Blocks</div>
+                    <div class="material-tag" data-value="dolls">🧸 Toys</div>
+                    <div class="material-tag" data-value="cards">🃏 Cards</div>
+                    <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
+                    <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
+                    <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
+                    <div class="material-tag" data-value="none">❌ Nothing special</div>
+                </div>
+                <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
+            </div>
+            
+            <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1rem; border-radius: 10px; width: 100%; font-size: 1.1rem; font-weight: 600; margin-top: 1rem; cursor: pointer;">
+                🎲 Generate Custom Activity
+            </button>
         </div>
     </div>
     
     <div id="favorites-tab" style="display: none;">
-        <div id="favorites-list"></div>
+        <div id="favorites-list">
+            <p class="loading">Loading favorites...</p>
+        </div>
     </div>
     
     <script>
         // Global variables
         let activities = [];
-        let favorites = JSON.parse(localStorage.getItem('playideas-favorites')) || [];
+        let allActivities = {};
+        let favorites = [];
+        let currentActivity = null;
+        let activitiesLoaded = false;
+        let parentEnergyLevel = 'low'; // Default to low energy
         
-        // Load activities from JSON file
-        async function loadActivities() {
-            try {
-                const response = await fetch('./activities.json?t=' + Date.now());
-                if (!response.ok) throw new Error("Failed to load activities");
-                const data = await response.json();
-                activities = data.activities;
-                generateActivity();
-            } catch (error) {
-                console.error("Error loading activities:", error);
-                document.getElementById('result').innerHTML = `
-                    <div style="color: var(--danger);">
-                        Error loading activities. Please refresh the page.
-                    </div>
-                `;
-                // Fallback activities
-                activities = [
-                    {
-                        id: 999,
-                        age: "3-5",
-                        location: "indoor",
-                        materials: ["none"],
-                        independent: true,
-                        duration: "quick",
-                        text: "Drawing game: Grab paper and pencils to create funny characters together!"
-                    }
-                ];
-            }
-        }
-        
-        // Generate activity based on filters
-        function generateActivity() {
-            if (activities.length === 0) return;
-            
-            // Get user selections
-            const age = document.getElementById("age").value;
-            const location = document.querySelector('input[name="location"]:checked').value;
-            const availability = document.querySelector('input[name="availability"]:checked').value;
-            const duration = document.querySelector('input[name="duration"]:checked').value;
-            
-            // Get selected materials
-            const materialCheckboxes = document.querySelectorAll('.materials input[type="checkbox"]:checked');
-            const materials = Array.from(materialCheckboxes).map(cb => cb.value);
-            
-            // Find matching activities
-            let matchingActivities = activities.filter(activity => 
-                activity.age === age && 
-                activity.location === location &&
-                activity.duration === duration &&
-                (availability === "available" || activity.independent === true)
-            );
-            
-            // Filter by materials if any are selected (and not just "none")
-            if (materials.length > 0 && !(materials.length === 1 && materials[0] === "none")) {
-                matchingActivities = matchingActivities.filter(activity =>
-                    activity.materials[0] === "none" || 
-                    activity.materials.some(m => materials.includes(m))
-                );
-            }
-            
-            // Display result
-            const resultDiv = document.getElementById("result");
-            if (matchingActivities.length > 0) {
-                const randomActivity = matchingActivities[Math.floor(Math.random() * matchingActivities.length)];
-                const isFavorite = favorites.includes(randomActivity.id);
-                
-                resultDiv.innerHTML = `
-                    <h3>Here's your play idea:</h3>
-                    <div class="activity-meta">
-                        <span>${randomActivity.independent ? "🧒 Independent" : "👨‍👧 Parent-assisted"}</span>
-                        <span>${randomActivity.duration === "quick" ? "⏱️ Quick" : randomActivity.duration === "medium" ? "⏳ Medium" : "⌛ Long"}</span>
-                        <span>${randomActivity.location === "indoor" ? "🏠 Indoor" : "🌳 Outdoor"}</span>
-                    </div>
-                    <div class="activity-text">${randomActivity.text}</div>
-                    <button class="favorite-btn ${isFavorite ? 'saved' : ''}" 
-                            onclick="toggleFavorite(${randomActivity.id}, this)">
-                        ${isFavorite ? '★ Saved to Favorites' : '☆ Save to Favorites'}
-                    </button>
-                `;
-            } else {
-                resultDiv.innerHTML = `
-                    <p>No exact matches found. Try:</p>
-                    <ul>
-                        <li>Selecting fewer materials</li>
-                        <li>Changing duration or location</li>
-                        <li>Checking 'Nothing special' if you don't have specific items</li>
-                    </ul>
-                `;
-            }
-            resultDiv.style.display = "block";
-        }
-        
-        // Toggle activity favorite status
-        function toggleFavorite(activityId, button) {
-            const index = favorites.indexOf(activityId);
-            if (index === -1) {
-                favorites.push(activityId);
-                button.textContent = '★ Saved to Favorites';
-                button.classList.add('saved');
-            } else {
-                favorites.splice(index, 1);
-                button.textContent = '☆ Save to Favorites';
-                button.classList.remove('saved');
-            }
-            localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-            updateFavoritesList();
-        }
-        
-        // Update favorites list display
-        function updateFavoritesList() {
-            const favoritesList = document.getElementById("favorites-list");
-            if (favorites.length === 0) {
-                favoritesList.innerHTML = "<p>You haven't saved any favorites yet. Generate some ideas and click 'Save to Favorites'!</p>";
+        // Load activities for specific age group
+        async function loadActivities(ageGroup) {
+            // Check if we already have this age group in cache
+            if (allActivities[ageGroup]) {
+                activities = allActivities[ageGroup];
+                activitiesLoaded = true;
                 return;
             }
             
-            let html = "<h3>Your Saved Favorites:</h3>";
-            favorites.forEach(favId => {
-                const activity = activities.find(a => a.id === favId);
-                if (activity) {
-                    html += `
-                        <div class="favorite-item">
-                            <div class="activity-meta">
-                                <span>${activity.independent ? "🧒 Independent" : "👨‍👧 Parent-assisted"}</span>
-                                <span>${activity.duration === "quick" ? "⏱️ Quick" : activity.duration === "medium" ? "⏳ Medium" : "⌛ Long"}</span>
-                                <span>${activity.location === "indoor" ? "🏠 Indoor" : "🌳 Outdoor"}</span>
-                                <span>Age ${activity.age}</span>
-                            </div>
-                            <div class="activity-text">${activity.text}</div>
-                            <button onclick="removeFavorite(${activity.id})" style="background: var(--danger); padding: 0.25rem 0.5rem; font-size: 0.8rem;">Remove</button>
-                        </div>
-                    `;
+            try {
+                // Show loading in result area
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years...</div>`;
+                resultDiv.style.display = "block";
+                
+                console.log(`Loading activities for age group: ${ageGroup}`);
+                
+                // Map age groups to filenames
+                const fileMap = {
+                    "0-2": "activities-0-2.json",
+                    "3-5": "activities-3-5.json", 
+                    "6-8": "activities-6-8.json",
+                    "9-12": "activities-9-12.json",
+                    "12+": "activities-12plus.json"
+                };
+                
+                const filename = fileMap[ageGroup];
+                if (!filename) {
+                    throw new Error(`No filename mapping for age group: ${ageGroup}`);
                 }
-            });
-            favoritesList.innerHTML = html;
-        }
-        
-        // Remove from favorites
-        function removeFavorite(activityId) {
-            favorites = favorites.filter(id => id !== activityId);
-            localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-            updateFavoritesList();
-            
-            // Update any visible favorite button in the results
-            const favBtn = document.querySelector(`.favorite-btn[onclick*="${activityId}"]`);
-            if (favBtn) {
-                favBtn.textContent = '☆ Save to Favorites';
-                favBtn.classList.remove('saved');
+                
+                const response = await fetch(`./${filename}?t=${Date.now()}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} - Could not load ${filename}`);
+                }
+                
+                const data = await response.json();
+                activities = data.activities || data || []; // Handle different JSON structures
+                allActivities[ageGroup] = activities; // Cache it
+                activitiesLoaded = true;
+                
+                console.log(`Loaded ${activities.length} activities for ${ageGroup}`);
+                
+                // Hide loading message
+                resultDiv.style.display = "none";
+                
+            } catch (error) {
+                console.error(`Error loading activities for ${ageGroup}:`, error);
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3 style="color: var(--danger); margin-bottom: 1rem;">😞 Oops! Couldn't load activities</h3>
+                        <p style="margin-bottom: 1rem;">Error: ${error.message}</p>
+                        <p style="font-size: 0.9rem; color: #666;">Make sure the JSON files are in the same folder as this HTML file.</p>
+                        <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
+                            🔄 Try Again
+                        </button>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+                activitiesLoaded = false;
             }
         }
         
-        // Switch between tabs
-        function showTab(tabName) {
-            document.getElementById('generator-tab').style.display = tabName === 'generator' ? 'block' : 'none';
-            document.getElementById('favorites-tab').style.display = tabName === 'favorites' ? 'block' : 'none';
+        // Handle radio button groups and energy selection
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('radio-btn')) {
+                const group = e.target.getAttribute('data-name');
+                const value = e.target.getAttribute('data-value');
+                
+                // Remove selected class from siblings
+                const siblings = e.target.parentElement.querySelectorAll('.radio-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                
+                // Add selected class to clicked button
+                e.target.classList.add('selected');
+            }
             
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(tabName));
-            });
+            if (e.target.classList.contains('material-tag')) {
+                e.target.classList.toggle('selected');
+            }
             
-            if (tabName === 'favorites') {
-                updateFavoritesList();
+            if (e.target.classList.contains('energy-btn')) {
+                parentEnergyLevel = e.target.getAttribute('data-energy');
+                
+                // Remove selected class from siblings
+                const siblings = e.target.parentElement.querySelectorAll('.energy-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                
+                // Add selected class to clicked button
+                e.target.classList.add('selected');
+                
+                // Save energy preference
+                try {
+                    localStorage.setItem('playideas-energy-level', parentEnergyLevel);
+                } catch (error) {
+                    console.log('Could not save energy preference');
+                }
+            }
+        });
+        
+        // Enhanced quick activity functions
+        async function quickActivity(location, duration, specialType) {
+            // Ensure activities are loaded first
+            if (!activitiesLoaded) {
+                await loadActivities(document.getElementById("age").value);
+            }
+            
+            let filteredActivities = [...activities];
+            
+            // Apply location filter if specified
+            if (location && location !== 'any') {
+                filteredActivities = filteredActivities.filter(activity => activity.location === location);
+            }
+            
+            // Apply duration filter if specified
+            if (duration && duration !== 'any') {
+                filteredActivities = filteredActivities.filter(activity => activity.duration === duration);
+            }
+            
+            // Apply special type filters
+            if (specialType === 'low') {
+                // For low energy parents, prefer independent activities and no materials
+                filteredActivities = filteredActivities.filter(activity => 
+                    activity.independent === true || activity.materials.includes("none")
+                );
+            } else if (specialType === 'independent') {
+                filteredActivities = filteredActivities.filter(activity => activity.independent === true);
+            } else if (specialType === 'quiet') {
+                // For quiet activities, prefer indoor, independent, and activities that don't typically involve noise
+                filteredActivities = filteredActivities.filter(activity => 
+                    activity.location === 'indoor' && 
+                    (activity.independent === true || activity.text.toLowerCase().includes('quiet') || 
+                     activity.text.toLowerCase().includes('read') || activity.text.toLowerCase().includes('draw'))
+                );
+            }
+            
+            // If we have activities, pick one randomly
+            if (filteredActivities.length > 0) {
+                const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+                displayActivity(randomActivity);
+                document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Fallback to any activity if filters are too restrictive
+                instantActivity();
             }
         }
         
-        // Initialize on load
-        window.onload = function() {
-            loadActivities();
-            updateFavoritesList();
-        };
-    </script>
-</body>
-</html>
+        async function instantActivity() {
+            // Ensure activities are loaded first
+            if (!activitiesLoaded) {
+                await loadActivities(document.getElementById("age").value);
+            }
+            
+            // Pick completely random activity
+            if (activities.length > 0) {
+                const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                displayActivity(randomActivity);
+                document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Show error if no activities loaded
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3 style="color: var(--danger);">No activities available</h3>
+                        <p>Please check that the activity files are loaded correctly.</p>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+            }
+        }
+        
+        // Handle age change
+        async function handleAgeChange() {
+            const ageGroup = document.getElementById("age").value;
+            await loadActivities(ageGroup);
+            
+            // Save age preference
+            try {
+                localStorage.setItem('playideas-age', ageGroup);
+            } catch (error) {
+                console.log('Could not save age preference');
+            }
+        }
+        
+        // Load favorites and preferences
+        function loadFavorites() {
+            try {
+                const stored = localStorage.getItem('playideas-favorites');
+                favorites = stored ? JSON.parse(stored) : [];
+                console.log(`Loaded ${favorites.length} favorites:`, favorites);
+                
+                // Load saved preferences
+                const savedAge = localStorage.getItem('playideas-age');
+                if (savedAge) {
+                    document.getElementById('age').value = savedAge;
+                }
+                
+                const savedEnergy = localStorage.getItem('playideas-energy-level');
+                if (savedEnergy) {
+                    parentEnergyLevel = savedEnergy;
+                    document.querySelectorAll('.energy-btn').forEach(btn => {
+                        btn.classList.toggle('selected', btn.getAttribute('data-energy') === savedEnergy);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading favorites:', error);
+                favorites = [];
+            }
+        }
+        
+        // Save favorites
+        function saveFavorites() {
+            try {
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+                console.log('Saved favorites:', favorites);
+            } catch (error) {
+                console.error('Error saving favorites:', error);
+            }
+        }
+        
+        // Get current form values
+        function getFormValues() {
+            const age = document.getElementById("age").value;
+            const location = document.querySelector('[data-name="location"].selected').getAttribute('data-value');
+            const availability = document.querySelector('[data-name="availability"].selected').getAttribute('data-value');
+            const duration = document.querySelector('[data-name="duration"].selected').getAttribute('data-value');
+            const materials = Array.from(document.querySelectorAll('.material-tag.selected')).map(tag => tag.getAttribute('data-value'));
+            
+            return { age, location, availability, duration, materials };
+        }
+        
+        // Generate activity
+        function generateActivity() {
+            if (!activitiesLoaded || activities.length === 0) {
+                // Show a helpful message if activities aren't loaded yet
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <div class="loading">
+                        <p>Loading activities... This will just take a moment!</p>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+                return;
+            }
+            
+            const { age, location, availability, duration, materials } = getFormValues();
+            
+            console.log('Generating activity with filters:', { age, location, availability, duration, materials });
+            
+            let matchingActivities = activities.filter(activity => {
+                const ageMatch = activity.age === age;
+                const locationMatch = activity.location === location;
+                const durationMatch = activity.duration === duration;
+                const availabilityMatch = availability === "available" || activity.independent === true;
+                
+                return ageMatch && locationMatch && durationMatch && availabilityMatch;
+            });
+            
+            console.log(`Found ${matchingActivities.length} activities after basic filters`);
+            
+            // Filter by materials if any selected
+            if (materials.length > 0 && !(materials.length === 1 && materials[0] === "none")) {
+                matchingActivities = matchingActivities.filter(activity => {
+                    if (activity.materials.includes("none")) return true;
+                    return activity.materials.some(material => materials.includes(material));
+                });
+            }
+            
+            console.log(`Found ${matchingActivities.length} activities after material filters`);
+            
+            const resultDiv = document.getElementById("result");
+            if (matchingActivities.length > 0) {
+                const randomActivity = matchingActivities[Math.floor(Math.random() * matchingActivities.length)];
+                displayActivity(randomActivity);
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h3 style
