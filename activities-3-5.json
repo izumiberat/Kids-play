@@ -7,25 +7,49 @@
       "materials": ["paper", "pencils"],
       "independent": false,
       "duration": "medium",
-      "text": "Drawing game: Take turns drawing parts of a funny creature (head, body, legs)."
+      "cleanup": "easy",
+      "involvement": "active",
+      "text": "Collaborative Creature Drawing: Take turns drawing different parts of a funny creature together - you draw the head, your child adds the body, and someone else creates the legs! Watch as a whimsical creature comes to life on paper.",
+      "benefits": "Develops creativity, turn-taking skills, and understanding of body concepts",
+      "prep": "Gather paper and pencils/crayons. Clear a flat drawing surface.",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3001,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["paper"],
       "independent": true,
       "duration": "quick",
-      "text": "Sticker sorting: Give child stickers and paper to create their own scene."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Sticker Sorting Adventure: Provide your child with colorful stickers and paper to create themed scenes - sort by color, shape, or size while building fine motor skills!",
+      "benefits": "Enhances categorization skills and finger dexterity",
+      "prep": "Collect stickers and paper. Optional: Draw sorting areas on paper",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3002,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": false,
       "duration": "medium",
-      "text": "Indoor obstacle course: Use cushions, chairs, and blankets to create a course."
+      "cleanup": "easy",
+      "involvement": "some",
+      "text": "Indoor Obstacle Challenge: Create a safe obstacle course using cushions, chairs and blankets - crawl under 'bridges', jump over 'rivers', and balance on 'mountains'!",
+      "benefits": "Builds gross motor skills and spatial awareness",
+      "prep": "Clear space and gather household soft items",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3003,
@@ -34,7 +58,15 @@
       "materials": ["tape"],
       "independent": false,
       "duration": "quick",
-      "text": "Tape shapes: Make shapes with tape on floor for jumping games."
+      "cleanup": "easy",
+      "involvement": "active",
+      "text": "Tape Shape Games: Create colorful shapes with tape on the floor - hop between squares, balance on lines, and jump into triangles!",
+      "benefits": "Teaches shape recognition and balance skills",
+      "prep": "Use painter's tape to create shapes on non-carpeted floor",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3004,
@@ -43,7 +75,15 @@
       "materials": ["blocks"],
       "independent": true,
       "duration": "medium",
-      "text": "Tallest tower: Who can build the tallest tower before it falls?"
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Tower Triumph Challenge: Race to build the tallest possible tower before it tumbles - experiment with different block arrangements for maximum height!",
+      "benefits": "Develops engineering thinking and fine motor control",
+      "prep": "Provide blocks on clear floor space",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3005,
@@ -52,7 +92,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Freeze dance: Dance when music plays, freeze when it stops."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Musical Freeze Party: Dance wildly when music plays, then freeze in funny poses when it stops - the sillier the better!",
+      "benefits": "Improves listening skills and body control",
+      "prep": "Choose upbeat songs and clear dancing space",
+      "contexts": ["normal", "rainy", "coffee"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3006,
@@ -61,7 +109,15 @@
       "materials": ["ball"],
       "independent": false,
       "duration": "quick",
-      "text": "Color ball: Call out a color and child kicks/throws ball to something that color."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Color Hunt Ball Toss: Call out a color, then throw/kick the ball to find something matching - 'Throw to something red!'",
+      "benefits": "Reinforces color recognition and coordination",
+      "prep": "Find open space with various colored objects",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3007,
@@ -70,7 +126,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Nature scavenger hunt: Find items like a smooth rock, green leaf, etc."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Nature Treasure Hunt: Search for outdoor wonders like smooth stones, fuzzy seeds, and patterned leaves - collect nature's artwork!",
+      "benefits": "Encourages observation skills and appreciation of nature",
+      "prep": "Prepare simple list of natural items to find",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3008,
@@ -79,7 +143,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Sock toss: Roll socks into balls and toss into laundry basket."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Sock Toss Challenge: Roll socks into balls and aim for targets like laundry baskets or boxes - score points for different targets!",
+      "benefits": "Develops hand-eye coordination",
+      "prep": "Roll 5-10 pairs of socks into balls",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3009,
@@ -88,7 +160,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Shadow puppets: Use hands to make shadows on the wall with a lamp."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Magical Shadow Theater: Create animal shapes with hands using a lamp - make bunnies, birds, and monsters that dance on the walls!",
+      "benefits": "Stimulates imagination and storytelling abilities",
+      "prep": "Darken room and position lamp facing blank wall",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3010,
@@ -97,7 +177,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Sock matching: Mix up clean socks and have child pair them together."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Sock Matching Mission: Mix clean socks into a colorful pile and race to find perfect pairs - folding optional!",
+      "benefits": "Builds visual discrimination and sorting skills",
+      "prep": "Gather clean socks from laundry",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3011,
@@ -106,16 +194,32 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Animal movement game: 'Move like a monkey/jump like a kangaroo' etc."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Wild Animal Movement Game: 'Waddle like a penguin!' 'Jump like a kangaroo!' 'Swing like a monkey!' - imitate animal actions together!",
+      "benefits": "Develops gross motor skills and creativity",
+      "prep": "Clear space for movement",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3012,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": true,
       "duration": "quick",
-      "text": "Pillow path: Create a stepping stone path with couch pillows."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Pillow Path Adventure: Create stepping stones across the 'lava floor' using couch cushions - don't fall in!",
+      "benefits": "Improves balance and coordination",
+      "prep": "Arrange pillows in path formation",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3013,
@@ -124,7 +228,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Color scavenger hunt: Find one item of each color in the room."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Rainbow Scavenger Hunt: Search for colorful treasures around the house - find something red, something blue, and something sparkly!",
+      "benefits": "Teaches color recognition and observation skills",
+      "prep": "Prepare color list or swatches",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3014,
@@ -133,7 +245,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Laundry basket boat: Pretend a laundry basket is a boat/spacecraft/car."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Imagination Voyage: Turn a laundry basket into a spaceship/boat/race car - add cushions for seats and colander for a helmet!",
+      "benefits": "Encourages pretend play and creativity",
+      "prep": "Place empty laundry basket in open area",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3015,
@@ -142,16 +262,32 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Memory tray game: Show 5 items on tray, cover, then recall what was there."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Memory Tray Challenge: Study 5 interesting objects on a tray, then cover and recall - who remembers the blue button?",
+      "benefits": "Strengthens memory and focus",
+      "prep": "Gather small household objects and cover",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3016,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": true,
       "duration": "quick",
-      "text": "Blanket fort: Drape blankets over furniture to create a cozy hideout."
+      "cleanup": "easy",
+      "involvement": "some",
+      "text": "Cozy Blanket Fort: Drape blankets over furniture to create secret hideouts - add pillows for maximum comfort!",
+      "benefits": "Encourages imaginative play and spatial skills",
+      "prep": "Gather blankets, clips, and pillows",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3017,
@@ -160,7 +296,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Simon says: Classic game with simple commands for this age group."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Simon Says Adventure: 'Simon says touch your toes!' 'Simon says hop like a frog!' Classic listening game with silly twists!",
+      "benefits": "Improves listening skills and body awareness",
+      "prep": "Prepare simple commands for this age",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3018,
@@ -169,7 +313,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Toy car wash: Set up a 'car wash' with sponges and water for toy vehicles."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Toy Car Wash Station: Set up a washing station with soapy water and sponges - give toy vehicles a bubbly bath!",
+      "benefits": "Develops pretend play and practical life skills",
+      "prep": "Prepare shallow tub with soapy water and towels",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3019,
@@ -178,7 +330,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Alphabet hunt: Find objects that start with each letter of the alphabet."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Alphabet Discovery Hunt: 'Find something starting with B!' - search for objects matching letter sounds",
+      "benefits": "Builds letter recognition and phonics awareness",
+      "prep": "Optional: Prepare alphabet cards",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3020,
@@ -187,7 +347,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Spoon relay: Balance a small ball on a spoon and walk across room."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Spoon Balance Relay: Carefully carry small objects on spoons across a course - race without dropping your 'egg'!",
+      "benefits": "Develops balance and concentration",
+      "prep": "Set start/finish lines and gather small objects",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3021,
@@ -196,7 +364,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "What's missing?: Place 5 objects, have child close eyes, remove one to identify."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Memory Detective: Study objects together, close eyes, then identify which item vanished - increase difficulty with more items!",
+      "benefits": "Strengthens visual memory and focus",
+      "prep": "Gather 5-7 small household objects",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3022,
@@ -205,7 +381,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Pillow case slide: Sit on pillow case and slide on carpeted floor."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Pillowcase Carpet Slide: Sit on pillowcases and scoot across carpet - race to the finish line!",
+      "benefits": "Develops core strength and coordination",
+      "prep": "Ensure smooth carpeted surface",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3023,
@@ -214,7 +398,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Feelings charades: Act out different emotions for others to guess."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Emotion Charades Express: Act out happy, sad, excited or surprised faces - guess each other's feelings!",
+      "benefits": "Teaches emotional recognition and expression",
+      "prep": "Optional: Prepare emotion cards",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3024,
@@ -223,7 +415,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Toy parade: Line up toys and march them around the room with music."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Toy Parade Spectacular: Line up stuffed animals and vehicles for a marching parade - add music for extra fun!",
+      "benefits": "Encourages imaginative play and sequencing",
+      "prep": "Gather favorite toys and create 'parade route'",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 3025,
@@ -232,7 +432,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Story dice: Roll dice with pictures and make up a story together."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Story Dice Adventure: Roll picture dice and create collaborative tales - 'Once there was a rocket visiting a rainbow...'",
+      "benefits": "Develops narrative skills and creativity",
+      "prep": "Prepare story dice or picture cards",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3026,
@@ -241,7 +449,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Sock basketball: Roll socks into balls and toss into laundry basket."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Sock Basketball Bonanza: Toss rolled socks into baskets from different distances - create scoring zones for extra challenge!",
+      "benefits": "Improves throwing accuracy and coordination",
+      "prep": "Roll socks into balls and place baskets/buckets",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3027,
@@ -250,7 +466,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Follow the leader: Take turns being leader with silly movements."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Follow-the-Leader Safari: Take turns leading silly movements - 'Waddle like penguins!' 'Fly like eagles!'",
+      "benefits": "Develops imitation skills and creativity",
+      "prep": "Clear movement space",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3028,
@@ -259,52 +483,100 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Toy rescue: Freeze small toys in ice and 'rescue' them with warm water."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Frozen Toy Rescue Mission: Freeze small toys in ice, then use tools to melt and rescue them - great for little paleontologists!",
+      "benefits": "Teaches science concepts and problem-solving",
+      "prep": "Freeze toys in containers overnight",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3029,
       "age": "3-5",
       "location": "outdoor",
-      "materials": ["none"],
+      "materials": ["tape"],
       "independent": false,
       "duration": "medium",
-      "text": "Nature bracelet: Wrap tape sticky-side out around wrist to collect small nature items."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Nature Collector Bracelet: Make sticky bracelets to collect outdoor treasures - petals, leaves, and tiny pinecones!",
+      "benefits": "Encourages nature observation and fine motor skills",
+      "prep": "Wrap tape sticky-side out around wrists",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3030,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["playdough"],
+      "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Playdough restaurant: Create pretend food items and 'serve' them."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Playdough Restaurant: Shape colorful playdough into pretend meals - serve 'pizza', 'cookies', and 'spaghetti' to stuffed animal customers!",
+      "benefits": "Develops fine motor skills and imaginative play",
+      "prep": "Set up playdough and simple kitchen tools",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3031,
       "age": "3-5",
       "location": "outdoor",
-      "materials": ["bucket", "water"],
+      "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Painting with water: 'Paint' sidewalks or fences with water and brushes."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Water Painting Magic: 'Paint' sidewalks or fences with brushes and water - watch creations disappear in the sun!",
+      "benefits": "Develops creativity without mess",
+      "prep": "Fill containers with water and gather brushes",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3032,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["cotton balls", "tongs"],
+      "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Cotton ball transfer: Use tongs to move cotton balls between bowls."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Tweezer Transfer Challenge: Move small objects between containers using tongs/chopsticks - race against the clock!",
+      "benefits": "Strengthens fine motor skills and focus",
+      "prep": "Set up bowls and small objects (cotton balls, pompoms)",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3033,
       "age": "3-5",
       "location": "outdoor",
-      "materials": ["none"],
+      "materials": ["pencils"],
       "independent": false,
       "duration": "medium",
-      "text": "Shadow tracing: Trace each other's shadows with chalk at different times."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Shadow Tracing Adventure: Trace each other's shadows with chalk at different times - watch how they change!",
+      "benefits": "Teaches sun movement concepts and body awareness",
+      "prep": "Gather sidewalk chalk and find sunny area",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3034,
@@ -313,7 +585,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Animal yoga: Pose like different animals (frog, cobra, downward dog)."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Animal Yoga Safari: Pose like animals - crouch like frogs, stretch like cats, and stand tall like giraffes!",
+      "benefits": "Improves flexibility and body awareness",
+      "prep": "Clear space and demonstrate poses",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3035,
@@ -322,7 +602,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Puddle jumping: Find safe puddles to splash in after rain."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Puddle Jumping Festival: Find safe puddles after rain - measure splashes, float leaves, and jump with both feet!",
+      "benefits": "Develops gross motor skills and sensory exploration",
+      "prep": "Dress in rain boots and waterproof clothes",
+      "contexts": ["rainy"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3036,
@@ -331,7 +619,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Sock skating: Slide on hardwood floors with socks."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Sock Skating Rink: Slide across smooth floors in socks - practice spins, glides, and long slides!",
+      "benefits": "Improves balance and coordination",
+      "prep": "Ensure smooth floor surface and clear obstacles",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3037,
@@ -340,7 +636,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Animal sound bingo: Match animal pictures to sounds you make."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Animal Sound Bingo: Match animal pictures to their sounds - 'Moo!' for cow, 'Roar!' for lion",
+      "benefits": "Builds auditory discrimination and animal knowledge",
+      "prep": "Prepare bingo cards with animal pictures",
+      "contexts": ["normal", "sick"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3038,
@@ -349,16 +653,32 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Dandelion blowing: Practice blowing dandelion seeds and make wishes."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Dandelion Wish Magic: Blow dandelion seeds while making wishes - count how many puffs to clear a flower!",
+      "benefits": "Develops oral motor skills and nature appreciation",
+      "prep": "Find dandelions gone to seed",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3039,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": true,
       "duration": "quick",
-      "text": "Pillow road: Create a path with pillows to crawl or walk along."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Pillow Balance Path: Create challenging paths with cushions - walk tip-toe, crawl, or jump between islands!",
+      "benefits": "Improves balance and spatial awareness",
+      "prep": "Arrange pillows and cushions on floor",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3040,
@@ -367,16 +687,32 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Follow the leader: Take turns leading silly movements around the house."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Silly Moves Follow-the-Leader: Take turns leading creative movements - 'Walk like a crab!' 'Twirl like a tornado!'",
+      "benefits": "Encourages creativity and imitation skills",
+      "prep": "Clear movement space",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple"
     },
     {
       "id": 3041,
       "age": "3-5",
       "location": "outdoor",
-      "materials": ["none"],
+      "materials": ["kitchen"],
       "independent": true,
       "duration": "quick",
-      "text": "Dirt kitchen: Set up an outdoor 'kitchen' with natural materials."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Mud Pie Kitchen: Create nature 'meals' using dirt, water, and found objects - stir with sticks, serve on leaf plates!",
+      "benefits": "Encourages sensory play and creativity",
+      "prep": "Provide old kitchen tools and designate mud area",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3042,
@@ -385,25 +721,49 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Stuffed animal school: Set up and 'teach' a class to stuffed animals."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Stuffed Animal School: Teach favorite toys letters, numbers, or songs - be the teacher!",
+      "benefits": "Reinforces academic concepts through teaching",
+      "prep": "Set up stuffed animals as 'students'",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 3043,
       "age": "3-5",
       "location": "indoor",
-      "materials": ["cotton swabs", "paint"],
+      "materials": ["paper", "pencils"],
       "independent": true,
       "duration": "medium",
-      "text": "Q-tip pointillism: Create artwork using only dots from cotton swabs."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "text": "Q-tip Pointillism Art: Create dot paintings using cotton swabs - make pictures with thousands of colorful dots!",
+      "benefits": "Develops fine motor control and creativity",
+      "prep": "Prepare paint, paper, and cotton swabs",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3044,
       "age": "3-5",
       "location": "outdoor",
-      "materials": ["spray bottle", "water"],
+      "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Water spray art: 'Paint' sidewalks or fences with water in spray bottles."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Spray Bottle Art: Create water designs on sidewalks using spray bottles - watch art evaporate in sunlight!",
+      "benefits": "Develops hand strength and creativity",
+      "prep": "Fill spray bottles with water",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple"
     },
     {
       "id": 3045,
@@ -412,7 +772,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Color mixing: Use food coloring in water to create new colors."
+      "cleanup": "messy",
+      "involvement": "active",
+      "text": "Color Mixing Magic: Blend food coloring in water to create new colors - predict what purple + yellow makes!",
+      "benefits": "Teaches color theory and science concepts",
+      "prep": "Prepare clear containers, water, and food coloring",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3046,
@@ -421,7 +789,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Flashlight tag: Play tag with flashlight beams in a darkened room."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Flashlight Tag Adventure: Chase light beams in a darkened room - tag walls and ceilings with light spots!",
+      "benefits": "Develops coordination and spatial awareness",
+      "prep": "Darken room and provide flashlights",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple"
     },
     {
       "id": 3047,
@@ -430,7 +806,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "quick",
-      "text": "Flower petal soup: Make pretend soup with flower petals and water."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "text": "Flower Petal Potion: Mix petals, grass, and water in containers - create magical 'soups' and 'perfumes'!",
+      "benefits": "Encourages sensory exploration and creativity",
+      "prep": "Provide containers and stirring sticks",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     }
   ]
 }
