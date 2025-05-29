@@ -7,7 +7,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Peek-a-boo with a blanket: Simple but always delightful for little ones!"
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Peek-a-boo with a blanket: Hide behind a blanket and pop out saying 'peek-a-boo!' Your little one will giggle with delight every time!",
+      "benefits": "Develops object permanence, social skills, and cause-and-effect understanding",
+      "prep": "Just grab any blanket or towel from around the house",
+      "contexts": ["normal", "rainy", "coffee"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 2,
@@ -16,7 +24,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Sensory bottles: Fill empty water bottles with colorful items like beads or glitter and seal tightly."
+      "cleanup": "easy",
+      "involvement": "some",
+      "text": "Sensory bottles: Fill empty water bottles with colorful beads, glitter, and water. Seal tightly and let your baby shake, roll, and explore the mesmerizing movement!",
+      "benefits": "Stimulates visual tracking, sensory processing, and focus",
+      "prep": "Collect clear plastic bottles, small colorful items, and glue for sealing",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 3,
@@ -25,7 +41,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Stacking cups: Use plastic cups to stack and knock down."
+      "cleanup": "easy",
+      "involvement": "active",
+      "text": "Stacking cups: Build colorful towers together and cheer when your baby knocks them down! Repeat for endless fun and learning.",
+      "benefits": "Develops hand-eye coordination, spatial awareness, and cause-effect understanding",
+      "prep": "Gather plastic stacking cups (common baby toy)",
+      "contexts": ["normal", "rainy", "coffee"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 4,
@@ -34,7 +58,15 @@
       "materials": ["blanket"],
       "independent": false,
       "duration": "quick",
-      "text": "Blanket ride: Gently pull child on a blanket around the room."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Blanket ride: Gently pull your child around the room on a soft blanket while making 'vroom' sounds. Watch their delight as they glide along!",
+      "benefits": "Builds balance, core strength, and vestibular stimulation",
+      "prep": "Find a smooth floor and medium-sized blanket",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 5,
@@ -43,7 +75,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Texture exploration: Gather different fabrics/textures for baby to feel."
+      "cleanup": "easy",
+      "involvement": "active",
+      "text": "Texture exploration: Guide baby's hands over different fabrics like silk, wool, and velvet while describing each texture. Watch their curiosity grow!",
+      "benefits": "Enhances tactile sensitivity, vocabulary, and sensory processing",
+      "prep": "Collect fabric swatches with varied textures from around your home",
+      "contexts": ["normal", "rainy", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 6,
@@ -52,7 +92,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Bubble chasing: Blow bubbles and let toddler chase/pop them."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Bubble chasing: Blow streams of bubbles and encourage your toddler to chase and pop them. Celebrate each successful pop with cheers!",
+      "benefits": "Develops visual tracking, gross motor skills, and coordination",
+      "prep": "Prepare bubble solution and wand",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 7,
@@ -61,7 +109,15 @@
       "materials": ["ball"],
       "independent": false,
       "duration": "quick",
-      "text": "Rolling ball: Sit opposite your child and roll a ball back and forth."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Rolling ball: Sit facing your child and roll a soft ball back and forth. Clap and cheer each time they push it toward you!",
+      "benefits": "Builds hand-eye coordination, turn-taking skills, and object tracking",
+      "prep": "Find a soft, lightweight ball",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 8,
@@ -70,7 +126,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Nature walk: Carry baby and point out different colors in nature."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Nature walk: Carry your baby and point out leaves, flowers, and insects. Describe colors, shapes, and movements in an excited voice!",
+      "benefits": "Introduces natural world concepts, builds vocabulary, and stimulates senses",
+      "prep": "Find a safe outdoor path with natural elements",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 9,
@@ -79,7 +143,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Dance party: Hold baby and dance to music."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Dance party: Hold baby close and sway, bounce, and spin to upbeat music. Add gentle lifts for extra giggles!",
+      "benefits": "Develops rhythm awareness, balance, and bonding through movement",
+      "prep": "Choose fun, age-appropriate music",
+      "contexts": ["normal", "rainy", "coffee"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 10,
@@ -88,16 +160,32 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Mirror play: Make faces in a mirror with baby."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Mirror play: Make funny faces and sounds in front of a mirror with your baby. Point to reflections while naming body parts!",
+      "benefits": "Builds self-recognition, social smiling, and facial expression awareness",
+      "prep": "Find a safe, baby-accessible mirror",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 11,
       "age": "0-2",
       "location": "indoor",
-      "materials": ["soft toys"],
+      "materials": ["dolls"],
       "independent": false,
       "duration": "quick",
-      "text": "Soft toy parade: Line up stuffed animals and march them while making funny sounds."
+      "cleanup": "easy",
+      "involvement": "active",
+      "text": "Soft toy parade: March stuffed animals across furniture while making funny voices and sounds. Let baby touch and hold each 'parade member'!",
+      "benefits": "Encourages imaginative play, language development, and fine motor skills",
+      "prep": "Gather 3-5 stuffed animals",
+      "contexts": ["normal", "sick"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 12,
@@ -106,25 +194,49 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Body parts song: Sing 'Head Shoulders Knees and Toes' while touching each part."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Body parts song: Sing 'Head, Shoulders, Knees and Toes' while touching each part on baby's body. Go slowly and add tickles!",
+      "benefits": "Teaches body awareness, vocabulary, and following simple instructions",
+      "prep": "Learn the song lyrics and motions",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 13,
       "age": "0-2",
       "location": "indoor",
-      "materials": ["pots", "spoons"],
+      "materials": ["kitchen"],
       "independent": true,
       "duration": "quick",
-      "text": "Kitchen drum set: Let baby bang on pots with wooden spoons."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "text": "Kitchen drum set: Let your baby bang pots and pans with wooden spoons. Show different rhythms and celebrate their musical creations!",
+      "benefits": "Develops cause-effect understanding, rhythm exploration, and motor skills",
+      "prep": "Gather unbreakable pots, pans, and spoons",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 14,
       "age": "0-2",
       "location": "outdoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": false,
       "duration": "medium",
-      "text": "Cloud watching: Lie on a blanket and point out cloud shapes together."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Cloud watching: Lie together on a blanket and point out cloud shapes. Create stories about animals and objects you discover!",
+      "benefits": "Encourages imagination, visual perception, and language skills",
+      "prep": "Choose a clear day with visible clouds",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 15,
@@ -133,7 +245,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Airplane baby: Gently lift baby while making airplane noises."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Airplane baby: Lift baby overhead while making engine noises. Gently 'fly' them around the room with dips and turns!",
+      "benefits": "Builds trust, spatial awareness, and core strength",
+      "prep": "Ensure you have clear space overhead",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 16,
@@ -142,7 +262,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Tickle game: Gently tickle different body parts while naming them."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Tickle game: Gently tickle different body parts while naming them. Pause dramatically between tickles for anticipation giggles!",
+      "benefits": "Teaches body part names, builds anticipation skills, and social bonding",
+      "prep": "None needed",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 17,
@@ -151,7 +279,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Animal sounds: Make animal noises and encourage baby to mimic."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Animal sounds: Make exaggerated animal noises and encourage baby to mimic. Add matching animal actions like hopping or flapping!",
+      "benefits": "Develops auditory discrimination, imitation skills, and vocabulary",
+      "prep": "Think of 4-5 common animals and their sounds",
+      "contexts": ["normal", "sick"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 18,
@@ -160,7 +296,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Kissing game: Gently kiss baby's hands, feet, and nose while naming each."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Kissing game: Gently kiss baby's hands, feet, and nose while naming each. Finish with a big cuddle!",
+      "benefits": "Strengthens bonding, teaches body part names, and provides sensory input",
+      "prep": "None needed",
+      "contexts": ["normal", "bedtime", "coffee"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 19,
@@ -169,7 +313,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby massage: Gently massage baby with lotion after bath time."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby massage: Gently massage baby with lotion using long strokes. Describe what you're doing ('Now I'm rubbing your back!')",
+      "benefits": "Promotes relaxation, body awareness, and sensory integration",
+      "prep": "Use baby-safe lotion and warm hands",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 20,
@@ -178,7 +330,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Lap bounce: Sit baby on lap and gently bounce to nursery rhymes."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Lap bounce: Sit baby on your lap and bounce rhythmically to nursery rhymes. Add gentle dips and leans for excitement!",
+      "benefits": "Develops balance, rhythm awareness, and vestibular stimulation",
+      "prep": "Learn simple bounce rhymes like 'Trot Trot to Boston'",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 21,
@@ -187,7 +347,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Garden explorer: Let baby touch safe leaves and flowers while describing textures."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Garden explorer: Guide baby's hands to touch safe plants while describing textures ('This leaf is bumpy!'). Smell flowers together!",
+      "benefits": "Introduces nature concepts, sensory exploration, and descriptive language",
+      "prep": "Identify safe plants in your garden/park",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 22,
@@ -196,7 +364,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Pat-a-cake: Clap baby's hands together while singing the rhyme."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Pat-a-cake: Clap baby's hands together while singing. Add knee bounces and finish with a big hug on 'throw it in the oven'!",
+      "benefits": "Develops rhythm, social interaction, and motor coordination",
+      "prep": "Learn the hand motions for the rhyme",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 23,
@@ -205,7 +381,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Sock puppet show: Use clean socks as simple puppets to tell a story."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Sock puppet show: Use clean socks as puppets to act out simple stories. Make different voices and encourage baby to touch the 'characters'!",
+      "benefits": "Stimulates imagination, language development, and social interaction",
+      "prep": "Find 2-3 clean socks and draw simple faces",
+      "contexts": ["normal", "sick", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 24,
@@ -214,7 +398,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "This little piggy: Play the classic toe-counting game."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "This little piggy: Wiggle each toe while reciting the rhyme. Add tickles on 'wee wee wee all the way home'!",
+      "benefits": "Teaches body awareness, rhythm, and anticipation skills",
+      "prep": "None needed",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 25,
@@ -223,7 +415,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby yoga: Gently move baby's arms and legs in simple stretches."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby yoga: Gently move baby's arms and legs in simple stretches. Narrate actions ('Stretch up high! Now touch your toes!')",
+      "benefits": "Promotes flexibility, body awareness, and bonding through touch",
+      "prep": "Learn simple baby yoga poses",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 26,
@@ -232,7 +432,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Flying kisses: Blow kisses to baby and help them mimic the motion."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Flying kisses: Demonstrate blowing kisses and help baby mimic. Celebrate every attempt with cheers and claps!",
+      "benefits": "Develops imitation skills, social gestures, and bonding",
+      "prep": "None needed",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 27,
@@ -241,7 +449,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Nursery rhyme time: Sing three classic nursery rhymes with actions."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Nursery rhyme time: Sing 'Twinkle Twinkle,' 'Itsy Bitsy Spider,' and 'Wheels on the Bus' with full motions and expressions!",
+      "benefits": "Builds language skills, memory, and motor coordination",
+      "prep": "Refresh lyrics and motions for 3 classics",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 28,
@@ -250,7 +466,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Up and down: Lift baby up high, then swoop down low repeatedly."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Up and down: Lift baby high overhead, then slowly lower. Repeat with variations like spins or dips!",
+      "benefits": "Develops spatial awareness, vestibular stimulation, and trust",
+      "prep": "Ensure you have clear overhead space",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 29,
@@ -259,7 +483,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby sign language: Teach simple signs like 'more', 'milk', and 'all done'."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby sign language: Teach simple signs like 'more,' 'milk,' and 'all done' during meals. Consistently sign while saying the words!",
+      "benefits": "Reduces frustration, builds communication skills, and cognitive understanding",
+      "prep": "Learn basic baby signs",
+      "contexts": ["normal", "meal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 30,
@@ -268,7 +500,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Stroller safari: Point out interesting sights during a neighborhood walk."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Stroller safari: Narrate your walk like a nature documentary. Point out dogs, birds, and flowers with excitement!",
+      "benefits": "Builds observation skills, vocabulary, and environmental awareness",
+      "prep": "Plan a route with interesting sights",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 31,
@@ -277,7 +517,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Color tour: Walk around house naming colors of objects you point to."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Color tour: Carry baby around the room and name colors of objects you touch. 'This pillow is RED! Your shirt is BLUE!'",
+      "benefits": "Teaches color recognition, vocabulary, and object identification",
+      "prep": "None needed",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 32,
@@ -286,7 +534,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Tummy time fun: Place interesting toys just out of reach during tummy time."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Tummy time fun: Place interesting toys just beyond reach during tummy time. Encourage reaching and celebrate efforts!",
+      "benefits": "Strengthens neck/back muscles, develops reaching skills, and builds persistence",
+      "prep": "Gather high-contrast toys",
+      "contexts": ["normal", "playtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 33,
@@ -295,7 +551,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby book club: Read simple board books with high-contrast pictures."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby book club: Read board books with high-contrast pictures. Point to images, make sounds, and let baby turn pages!",
+      "benefits": "Builds early literacy skills, visual tracking, and attention span",
+      "prep": "Select 2-3 baby-friendly books",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 34,
@@ -304,7 +568,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Silly face contest: Make exaggerated facial expressions for baby to mimic."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Silly face contest: Make exaggerated happy/surprised/silly faces. Encourage baby to mimic your expressions!",
+      "benefits": "Develops facial muscle control, imitation skills, and emotional recognition",
+      "prep": "None needed",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 35,
@@ -313,7 +585,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby dance party: Hold baby and dance to different music genres."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby dance party: Hold baby and dance to different music styles. Change movements with each song - salsa, rock, waltz!",
+      "benefits": "Develops rhythm, balance, and cultural sound awareness",
+      "prep": "Prepare playlist with varied musical styles",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 36,
@@ -322,7 +602,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Where's baby?: Play peek-a-boo with a burp cloth or small blanket."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Where's baby?: Drape a lightweight cloth over baby's head and ask 'Where's baby?' Pull it off with 'There you are!'",
+      "benefits": "Teaches object permanence, social anticipation, and peek-a-boo variation",
+      "prep": "Use a breathable cloth like a muslin blanket",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 37,
@@ -331,16 +619,32 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Gentle baby exercises: Help baby do bicycle legs and arm crosses."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Gentle baby exercises: Help baby do 'bicycle legs' and arm crosses. Narrate motions ('Legs go round and round!')",
+      "benefits": "Promotes muscle development, joint flexibility, and body awareness",
+      "prep": "Ensure baby is on a soft surface",
+      "contexts": ["normal", "playtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 38,
       "age": "0-2",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["blanket"],
       "independent": false,
       "duration": "quick",
-      "text": "Magic scarf: Play peek-a-boo with a lightweight scarf."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Magic scarf play: Drape a lightweight scarf over baby and gently pull it away. Let baby grasp and explore the fabric!",
+      "benefits": "Develops object permanence, tactile exploration, and visual tracking",
+      "prep": "Use a sheer, lightweight scarf",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 39,
@@ -349,7 +653,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby drumroll: Gently drum on baby's tummy while making silly sounds."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby drumroll: Gently 'drum' on baby's tummy while making escalating sounds. Finish with a tummy raspberry!",
+      "benefits": "Builds anticipation skills, body awareness, and cause-effect understanding",
+      "prep": "None needed",
+      "contexts": ["normal", "diaper change"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 40,
@@ -358,25 +670,49 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Park bench people watching: Describe what people are doing at the park."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Park bench people watching: Describe park activities to baby ('See the boy running? Hear the dog barking?')",
+      "benefits": "Builds observation skills, social awareness, and vocabulary",
+      "prep": "Find a busy park bench",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 41,
       "age": "0-2",
       "location": "indoor",
-      "materials": ["empty containers"],
+      "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Container play: Fill and empty different sized containers with small toys."
+      "cleanup": "easy",
+      "involvement": "some",
+      "text": "Container play: Provide different sized containers for filling and emptying with safe objects. Demonstrate dumping and refilling!",
+      "benefits": "Teaches object permanence, size concepts, and hand-eye coordination",
+      "prep": "Gather plastic containers and small toys",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 42,
       "age": "0-2",
       "location": "indoor",
-      "materials": ["scarf"],
+      "materials": ["blanket"],
       "independent": false,
       "duration": "quick",
-      "text": "Scarf peekaboo: Play peekaboo with a lightweight scarf."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Scarf peekaboo: Play peekaboo using a lightweight scarf. Drape it over your head or baby's head for surprises!",
+      "benefits": "Develops object permanence, social anticipation, and fine motor skills",
+      "prep": "Use a sheer, breathable scarf",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 43,
@@ -385,7 +721,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Texture walk: Help baby walk on different surfaces (carpet, towel, foam)."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Texture walk: Help baby walk barefoot on different surfaces (carpet, tile, foam mat). Describe each feeling!",
+      "benefits": "Stimulates tactile senses, builds walking confidence, and vocabulary",
+      "prep": "Create a safe path with varied surfaces",
+      "contexts": ["normal", "playtime"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 44,
@@ -394,7 +738,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Stroller safari: Point out interesting sights during neighborhood walk."
+      "cleanup": "no",
+      "involvement": "some",
+      "text": "Stroller safari: Point out vehicles, animals, and nature during your walk. Use exciting narration like a tour guide!",
+      "benefits": "Builds environmental awareness, vocabulary, and observation skills",
+      "prep": "Plan a route with diverse sights",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 45,
@@ -403,7 +755,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby book club: Read simple board books with high-contrast pictures."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby book club: Read high-contrast board books together. Point to pictures and ask simple questions ('Where's the dog?')",
+      "benefits": "Develops early literacy, visual tracking, and object identification",
+      "prep": "Choose books with bold illustrations",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     },
     {
       "id": 46,
@@ -412,7 +772,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Silly face contest: Make exaggerated facial expressions for baby to mimic."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Silly face contest: Make exaggerated expressions and sounds. Reward baby's imitation attempts with cheers and claps!",
+      "benefits": "Encourages facial muscle development, emotional recognition, and imitation skills",
+      "prep": "None needed",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 47,
@@ -421,7 +789,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby dance party: Hold baby and dance to different music genres."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby dance party: Move to different musical styles! Sway to lullabies, bounce to pop, and wiggle to jazz with baby in arms.",
+      "benefits": "Develops rhythm awareness, bonding through movement, and cultural sound exposure",
+      "prep": "Prepare playlist with diverse music",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 48,
@@ -430,7 +806,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Where's baby?: Play peek-a-boo with a burp cloth or small blanket."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Where's baby?: Play peek-a-boo using a burp cloth. Cover your face or baby's face for short surprises!",
+      "benefits": "Reinforces object permanence, social anticipation, and visual tracking",
+      "prep": "Use a small cloth or burp rag",
+      "contexts": ["normal", "diaper change"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 49,
@@ -439,7 +823,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Flying kisses: Blow kisses to baby and help them mimic the motion."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Flying kisses: Blow exaggerated kisses to baby and help them mimic. Celebrate every attempt like it's a major achievement!",
+      "benefits": "Develops imitation skills, social-emotional connection, and fine motor control",
+      "prep": "None needed",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 50,
@@ -448,7 +840,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Nursery rhyme time: Sing three classic nursery rhymes with actions."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Nursery rhyme time: Sing 'Row Your Boat,' 'Hickory Dickory Dock,' and 'Baa Baa Black Sheep' with full motions and enthusiasm!",
+      "benefits": "Builds language patterns, memory skills, and parent-child bonding",
+      "prep": "Refresh lyrics for 3 nursery rhymes",
+      "contexts": ["normal", "bedtime"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single"
     },
     {
       "id": 51,
@@ -457,7 +857,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "quick",
-      "text": "Up and down: Lift baby up high, then swoop down low repeatedly."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Up and down: Lift baby high while saying 'UP!', then lower while saying 'DOWN!' Add spins and dips for variation!",
+      "benefits": "Develops spatial awareness, vestibular stimulation, and understanding of opposites",
+      "prep": "Ensure clear space above",
+      "contexts": ["normal", "coffee"],
+      "energy_required": "medium",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 52,
@@ -466,7 +874,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Baby drumroll: Gently drum on baby's tummy while making silly sounds."
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Baby drumroll: Gently drum on baby's tummy while making escalating sounds. Finish with a tickle flourish!",
+      "benefits": "Builds anticipation skills, body awareness, and cause-effect understanding",
+      "prep": "None needed",
+      "contexts": ["normal", "diaper change"],
+      "energy_required": "low",
+      "noise_level": "loud",
+      "kid_count": "single"
     },
     {
       "id": 53,
@@ -474,8 +890,16 @@
       "location": "outdoor",
       "materials": ["none"],
       "independent": false,
-      "duration": "quick",
-      "text": "Garden explorer: Let baby touch safe leaves and flowers while describing textures."
+      "duration": "medium",
+      "cleanup": "no",
+      "involvement": "active",
+      "text": "Garden explorer: Guide baby to touch safe plants while describing textures. Smell flowers together and listen for birds!",
+      "benefits": "Introduces nature concepts, sensory exploration, and descriptive language",
+      "prep": "Identify baby-safe plants in your garden",
+      "contexts": ["normal", "sunny"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single"
     }
   ]
 }
