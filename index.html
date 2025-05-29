@@ -1127,67 +1127,6 @@
             
             // Show selected tab and activate button
             document.getElementById(tabName + '-tab').style.display = 'block';
-            event.target.classList.add('active');
-            
-            if (tabName === 'favorites') {
-                showFavorites();
-            }
-        }
-    
-        function showFavorites() {
-            const favoritesDiv = document.getElementById('favorites-list');
-            
-            if (favorites.length === 0) {
-                favoritesDiv.innerHTML = `
-                    <div style="text-align: center; padding: 2rem; color: #666;">
-                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
-                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const favoritesHtml = favorites.map(activity => `
-                <div class="favorite-item">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
-                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
-                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
-                    <button onclick="displayActivityFromFavorite('${activity.id}')" 
-                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
-                        🎮 Do This Activity
-                    </button>
-                    <button onclick="removeFavorite('${activity.id}')" 
-                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
-                        🗑️ Remove
-                    </button>
-                </div>
-            `).join('');
-            
-            favoritesDiv.innerHTML = favoritesHtml;
-        }
-        
-        // Add this new helper function:
-        function displayActivityFromFavorite(activityId) {
-            const activity = favorites.find(fav => fav.id === activityId);
-            if (activity) {
-                // Switch to the generator tab first
-                showTabProgrammatically('generator');
-                displayActivity(activity);
-            }
-        }
-        
-        // Updated showTab function to handle both event-based and programmatic calls:
-        function showTab(tabName) {
-            // Hide all tabs
-            document.getElementById('generator-tab').style.display = 'none';
-            document.getElementById('planner-tab').style.display = 'none';
-            document.getElementById('favorites-tab').style.display = 'none';
-            
-            // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected tab and activate button
-            document.getElementById(tabName + '-tab').style.display = 'block';
             
             // Handle both event-based and direct calls
             if (event && event.target) {
@@ -1231,6 +1170,48 @@
                     btn.classList.add('active');
                 }
             });
+        }
+    
+        function showFavorites() {
+            const favoritesDiv = document.getElementById('favorites-list');
+            
+            if (favorites.length === 0) {
+                favoritesDiv.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
+                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const favoritesHtml = favorites.map(activity => `
+                <div class="favorite-item">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
+                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
+                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
+                    <button onclick="displayActivityFromFavorite('${activity.id}')" 
+                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
+                        🎮 Do This Activity
+                    </button>
+                    <button onclick="removeFavorite('${activity.id}')" 
+                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
+                        🗑️ Remove
+                    </button>
+                </div>
+            `).join('');
+            
+            favoritesDiv.innerHTML = favoritesHtml;
+        }
+        
+        // Add this new helper function:
+        function displayActivityFromFavorite(activityId) {
+            const activity = favorites.find(fav => fav.id === activityId);
+            if (activity) {
+                // Switch to the generator tab first
+                showTabProgrammatically('generator');
+                displayActivity(activity);
+            }
         }
     
         function removeFavorite(id) {
