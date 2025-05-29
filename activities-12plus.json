@@ -7,7 +7,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Podcast production: Record a 10-minute episode about a topic they're passionate about."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops communication skills, technical production knowledge, and creative storytelling",
+      "prep": "Ensure access to recording device and editing software",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "Podcast Production Lab: Record and edit a professional 10-minute episode about a passion topic. Research content, structure segments, and add sound effects for a broadcast-quality show!"
     },
     {
       "id": 12001,
@@ -16,7 +24,15 @@
       "materials": ["paper", "pencils"],
       "independent": true,
       "duration": "medium",
-      "text": "Pictionary tournament: Play with custom-drawn word cards in multiple difficulty levels."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "benefits": "Enhances creativity, quick-thinking and teamwork skills",
+      "prep": "Prepare paper strips with words in multiple difficulty categories",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Pictionary Championship: Host a competitive drawing tournament with custom word cards. Create themed rounds and scoring systems for endless artistic battles!"
     },
     {
       "id": 12002,
@@ -25,7 +41,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Geocaching adventure: Find 3 local geocaches or create your own hidden container."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Builds navigation skills, exploration mindset and environmental awareness",
+      "prep": "Download geocaching app and pack outdoor essentials",
+      "contexts": ["normal"],
+      "energy_required": "high",
+      "noise_level": "quiet",
+      "kid_count": "multiple",
+      "text": "Geocaching Expedition: Hunt for 3 hidden local treasures using GPS coordinates. Document finds and create your own cache with logbook for others to discover!"
     },
     {
       "id": 12003,
@@ -34,16 +58,32 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "TikTok challenge: Film and edit three 15-second creative videos."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Encourages digital creativity, trend analysis and performance skills",
+      "prep": "Clear filming space and check device storage",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "TikTok Creator Studio: Produce three 15-second viral-style videos. Experiment with effects, transitions, and popular audio trends to build content creation skills!"
     },
     {
       "id": 12004,
       "age": "12+",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["kitchen"],
       "independent": true,
       "duration": "long",
-      "text": "MasterChef challenge: Cook a three-course meal using only available ingredients."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "benefits": "Develops culinary skills, resourcefulness and time management",
+      "prep": "Inventory pantry ingredients and select recipes",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "MasterChef Challenge: Create an impressive three-course meal using only available ingredients. Plate dishes restaurant-style and document your culinary creations!"
     },
     {
       "id": 12005,
@@ -52,7 +92,15 @@
       "materials": ["ball"],
       "independent": true,
       "duration": "medium",
-      "text": "Spikeball tournament: Set up a bracket competition with customized rules."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Improves coordination, strategic thinking and sportsmanship",
+      "prep": "Set up net and define tournament rules",
+      "contexts": ["normal"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple",
+      "text": "Spikeball Showdown: Run an intense bracket tournament with customized rules. Keep tournament stats and award creative prizes to winners!"
     },
     {
       "id": 12006,
@@ -61,7 +109,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Film festival: Watch 3 short films from different genres and discuss them."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Builds media literacy, critical analysis and discussion skills",
+      "prep": "Curate diverse short films from streaming platforms",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple",
+      "text": "Indie Film Festival: Screen and analyze 3 award-winning short films from different genres. Host post-viewing discussions with themed snacks!"
     },
     {
       "id": 12007,
@@ -70,7 +126,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Science fair: Conduct 3 simple experiments and record the results."
+      "cleanup": "easy",
+      "involvement": "minimal",
+      "benefits": "Strengthens scientific method understanding and analytical skills",
+      "prep": "Gather household experiment materials",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "Kitchen Science Fair: Conduct three fascinating experiments using household items. Document hypotheses, procedures and surprising results!"
     },
     {
       "id": 12008,
@@ -79,7 +143,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Night exploration: Create a star map and identify constellations."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops astronomical knowledge and observational skills",
+      "prep": "Download star map app and prepare red-light flashlight",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "multiple",
+      "text": "Stellar Observatory: Map constellations and identify planets using astronomy apps. Track celestial movements and photograph night sky phenomena!"
     },
     {
       "id": 12009,
@@ -88,7 +160,15 @@
       "materials": ["none"],
       "independent": false,
       "duration": "medium",
-      "text": "Talent showcase: Each person prepares and performs a special talent."
+      "cleanup": "no",
+      "involvement": "active",
+      "benefits": "Builds confidence, performance skills and audience engagement",
+      "prep": "Create performance schedule and audience seating",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Family Talent Extravaganza: Host a showcase where each participant prepares and performs special talents. Create programs and award fun recognition categories!"
     },
     {
       "id": 12010,
@@ -97,7 +177,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "DIY podcast: Record a podcast episode about a topic they're passionate about."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops audio production, interviewing and scripting skills",
+      "prep": "Set up recording space and test equipment",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "DIY Podcast Studio: Produce a professional podcast episode from concept to final edit. Develop interview questions, record narration, and add sound effects!"
     },
     {
       "id": 12011,
@@ -106,16 +194,32 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Outdoor art gallery: Create nature art installations and give tours."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Encourages artistic expression and environmental appreciation",
+      "prep": "Gather natural materials for installations",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Nature Art Gallery: Create temporary land art installations using natural materials. Photograph pieces and give guided tours explaining artistic concepts!"
     },
     {
       "id": 12012,
       "age": "12+",
       "location": "indoor",
-      "materials": ["magazines", "glue"],
+      "materials": ["paper", "tape"],
       "independent": true,
       "duration": "long",
-      "text": "Vision board: Create a collage of goals and inspirational images."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "benefits": "Clarifies goal-setting skills and future planning",
+      "prep": "Collect magazines, scissors and poster board",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Vision Board Workshop: Design an inspirational collage of goals and dreams using magazine cutouts. Organize themes and display prominently for daily motivation!"
     },
     {
       "id": 12013,
@@ -124,7 +228,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Language challenge: Learn and teach 10 phrases in a new language."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Enhances memory retention and cross-cultural understanding",
+      "prep": "Select target language and prepare learning resources",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Language Exchange Challenge: Master 10 practical phrases in a new language, then teach them to family members. Practice through conversational role-plays!"
     },
     {
       "id": 12014,
@@ -133,7 +245,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Fitness challenge: Create and complete a backyard obstacle course."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Improves physical fitness and obstacle course design skills",
+      "prep": "Identify outdoor space and available equipment",
+      "contexts": ["normal"],
+      "energy_required": "high",
+      "noise_level": "loud",
+      "kid_count": "multiple",
+      "text": "Backyard Bootcamp: Design and complete a custom obstacle course. Time attempts and create challenges for different fitness levels!"
     },
     {
       "id": 12015,
@@ -142,7 +262,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Park clean-up: Organize a neighborhood beautification project."
+      "cleanup": "easy",
+      "involvement": "some",
+      "benefits": "Develops community awareness and leadership skills",
+      "prep": "Organize supplies: trash bags, gloves, and pickers",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Community Cleanup Crew: Organize a neighborhood beautification project. Document before/after transformations and recycle collected materials!"
     },
     {
       "id": 12016,
@@ -151,7 +279,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Family history project: Interview relatives and create a family tree."
+      "cleanup": "no",
+      "involvement": "some",
+      "benefits": "Strengthens research skills and family connection",
+      "prep": "Prepare interview questions and recording device",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Family History Detective: Research ancestry through interviews and online resources. Create a multimedia family tree with photos and stories!"
     },
     {
       "id": 12017,
@@ -160,7 +296,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Life skills challenge: Learn and practice a new practical skill."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Builds practical life skills and independence",
+      "prep": "Select skill tutorial videos or guides",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "Adulting Bootcamp: Master a practical life skill like sewing, basic car maintenance, or resume writing through online tutorials!"
     },
     {
       "id": 12018,
@@ -169,7 +313,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Debate club: Choose topics and practice formal debate techniques."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops critical thinking and persuasive communication",
+      "prep": "Research debate formats and current topics",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Policy Debate Club: Practice formal debate techniques on controversial topics. Research evidence and develop rebuttal strategies!"
     },
     {
       "id": 12019,
@@ -178,25 +330,49 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Outdoor yoga: Practice yoga poses in the park or backyard."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Improves flexibility, mindfulness and stress management",
+      "prep": "Find online yoga routine and clear outdoor space",
+      "contexts": ["normal"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Sunset Yoga Flow: Practice mindful movement and breathing exercises in nature. Follow guided routines focusing on strength and flexibility!"
     },
     {
       "id": 12020,
       "age": "12+",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["kitchen"],
       "independent": true,
       "duration": "long",
-      "text": "Cookbook challenge: Create an original recipe and prepare it for family."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "benefits": "Develops recipe development and cooking techniques",
+      "prep": "Inventory ingredients and plan courses",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "Signature Dish Challenge: Invent and prepare an original three-course meal. Document recipes with photos for a personal cookbook!"
     },
     {
       "id": 12021,
       "age": "12+",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["paper", "pencils"],
       "independent": true,
       "duration": "medium",
-      "text": "Budget challenge: Plan a week's worth of meals on a set 'budget'."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Builds financial literacy and meal planning skills",
+      "prep": "Research local grocery prices",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Budget Chef Challenge: Plan nutritionally balanced meals for a week on a tight budget. Compare prices and calculate cost per meal!"
     },
     {
       "id": 12022,
@@ -205,7 +381,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Fitness circuit: Create and complete an outdoor exercise routine."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Improves cardiovascular health and exercise planning",
+      "prep": "Design circuit stations and timing system",
+      "contexts": ["normal"],
+      "energy_required": "high",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Fitness Circuit Challenge: Create an outdoor gym with bodyweight exercise stations. Time circuits and track performance improvements!"
     },
     {
       "id": 12023,
@@ -214,7 +398,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Blog creation: Start a blog about a topic of interest with 3 posts."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops writing skills and digital content creation",
+      "prep": "Choose blogging platform and niche topic",
+      "contexts": ["normal", "rainy", "sick"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Blog Launch Project: Create a professional blog with three pillar articles on a passionate subject. Optimize content and design an engaging layout!"
     },
     {
       "id": 12024,
@@ -223,7 +415,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Photo essay: Tell a story through a series of 10 connected photos."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Enhances visual storytelling and photographic technique",
+      "prep": "Select theme and charge camera devices",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Photo Story Expedition: Capture a narrative through 10 connected outdoor images. Experiment with composition and lighting to convey emotions!"
     },
     {
       "id": 12025,
@@ -232,7 +432,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Short film making: Write, film and edit a 3-minute movie."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Builds collaborative storytelling and technical editing skills",
+      "prep": "Plan storyboards and assign production roles",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "multiple",
+      "text": "Short Film Production: Write, shoot and edit a 3-minute cinematic masterpiece. Handle all production roles from director to editor!"
     },
     {
       "id": 12026,
@@ -241,7 +449,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Personal finance project: Research and compare bank accounts/credit cards."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Develops financial literacy and product comparison skills",
+      "prep": "Gather financial institution brochures/websites",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Finance Research Lab: Compare banking products and credit card terms. Create comparison charts highlighting fees, benefits, and ideal users!"
     },
     {
       "id": 12027,
@@ -250,16 +466,32 @@
       "materials": ["none"],
       "independent": true,
       "duration": "medium",
-      "text": "Career research: Explore and present on 3 potential future careers."
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Improves research abilities and future planning",
+      "prep": "Identify career interests and research resources",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "low",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Career Exploration Project: Research three potential professions including required education, salary ranges, and growth projections!"
     },
     {
       "id": 12028,
       "age": "12+",
       "location": "indoor",
-      "materials": ["none"],
+      "materials": ["paper", "scissors", "tape"],
       "independent": true,
       "duration": "long",
-      "text": "DIY craft tutorial: Film yourself teaching a simple craft project."
+      "cleanup": "messy",
+      "involvement": "minimal",
+      "benefits": "Develops teaching skills and craft technique",
+      "prep": "Gather project materials and filming equipment",
+      "contexts": ["normal", "rainy"],
+      "energy_required": "medium",
+      "noise_level": "normal",
+      "kid_count": "single",
+      "text": "DIY Craft Tutorial: Film a step-by-step instructional video for an original craft project. Edit with clear close-ups and voiceover instructions!"
     },
     {
       "id": 12029,
@@ -268,7 +500,15 @@
       "materials": ["none"],
       "independent": true,
       "duration": "long",
-      "text": "Outdoor photography challenge: Take artistic photos matching a theme (shadows, textures, etc.)"
+      "cleanup": "no",
+      "involvement": "minimal",
+      "benefits": "Enhances observational skills and artistic perspective",
+      "prep": "Select photography theme and charge devices",
+      "contexts": ["normal"],
+      "energy_required": "medium",
+      "noise_level": "quiet",
+      "kid_count": "single",
+      "text": "Themed Photo Safari: Capture artistic outdoor images following specific concepts like 'textures' or 'reflections'. Curate the best shots into a digital gallery!"
     }
   ]
 }
