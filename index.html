@@ -653,6 +653,48 @@
             font-size: 0.9rem;
             margin-top: 1.5rem;
         }
+        
+        /* New styles for favorites buttons */
+        .do-activity-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.9rem 1.7rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 2; /* Takes more space than remove button */
+            min-width: 200px;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .remove-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.7rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .do-activity-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .remove-btn:hover {
+            background: #bd2130;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
     </style>
 </head>
 <body>
@@ -1342,8 +1384,8 @@
                         <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
                     </div>
                     <div class="activity-actions">
-                        <button class="favorite-btn saved" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
-                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
+                        <button class="do-activity-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
+                        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove</button>
                     </div>
                 `;
                 container.appendChild(favElement);
