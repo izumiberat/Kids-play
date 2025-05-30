@@ -1333,7 +1333,7 @@
             alert(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
         }
     
-        // Initialize app
+    // Initialize app
         function init() {
             try {
                 // Load energy level
@@ -1355,7 +1355,7 @@
                     document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
                 }
                 
-                // Load favorites
+                // Load favorites - THIS WAS MISSING
                 loadFavorites();
                 
                 // Load plans
@@ -1375,7 +1375,6 @@
             // Load initial activities for default age
             loadActivities('3-5');
         }
-    
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
     </script>
