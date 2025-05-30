@@ -1154,12 +1154,9 @@
             }
         }
         
-            // Show favorites
+        // Show favorites
         function showFavorites() {
             const favoritesDiv = document.getElementById('favorites-list');
-            
-            // Clear the loading message
-            favoritesDiv.innerHTML = '';
             
             if (favorites.length === 0) {
                 favoritesDiv.innerHTML = `
@@ -1173,10 +1170,15 @@
             
             // Build the favorites HTML
             const favoritesHtml = favorites.map(activity => {
+                // Escape special characters in activity text
+                const safeText = activity.text
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+                
                 return `
                     <div class="favorite-item">
                         <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
-                        <p style="margin-bottom: 0.5rem;">${activity.text}</p>
+                        <p style="margin-bottom: 0.5rem;">${safeText}</p>
                         <div class="activity-meta" style="margin-bottom: 0.5rem;">
                             <span class="meta-tag">📍 ${activity.location}</span>
                             <span class="meta-tag">⏱️ ${activity.duration}</span>
