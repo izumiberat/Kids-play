@@ -1123,26 +1123,22 @@
             document.getElementById('favorites-tab').style.display = 'none';
             
             // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Show selected tab and activate button
+            // Show selected tab
             document.getElementById(tabName + '-tab').style.display = 'block';
             
-            // Handle both event-based and direct calls
-            if (event && event.target) {
-                event.target.classList.add('active');
-            } else {
-                // Find the correct tab button and activate it
-                const tabButtons = document.querySelectorAll('.tab-btn');
-                tabButtons.forEach(btn => {
-                    if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
-                        (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
-                        (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
+            // Activate the correct tab button
+            tabButtons.forEach(btn => {
+                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
+                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
+                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                    btn.classList.add('active');
+                }
+            });
             
+            // Load content for the tab
             if (tabName === 'favorites') {
                 showFavorites();
             }
@@ -1154,29 +1150,19 @@
         }
 
     
-        function showFavorites() {
-            const favoritesDiv = document.getElementById('favorites-list');
-            
-            if (favorites.length === 0) {
-                favoritesDiv.innerHTML = `
-                    <div style="text-align: center; padding: 2rem; color: #666;">
-                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
-                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
-                    </div>
-                `;
-                return;
-            }
-            
+        // Use dataset to avoid quote issues in HTML attributes
             const favoritesHtml = favorites.map(activity => `
                 <div class="favorite-item">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
                     <p style="margin-bottom: 0.5rem;">${activity.text}</p>
                     <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
-                    <button onclick="displayActivityFromFavorite('${activity.id}')" 
+                    <button data-activity-id="${activity.id}" 
+                            class="do-activity-btn"
                             style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
                         🎮 Do This Activity
                     </button>
-                    <button onclick="removeFavorite('${activity.id}')" 
+                    <button data-activity-id="${activity.id}" 
+                            class="remove-favorite-btn"
                             style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
                         🗑️ Remove
                     </button>
@@ -1184,14 +1170,26 @@
             `).join('');
             
             favoritesDiv.innerHTML = favoritesHtml;
+            
+            // Add event listeners using event delegation
+            favoritesDiv.addEventListener('click', function(e) {
+                if (e.target.classList.contains('do-activity-btn')) {
+                    const activityId = e.target.dataset.activityId;
+                    displayActivityFromFavorite(activityId);
+                }
+                if (e.target.classList.contains('remove-favorite-btn')) {
+                    const activityId = e.target.dataset.activityId;
+                    removeFavorite(activityId);
+                }
+            });
         }
         
         // Add this new helper function:
         function displayActivityFromFavorite(activityId) {
             const activity = favorites.find(fav => fav.id === activityId);
             if (activity) {
-                showTab('generator');  // Switch to generator tab first
-                // Small delay to ensure tab is visible before displaying activity
+                showTab('generator');
+                // Small delay to ensure tab switch completes
                 setTimeout(() => displayActivity(activity), 50);
             }
         }
@@ -1345,6 +1343,16 @@
                 const savedPlansData = localStorage.getItem('playideas-plans');
                 if (savedPlansData) {
                     savedPlans = JSON.parse(savedPlansData);
+                }
+
+                const savedFavorites = localStorage.getItem('playideas-favorites');
+                if (savedFavorites) {
+                    try {
+                        favorites = JSON.parse(savedFavorites);
+                    } catch (e) {
+                        console.error('Error parsing favorites', e);
+                        favorites = [];
+                    }
                 }
             } catch (e) {
                 console.log('LocalStorage not available, using defaults');
