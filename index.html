@@ -1209,9 +1209,6 @@
             
             updateFavoriteButton();
             updateFavoriteCount();
-            if (document.querySelector('.tab-btn[onclick="showTab(\'favorites\')"]').classList.contains('active')) {
-                showFavorites();
-            }
         }
     
         function updateFavoriteButton() {
@@ -1252,43 +1249,26 @@
             tabButtons.forEach(btn => btn.classList.remove('active'));
             
             // Show selected tab
-            document.getElementById(tabName + '-tab').style.display = 'block';
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
             
-            // Activate the correct tab button
-            tabButtons.forEach(btn => {
-                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
-                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
-                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
-                    btn.classList.add('active');
-                }
-            });
+            // Find and activate the button that corresponds to this tab
+            const tabButton = document.querySelector(`.tab-btn[onclick="showTab('${tabName}')"]`);
+            if (tabButton) {
+                tabButton.classList.add('active');
+            }
             
             // Load content for the tab
             if (tabName === 'favorites') {
-                showFavorites();
+                displayFavorites();
             }
         }
         
-        // Load favorites from localStorage  
-        function loadFavorites() {
-            try {
-                const stored = localStorage.getItem('playideas-favorites');
-                if (stored) {
-                    favorites = JSON.parse(stored);
-                }
-            } catch (error) {
-                console.error('Error loading favorites:', error);
-                favorites = [];
-            }
-            updateFavoriteCount();
-        }
-        
-        // Show favorites
-        function showFavorites() {
-            const favoritesDiv = document.getElementById('favorites-list');
+        // Display favorites
+        function displayFavorites() {
+            const container = document.getElementById('favorites-list');
             
             if (favorites.length === 0) {
-                favoritesDiv.innerHTML = `
+                container.innerHTML = `
                     <div style="text-align: center; padding: 2rem; color: #666;">
                         <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
                         <p>Save activities you love by clicking the "Save as Favorite" button.</p>
@@ -1297,89 +1277,67 @@
                 return;
             }
             
-            // Build the favorites HTML
-            const favoritesHtml = favorites.map(activity => {
-                const cleanupLabels = {
-                    'no': 'No cleanup needed',
-                    'easy': 'Easy cleanup',
-                    'messy': 'Some cleanup needed'
-                };
-                
-                return `
-                    <div class="favorite-item">
-                        <h4>${escapeHtml(activity.text.split(':')[0] || 'Activity')}</h4>
-                        <p class="activity-text">${escapeHtml(activity.text)}</p>
-                        
-                        <div class="activity-meta" style="margin-bottom: 0.5rem;">
-                            <span class="meta-tag">📍 ${activity.location}</span>
-                            <span class="meta-tag">⏱️ ${activity.duration}</span>
-                            <span class="meta-tag">🔊 ${activity.noise_level}</span>
-                            ${activity.cleanup ? `<span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup]}</span>` : ''}
-                        </div>
-                        
-                        ${activity.benefits ? `
-                            <div class="activity-benefits">
-                                <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
-                            </div>
-                        ` : ''}
-                        
-                        <div class="activity-actions">
-                            <button onclick="loadFavoriteActivity('${escapeHtml(activity.compositeId)}')" 
-                                    style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
-                                🎮 Do This Activity
-                            </button>
-                            <button onclick="removeFavorite('${escapeHtml(activity.compositeId)}')" 
-                                    style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
-                                🗑️ Remove
-                            </button>
-                        </div>
+            container.innerHTML = ''; // Clear loading message
+            
+            favorites.forEach(activity => {
+                const favElement = document.createElement('div');
+                favElement.className = 'favorite-item';
+                favElement.innerHTML = `
+                    <h4>Activity #${activity.id}</h4>
+                    <div class="activity-text">${escapeHtml(activity.text)}</div>
+                    <div class="activity-meta">
+                        <span class="meta-tag">${activity.ageGroup} years</span>
+                        <span class="meta-tag">${activity.location === 'indoor' ? '🏠 Indoor' : '🌳 Outdoor'}</span>
+                        <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="favorite-btn saved" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
+                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
                     </div>
                 `;
-            }).join('');
-            
-            favoritesDiv.innerHTML = favoritesHtml;
+                container.appendChild(favElement);
+            });
         }
-
-        // Display a favorite activity
-        async function loadFavoriteActivity(compositeId) {
+        
+        function getDurationLabel(duration) {
+            switch (duration) {
+                case 'quick': return '⏱️ Quick';
+                case 'medium': return '⏳ Medium';
+                case 'long': return '⌛ Long';
+                default: return duration;
+            }
+        }
+        
+        function removeFavorite(compositeId) {
+            const index = favorites.findIndex(fav => fav.compositeId === compositeId);
+            if (index >= 0) {
+                favorites.splice(index, 1);
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+                updateFavoriteCount();
+                displayFavorites();
+                showToast('Removed from favorites');
+                
+                // If this was the current activity, update its button
+                if (currentActivity && currentActivity.compositeId === compositeId) {
+                    updateFavoriteButton();
+                }
+            }
+        }
+        
+        function loadFavorite(compositeId) {
             const activity = favorites.find(fav => fav.compositeId === compositeId);
             if (activity) {
-                // Set the correct age group
+                // Set the age group
                 document.getElementById('age').value = activity.ageGroup;
-                
-                // Load activities for this age group
-                await loadActivities(activity.ageGroup);
                 
                 // Show the generator tab
                 showTab('generator');
                 
-                // Display activity after short delay
-                setTimeout(() => displayActivity(activity), 100);
-            }
-        }
-
-        // Remove a favorite
-        function removeFavorite(compositeId) {
-            const index = favorites.findIndex(fav => fav.compositeId === compositeId);
-            if (index >= 0) {
-                // Check if this is the current activity
-                const wasCurrent = currentActivity && currentActivity.compositeId === compositeId;
-                
-                favorites.splice(index, 1);
-                
-                try {
-                    localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-                } catch (e) {
-                    console.log('LocalStorage not available');
-                }
-                
-                if (wasCurrent) {
-                    updateFavoriteButton();
-                }
-                
-                showFavorites();
-                updateFavoriteCount();
-                showToast('Removed from favorites');
+                // Set as current activity and display
+                setTimeout(() => {
+                    currentActivity = activity;
+                    displayActivity(activity);
+                }, 100);
             }
         }
     
@@ -1499,7 +1457,10 @@
         function init() {
             try {
                 // Load favorites
-                loadFavorites();
+                const savedFavorites = localStorage.getItem('playideas-favorites');
+                if (savedFavorites) {
+                    favorites = JSON.parse(savedFavorites);
+                }
                 
                 // Load energy level
                 const savedEnergy = localStorage.getItem('playideas-energy-level');
@@ -1531,8 +1492,7 @@
                     }
                 }
                 
-                // Show favorites if they exist
-                showFavorites();
+                updateFavoriteCount();
                 
             } catch (e) {
                 console.log('LocalStorage not available, using defaults');
