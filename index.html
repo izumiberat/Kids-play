@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayIdeas - Activity Generator for Parents</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>PlayIdeas - Enhanced Favorites Tab</title>
     <style>
         * {
             box-sizing: border-box;
@@ -52,7 +51,7 @@
         }
         
         .app-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             overflow: hidden;
@@ -69,10 +68,6 @@
         h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
         
         .tagline {
@@ -80,110 +75,10 @@
             opacity: 0.9;
         }
         
-        /* Parent Energy Check */
-        .energy-check {
-            background: linear-gradient(135deg, #ffecd2, #ffd8a8);
-            padding: 1.2rem;
-            border-radius: var(--radius-sm);
-            margin: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(255, 184, 77, 0.2);
-        }
-        
-        .energy-check h3 {
-            margin-bottom: 0.75rem;
-            color: #d35400;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .energy-buttons {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .energy-btn {
-            background: white;
-            border: 2px solid #ddd;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .energy-btn.selected {
-            background: var(--orange);
-            border-color: var(--orange);
-            color: white;
-            font-weight: 600;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
-        }
-        
-        /* Context Mode Selector */
-        .context-selector {
-            background: white;
-            padding: 1.2rem;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow);
-            margin: 0 1.5rem 1.5rem;
-            text-align: center;
-        }
-        
-        .context-selector h3 {
-            margin-bottom: 0.75rem;
-            color: var(--primary);
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .context-buttons {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .context-btn {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .context-btn.selected {
-            background: var(--teal);
-            border-color: var(--teal);
-            color: white;
-            font-weight: 600;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
-        }
-        
         /* Tab system */
         .tab-buttons {
             display: flex;
-            margin: 0 1.5rem 1.8rem;
+            margin: 1.5rem;
             gap: 0.3rem;
             background: white;
             padding: 0.3rem;
@@ -202,10 +97,6 @@
             transition: var(--transition);
             position: relative;
             font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
         
         .tab-btn.active {
@@ -235,502 +126,14 @@
             padding: 0 1.5rem 1.5rem;
         }
         
-        /* Enhanced Quick Actions */
-        .quick-actions {
-            background: white;
-            padding: 1.8rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .quick-actions h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .quick-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        @media (max-width: 480px) {
-            .quick-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .quick-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .quick-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
-        }
-        
-        .quick-btn.low-energy {
-            background: linear-gradient(135deg, var(--success), #20c997);
-        }
-        
-        .quick-btn.quiet {
-            background: linear-gradient(135deg, var(--purple), #8e44ad);
-        }
-        
-        .quick-btn.independent {
-            background: linear-gradient(135deg, var(--orange), #e17055);
-        }
-        
-        .quick-btn.multiple-kids {
-            background: linear-gradient(135deg, var(--pink), #d63384);
-        }
-        
-        .instant-btn {
-            background: linear-gradient(135deg, var(--success), #20c997);
-            padding: 1.3rem;
-            font-size: 1.15rem;
-            border-radius: 15px;
-            margin-top: 1rem;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-            transition: var(--transition);
-            border: none;
-            color: white;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .instant-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
-            background: linear-gradient(135deg, var(--success-light), #2ce5ae);
-        }
-        
-        /* Compact Form */
-        .compact-form {
-            background: white;
-            padding: 1.8rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .compact-form h3 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            text-align: center;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-            margin-bottom: 1.2rem;
-        }
-        
-        @media (max-width: 480px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        
-        label {
+        /* Favorites Tab */
+        #favorites-tab {
             display: block;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #444;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
-        select {
-            width: 100%;
-            padding: 0.85rem;
-            border: 2px solid var(--light-gray);
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            background: white;
-            transition: var(--transition);
-            box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
-            font-family: inherit;
-        }
-        
-        select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .radio-group {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-        
-        .radio-btn {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 0.7rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            flex: 1;
-            text-align: center;
-            min-width: fit-content;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .radio-btn.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .radio-btn:hover {
-            border-color: var(--primary);
-        }
-        
-        /* Materials as tags */
-        .materials-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.6rem;
-        }
-        
-        .material-tag {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 0.5rem 0.9rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .material-tag.selected {
-            background: var(--warning);
-            border-color: var(--warning);
-            color: var(--dark);
-            transform: translateY(-2px);
-        }
-        
-        .material-tag:hover {
-            border-color: var(--warning);
-        }
-        
-        /* Results */
-        #result {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            display: none;
-            position: relative;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-result {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--light-gray);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--gray);
-            transition: var(--transition);
-            z-index: 20;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .close-result:hover {
-            background: var(--danger);
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .activity-text {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            color: #222;
-        }
-        
-        .activity-meta {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            color: #555;
-            flex-wrap: wrap;
-        }
-        
-        .meta-tag {
-            background: var(--light);
-            padding: 0.4rem 0.8rem;
-            border-radius: var(--radius-sm);
-            border: 1px solid #dee2e6;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .meta-tag.parent-energy {
-            background: #fff3cd;
-            border-color: #ffeaa7;
-            color: #856404;
-        }
-        
-        .meta-tag.cleanup-no { background: #d4edda; color: #155724; }
-        .meta-tag.cleanup-easy { background: #fff3cd; color: #856404; }
-        .meta-tag.cleanup-messy { background: #f8d7da; color: #721c24; }
-        
-        .meta-tag.involvement-minimal { background: #d4edda; color: #155724; }
-        .meta-tag.involvement-some { background: #fff3cd; color: #856404; }
-        .meta-tag.involvement-active { background: #f8d7da; color: #721c24; }
-        
-        .activity-benefits {
-            background: #e8f4f8;
-            padding: 1.2rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            color: #0c5460;
-            border-left: 4px solid var(--teal);
-        }
-        
-        .prep-instructions {
-            background: #fff3cd;
-            padding: 1.2rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            color: #856404;
-            border-left: 4px solid var(--warning);
-        }
-        
-        .prep-instructions strong {
-            color: #533f03;
-        }
-        
-        .activity-actions {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        
-        .action-btn {
-            border: none;
-            padding: 0.9rem 1.7rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            flex: 1;
-            min-width: 150px;
-            font-size: 1.05rem;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .favorite-btn {
-            background-color: var(--warning);
-            color: var(--dark);
-        }
-        
-        .favorite-btn:hover {
-            background-color: var(--warning-light);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .favorite-btn.saved {
-            background-color: var(--success);
-            color: white;
-        }
-        
-        .favorite-btn.saved:hover {
-            background-color: var(--success-light);
-        }
-        
-        .plan-btn {
-            background-color: var(--teal);
-            color: white;
-        }
-        
-        .plan-btn:hover {
-            background-color: var(--teal-light);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        /* Batch Planning */
-        .batch-planning {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .batch-planning h2 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            text-align: center;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .batch-planning p {
-            margin-bottom: 1.8rem;
-            color: var(--gray);
-            text-align: center;
-        }
-        
-        .batch-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        @media (max-width: 480px) {
-            .batch-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .batch-btn {
-            background: linear-gradient(135deg, var(--teal), #17a2b8);
-            color: white;
-            border: none;
-            padding: 1.3rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
-            font-size: 1.05rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .batch-btn small {
-            font-weight: normal;
-            opacity: 0.9;
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .batch-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
-            background: linear-gradient(135deg, var(--teal-light), #1db9d1);
-        }
-        
-        .batch-results {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: var(--radius-sm);
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .batch-activity {
-            background: white;
-            padding: 1.3rem;
-            margin-bottom: 1rem;
-            border-radius: var(--radius-sm);
-            border-left: 5px solid var(--teal);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-        }
-        
-        .batch-activity:last-child {
-            margin-bottom: 0;
-        }
-        
-        .batch-activity-number {
-            font-weight: bold;
-            color: var(--teal);
-            margin-bottom: 0.7rem;
-            font-size: 1.15rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Favorites */
         #favorites-list {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
         }
@@ -743,6 +146,7 @@
             border-left: 5px solid var(--primary);
             transition: var(--transition);
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            position: relative;
         }
         
         .favorite-item:hover {
@@ -762,12 +166,15 @@
         .favorite-item .activity-text {
             margin-bottom: 0.8rem;
             font-size: 1.15rem;
+            line-height: 1.6;
+            padding-left: 5px;
+            border-left: 3px solid var(--warning);
         }
         
         .favorite-meta {
             display: flex;
             gap: 10px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
         
@@ -780,6 +187,57 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+        
+        .favorite-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* Do Activity Button - More prominent */
+        .do-activity-btn {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            color: white;
+            flex: 2;
+            min-width: 200px;
+        }
+        
+        .do-activity-btn:hover {
+            background: linear-gradient(135deg, var(--success-light), #2ce5ae);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Remove Favorite Button - Less prominent */
+        .remove-btn {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            color: var(--dark);
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
         
         .loading, .error {
@@ -810,294 +268,6 @@
             color: var(--danger);
         }
         
-        /* Hide native radio buttons */
-        input[type="radio"] {
-            display: none;
-        }
-
-        /* Helper text styling */
-        .helper-text {
-            font-size: 0.9rem;
-            color: var(--gray);
-            font-style: italic;
-            margin-top: 0.4rem;
-            display: block;
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.85);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 30px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 1.05rem;
-            max-width: 90%;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        
-        .toast.show {
-            opacity: 1;
-        }
-        
-        .app-footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-        }
-        
-        .generate-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: var(--radius-sm);
-            width: 100%;
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-top: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(67, 97, 238, 0.4);
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
-        }
-        
-        /* Remove button styling */
-        .remove-btn {
-            background: linear-gradient(135deg, var(--danger), #c82333) !important;
-            color: white !important;
-            border: none;
-            padding: 0.9rem 1.7rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            flex: 1;
-            min-width: 150px;
-            font-size: 1.05rem;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .remove-btn:hover {
-            background: linear-gradient(135deg, var(--danger-light), #dc3545) !important;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        /* Saved Plans Section */
-        #saved-plans-section {
-            margin-top: 2rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        
-        #saved-plans-section h3 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .plans-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        
-        .plan-card {
-            background: var(--lighter-gray);
-            border-radius: var(--radius-sm);
-            padding: 1.5rem;
-            border-left: 4px solid var(--teal);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-            transition: var(--transition);
-        }
-        
-        .plan-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .plan-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .plan-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .plan-date {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        .plan-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .view-plan-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .view-plan-btn:hover {
-            background: var(--primary-light);
-        }
-        
-        .delete-plan-btn {
-            background: var(--danger);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .delete-plan-btn:hover {
-            background: var(--danger-light);
-        }
-        
-        .empty-plans {
-            text-align: center;
-            padding: 2rem;
-            color: var(--gray);
-            font-style: italic;
-        }
-        
-        /* Plan Details Modal */
-        #plan-detail-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        
-        #plan-detail-modal.show {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: var(--radius);
-            padding: 2rem;
-            position: relative;
-            animation: scaleIn 0.3s;
-        }
-        
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--light-gray);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-        
-        .close-modal:hover {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .modal-header {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .modal-header h2 {
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .modal-body {
-            padding: 1rem 0;
-        }
-        
-        .plan-activity-item {
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            background: var(--lighter-gray);
-            border-radius: var(--radius-sm);
-            border-left: 3px solid var(--teal);
-        }
-        
         /* Responsive adjustments */
         @media (max-width: 600px) {
             body {
@@ -1120,1108 +290,253 @@
                 padding: 0 1rem 1rem;
             }
             
-            .quick-actions, .compact-form, .batch-planning, #favorites-list {
-                padding: 1.2rem;
+            #favorites-list {
+                padding: 1rem;
             }
             
-            #result {
-                padding: 1.5rem;
-            }
-            
-            .activity-actions, .favorite-actions {
+            .favorite-actions {
                 flex-direction: column;
-                gap: 0.8rem;
             }
             
-            .action-btn, .remove-btn, .plan-btn {
+            .action-btn {
                 width: 100%;
             }
-            
-            .plan-actions {
-                flex-direction: column;
-            }
+        }
+        
+        /* Colorful Emoji Backgrounds */
+        .emoji-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .age-badge { background-color: #FFD6E7; }
+        .location-badge { background-color: #C1E7FF; }
+        .duration-badge { background-color: #FFEBB9; }
+        .kids-badge { background-color: #D0F0C0; }
+        
+        /* Footer */
+        .app-footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
         }
     </style>
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1><i class="fas fa-gamepad"></i> PlayIdeas Activity Generator</h1>
-            <p class="tagline">Fun activities tailored to your child's age and your energy level</p>
+            <h1>🌟 PlayIdeas Favorites</h1>
+            <p class="tagline">Your saved activities at a glance</p>
         </header>
         
-        <!-- Parent Energy Check -->
-        <div class="energy-check">
-            <h3><i class="fas fa-battery-quarter"></i> How's your energy level today?</h3>
-            <div class="energy-buttons">
-                <div class="energy-btn selected" data-energy="low"><i class="fas fa-bed"></i> Exhausted</div>
-                <div class="energy-btn" data-energy="medium"><i class="fas fa-battery-half"></i> Medium</div>
-                <div class="energy-btn" data-energy="high"><i class="fas fa-bolt"></i> Ready!</div>
-            </div>
-        </div>
-        
-        <!-- Context Mode Selector -->
-        <div class="context-selector">
-            <h3><i class="fas fa-cloud-sun"></i> What's the situation?</h3>
-            <div class="context-buttons">
-                <div class="context-btn selected" data-context="normal"><i class="fas fa-calendar"></i> Regular</div>
-                <div class="context-btn" data-context="rainy"><i class="fas fa-cloud-rain"></i> Rainy</div>
-                <div class="context-btn" data-context="sick"><i class="fas fa-head-side-cough"></i> Sick</div>
-                <div class="context-btn" data-context="bedtime"><i class="fas fa-moon"></i> Bedtime</div>
-                <div class="context-btn" data-context="coffee"><i class="fas fa-coffee"></i> Need Break</div>
-            </div>
-        </div>
-        
         <div class="tab-buttons">
-            <button class="tab-btn active" onclick="showTab('generator')"><i class="fas fa-lightbulb"></i> Get Ideas</button>
-            <button class="tab-btn" onclick="showTab('planner')"><i class="fas fa-calendar-check"></i> Plan</button>
-            <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
-                <i class="fas fa-heart"></i> Favorites
-                <span class="favorite-count" id="favorite-count"></span>
+            <button class="tab-btn">Activities</button>
+            <button class="tab-btn">Planner</button>
+            <button class="tab-btn active" id="favorites-tab-btn">
+                My Favorites
+                <span class="favorite-count">7</span>
             </button>
         </div>
         
         <div class="tab-content">
-            <div id="generator-tab">
-                <!-- Enhanced Quick Actions Section -->
-                <div class="quick-actions">
-                    <h2><i class="fas fa-bolt"></i> Need something NOW?</h2>
-                    <div class="quick-buttons">
-                        <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')"><i class="fas fa-couch"></i> Easy Indoor</button>
-                        <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')"><i class="fas fa-child"></i> Independent</button>
-                        <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')"><i class="fas fa-volume-mute"></i> Quiet</button>
-                        <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')"><i class="fas fa-users"></i> Multiple Kids</button>
-                        <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')"><i class="fas fa-tree"></i> Outdoor</button>
-                        <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')"><i class="fas fa-broom"></i> No Mess</button>
-                    </div>
-                    <button class="instant-btn" onclick="instantActivity()">
-                        <i class="fas fa-gift"></i> SURPRISE ME! (Any activity)
-                    </button>
-                </div>
-                
-                <!-- Results appear here when generated -->
-                <div id="result">
-                    <div class="loading">Loading activities</div>
-                </div>
-                
-                <!-- Compact Custom Form -->
-                <div class="compact-form">
-                    <h3><i class="fas fa-sliders-h"></i> Or customize your search:</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="age"><i class="fas fa-child"></i> Child's Age:</label>
-                            <select id="age" onchange="handleAgeChange()">
-                                <option value="0-2">0-2 years</option>
-                                <option value="3-5" selected>3-5 years</option>
-                                <option value="6-8">6-8 years</option>
-                                <option value="9-12">9-12 years</option>
-                                <option value="12+">12+ years</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="fas fa-user-friends"></i> Number of Kids:</label>
-                            <div class="radio-group">
-                                <div class="radio-btn selected" data-name="kid-count" data-value="single"><i class="fas fa-user"></i> One</div>
-                                <div class="radio-btn" data-name="kid-count" data-value="multiple"><i class="fas fa-users"></i> Multiple</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-map-marker-alt"></i> Location:</label>
-                            <div class="radio-group">
-                                <div class="radio-btn selected" data-name="location" data-value="indoor"><i class="fas fa-home"></i> Indoor</div>
-                                <div class="radio-btn" data-name="location" data-value="outdoor"><i class="fas fa-tree"></i> Outdoor</div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="fas fa-clock"></i> Duration:</label>
-                            <div class="radio-group">
-                                <div class="radio-btn selected" data-name="duration" data-value="quick"><i class="fas fa-stopwatch"></i> Quick</div>
-                                <div class="radio-btn" data-name="duration" data-value="medium"><i class="fas fa-hourglass-half"></i> Medium</div>
-                                <div class="radio-btn" data-name="duration" data-value="long"><i class="fas fa-hourglass"></i> Long</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-hands-helping"></i> Your involvement:</label>
-                            <div class="radio-group">
-                                <div class="radio-btn selected" data-name="availability" data-value="available"><i class="fas fa-hand-holding-heart"></i> Can help</div>
-                                <div class="radio-btn" data-name="availability" data-value="independent"><i class="fas fa-user-check"></i> Independent</div>
-                            </div>
-                            <span class="helper-text">Independent = activities your child can do mostly alone</span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="fas fa-broom"></i> Clean-up level:</label>
-                            <div class="radio-group">
-                                <div class="radio-btn selected" data-name="cleanup" data-value="any"><i class="fas fa-question"></i> Any</div>
-                                <div class="radio-btn" data-name="cleanup" data-value="no-mess"><i class="fas fa-sparkles"></i> No mess</div>
-                                <div class="radio-btn" data-name="cleanup" data-value="easy"><i class="fas fa-wind"></i> Easy</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-tools"></i> What do you have handy? (tap any that apply)</label>
-                        <div class="materials-tags">
-                            <div class="material-tag" data-value="paper"><i class="fas fa-sticky-note"></i> Paper</div>
-                            <div class="material-tag" data-value="pencils"><i class="fas fa-pencil-alt"></i> Pencils</div>
-                            <div class="material-tag" data-value="scissors"><i class="fas fa-cut"></i> Scissors</div>
-                            <div class="material-tag" data-value="tape"><i class="fas fa-tape"></i> Tape/Glue</div>
-                            <div class="material-tag" data-value="ball"><i class="fas fa-futbol"></i> Ball</div>
-                            <div class="material-tag" data-value="blocks"><i class="fas fa-cubes"></i> Blocks</div>
-                            <div class="material-tag" data-value="dolls"><i class="fas fa-robot"></i> Toys</div>
-                            <div class="material-tag" data-value="cards"><i class="fas fa-club"></i> Cards</div>
-                            <div class="material-tag" data-value="blanket"><i class="fas fa-bed"></i> Blanket</div>
-                            <div class="material-tag" data-value="kitchen"><i class="fas fa-utensils"></i> Kitchen</div>
-                            <div class="material-tag" data-value="cardboard"><i class="fas fa-archive"></i> Boxes</div>
-                            <div class="material-tag" data-value="none"><i class="fas fa-ban"></i> Nothing</div>
-                        </div>
-                        <span class="helper-text">Select "Nothing" if you want activities that need no materials</span>
-                    </div>
-                    
-                    <button class="generate-btn" onclick="generateActivity()">
-                        <i class="fas fa-dice"></i> Generate Custom Activity
-                    </button>
-                </div>
-            </div>
-            
-            <div id="planner-tab" style="display: none;">
-                <div class="batch-planning">
-                    <h2><i class="fas fa-calendar-alt"></i> Activity Planning</h2>
-                    <p>Plan ahead with multiple activities!</p>
-                    
-                    <div class="batch-buttons">
-                        <button class="batch-btn" onclick="planMorning()">
-                            <i class="fas fa-sun"></i> Plan My Morning
-                            <small>3-4 sequential activities</small>
-                        </button>
-                        <button class="batch-btn" onclick="planAfternoon()">
-                            <i class="fas fa-cloud-sun"></i> Plan My Afternoon
-                            <small>Perfect for post-nap time</small>
-                        </button>
-                        <button class="batch-btn" onclick="planRainyDay()">
-                            <i class="fas fa-cloud-showers-heavy"></i> Rainy Day Plan
-                            <small>All indoor activities</small>
-                        </button>
-                        <button class="batch-btn" onclick="planQuietTime()">
-                            <i class="fas fa-volume-mute"></i> Quiet Time Plan
-                            <small>Calm, focused activities</small>
-                        </button>
-                    </div>
-                    
-                    <div id="batch-results" class="batch-results">
-                        <!-- Batch results will appear here -->
-                    </div>
-                    
-                    <!-- NEW: Saved Plans Section -->
-                    <div id="saved-plans-section">
-                        <h3><i class="fas fa-bookmark"></i> My Saved Plans</h3>
-                        <div class="plans-container" id="saved-plans-container">
-                            <p class="empty-plans">No saved plans yet. Save a plan to see it here.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="favorites-tab" style="display: none;">
+            <div id="favorites-tab">
                 <div id="favorites-list">
-                    <p class="loading">Loading favorites</p>
+                    <!-- Favorite Item 1 -->
+                    <div class="favorite-item">
+                        <h4><span class="emoji-badge age-badge">👶</span> Sensory Play Activity</h4>
+                        <div class="activity-text">
+                            Create a sensory bin: Fill a container with rice or beans and hide small toys inside for your child to find.
+                        </div>
+                        
+                        <div class="favorite-meta">
+                            <span class="favorite-tag">
+                                <span class="emoji-badge age-badge">👶</span> 3-5 years
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge location-badge">🏠</span> Indoor
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge duration-badge">⏱️</span> Medium
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge kids-badge">👥</span> Multiple kids
+                            </span>
+                        </div>
+                        
+                        <div class="favorite-actions">
+                            <button class="action-btn remove-btn">
+                                <span>🗑️</span> Remove Favorite
+                            </button>
+                            <button class="action-btn do-activity-btn">
+                                <span>🎮</span> Do This Activity
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Favorite Item 2 -->
+                    <div class="favorite-item">
+                        <h4><span class="emoji-badge age-badge">👦</span> Indoor Obstacle Course</h4>
+                        <div class="activity-text">
+                            Create a safe obstacle course using pillows, chairs, and blankets for your child to climb over and under.
+                        </div>
+                        
+                        <div class="favorite-meta">
+                            <span class="favorite-tag">
+                                <span class="emoji-badge age-badge">👦</span> 4-6 years
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge location-badge">🏠</span> Indoor
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge duration-badge">⏱️</span> Quick
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge kids-badge">👤</span> One child
+                            </span>
+                        </div>
+                        
+                        <div class="favorite-actions">
+                            <button class="action-btn remove-btn">
+                                <span>🗑️</span> Remove Favorite
+                            </button>
+                            <button class="action-btn do-activity-btn">
+                                <span>🎮</span> Do This Activity
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Favorite Item 3 -->
+                    <div class="favorite-item">
+                        <h4><span class="emoji-badge age-badge">👧</span> Nature Scavenger Hunt</h4>
+                        <div class="activity-text">
+                            Create a list of natural items for your child to find in the backyard or park - leaves, rocks, flowers, etc.
+                        </div>
+                        
+                        <div class="favorite-meta">
+                            <span class="favorite-tag">
+                                <span class="emoji-badge age-badge">👧</span> 5-8 years
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge location-badge">🌳</span> Outdoor
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge duration-badge">⌛</span> Long
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge kids-badge">👥</span> Multiple kids
+                            </span>
+                        </div>
+                        
+                        <div class="favorite-actions">
+                            <button class="action-btn remove-btn">
+                                <span>🗑️</span> Remove Favorite
+                            </button>
+                            <button class="action-btn do-activity-btn">
+                                <span>🎮</span> Do This Activity
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Favorite Item 4 -->
+                    <div class="favorite-item">
+                        <h4><span class="emoji-badge age-badge">👶</span> Bubble Wrap Painting</h4>
+                        <div class="activity-text">
+                            Put paint on bubble wrap and let your child stomp on it to create colorful patterns on paper.
+                        </div>
+                        
+                        <div class="favorite-meta">
+                            <span class="favorite-tag">
+                                <span class="emoji-badge age-badge">👶</span> 2-4 years
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge location-badge">🏠</span> Indoor
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge duration-badge">⏱️</span> Medium
+                            </span>
+                            <span class="favorite-tag">
+                                <span class="emoji-badge kids-badge">👤</span> One child
+                            </span>
+                        </div>
+                        
+                        <div class="favorite-actions">
+                            <button class="action-btn remove-btn">
+                                <span>🗑️</span> Remove Favorite
+                            </button>
+                            <button class="action-btn do-activity-btn">
+                                <span>🎮</span> Do This Activity
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Plan Detail Modal -->
-        <div id="plan-detail-modal">
-            <div class="modal-content">
-                <button class="close-modal">&times;</button>
-                <div class="modal-header">
-                    <h2><i class="fas fa-list-alt"></i> Plan Details</h2>
-                    <p class="plan-date" id="plan-detail-date"></p>
-                </div>
-                <div class="modal-body" id="plan-detail-body">
-                    <!-- Plan activities will be listed here -->
-                </div>
-            </div>
-        </div>
-        
-        <div id="toast" class="toast"></div>
         
         <div class="app-footer">
-            Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> by PlayIdeas • Activities loaded from JSON files
+            Made with ❤️ by PlayIdeas • Activities for happy parenting
         </div>
     </div>
-    
+
     <script>
-        // Global variables
-        let activities = [];
-        let allActivities = {};
-        let favorites = [];
-        let savedPlans = [];
-        let currentActivity = null;
-        let activitiesLoaded = false;
-        let parentEnergyLevel = 'low';
-        let currentContext = 'normal';
-        
-        // Map age groups to JSON filenames
-        const ageGroupFiles = {
-            "0-2": "activities-0-2.json",
-            "3-5": "activities-3-5.json",
-            "6-8": "activities-6-8.json",
-            "9-12": "activities-9-12.json",
-            "12+": "activities-12plus.json"
-        };
-        
-        // Sample activities for demonstration
-        const sampleActivities = {
-            "3-5": [
-                {
-                    id: 1,
-                    text: "Create a sensory bin: Fill a container with rice or beans and hide small toys inside for your child to find.",
-                    location: "indoor",
-                    duration: "medium",
-                    kid_count: "single",
-                    independent: false,
-                    cleanup: "messy",
-                    involvement: "some",
-                    noise_level: "moderate",
-                    benefits: "Develops fine motor skills and sensory exploration",
-                    prep: "Use a large plastic container and add uncooked rice or dried beans. Bury small toys or objects for your child to discover."
-                },
-                {
-                    id: 2,
-                    text: "Indoor obstacle course: Create a safe obstacle course using pillows, chairs, and blankets.",
-                    location: "indoor",
-                    duration: "quick",
-                    kid_count: "multiple",
-                    independent: true,
-                    cleanup: "easy",
-                    involvement: "minimal",
-                    noise_level: "moderate",
-                    benefits: "Promotes physical activity and coordination",
-                    prep: "Clear a space in your living room and use household items to create challenges like tunnels, stepping stones, and balance beams."
-                },
-                {
-                    id: 3,
-                    text: "Nature scavenger hunt: Create a list of natural items for your child to find in the backyard or park.",
-                    location: "outdoor",
-                    duration: "medium",
-                    kid_count: "multiple",
-                    independent: false,
-                    cleanup: "no",
-                    involvement: "some",
-                    noise_level: "moderate",
-                    benefits: "Encourages observation skills and appreciation for nature",
-                    prep: "Make a simple list with pictures of items like a smooth rock, a yellow leaf, a pinecone, etc."
-                }
-            ]
-        };
-        
-        // HTML escaping function for security
-        function escapeHtml(unsafe) {
-            if (!unsafe) return '';
-            return unsafe.toString()
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-        
-        // Show toast notification
-        function showToast(message, duration = 3000) {
-            const toast = document.getElementById('toast');
-            toast.innerHTML = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
-        }
-        
         // Update favorite count badge
         function updateFavoriteCount() {
             const countElem = document.getElementById('favorite-count');
-            if (favorites.length > 0) {
-                countElem.textContent = favorites.length;
+            const favoriteItems = document.querySelectorAll('.favorite-item');
+            if (favoriteItems.length > 0) {
+                countElem.textContent = favoriteItems.length;
                 countElem.style.display = 'flex';
             } else {
                 countElem.style.display = 'none';
             }
         }
-        
-        // Load activities for specific age group
-        async function loadActivities(ageGroup) {
-            // For demonstration, use sample activities
-            activities = sampleActivities[ageGroup] || [];
-            allActivities[ageGroup] = activities;
-            activitiesLoaded = true;
-            
-            // In a real app, you would fetch from JSON files:
-            /*
-            try {
-                const filename = ageGroupFiles[ageGroup];
-                const response = await fetch(filename);
-                const data = await response.json();
-                activities = data.activities;
-                allActivities[ageGroup] = activities;
-                activitiesLoaded = true;
-            } catch (error) {
-                console.error(`Error loading activities for ${ageGroup}:`, error);
-                // Handle error
-            }
-            */
-        }
-    
-        // Handle radio button groups and selections
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('radio-btn')) {
-                const group = e.target.getAttribute('data-name');
-                const value = e.target.getAttribute('data-value');
-                
-                const siblings = e.target.parentElement.querySelectorAll('.radio-btn');
-                siblings.forEach(btn => btn.classList.remove('selected'));
-                e.target.classList.add('selected');
-            }
-            
-            if (e.target.classList.contains('material-tag')) {
-                e.target.classList.toggle('selected');
-            }
-            
-            if (e.target.classList.contains('energy-btn')) {
-                parentEnergyLevel = e.target.getAttribute('data-energy');
-                
-                const siblings = e.target.parentElement.querySelectorAll('.energy-btn');
-                siblings.forEach(btn => btn.classList.remove('selected'));
-                e.target.classList.add('selected');
-                
-                try {
-                    localStorage.setItem('playideas-energy-level', parentEnergyLevel);
-                } catch (e) {
-                    console.log('LocalStorage not available');
-                }
-            }
-            
-            if (e.target.classList.contains('context-btn')) {
-                currentContext = e.target.getAttribute('data-context');
-                
-                const siblings = e.target.parentElement.querySelectorAll('.context-btn');
-                siblings.forEach(btn => btn.classList.remove('selected'));
-                e.target.classList.add('selected');
-                
-                try {
-                    localStorage.setItem('playideas-context', currentContext);
-                } catch (e) {
-                    console.log('LocalStorage not available');
-                }
-            }
-        });
-    
-        // Get form values
-        function getFormValues() {
-            const age = document.getElementById('age').value;
-            const kidCount = document.querySelector('.radio-btn[data-name="kid-count"].selected')?.getAttribute('data-value') || 'single';
-            const location = document.querySelector('.radio-btn[data-name="location"].selected')?.getAttribute('data-value') || 'indoor';
-            const duration = document.querySelector('.radio-btn[data-name="duration"].selected')?.getAttribute('data-value') || 'quick';
-            const availability = document.querySelector('.radio-btn[data-name="availability"].selected')?.getAttribute('data-value') || 'available';
-            const cleanup = document.querySelector('.radio-btn[data-name="cleanup"].selected')?.getAttribute('data-value') || 'any';
-            
-            const selectedMaterials = Array.from(document.querySelectorAll('.material-tag.selected'))
-                .map(tag => tag.getAttribute('data-value'));
-            
-            return {
-                age,
-                kidCount,
-                location,
-                duration,
-                availability,
-                cleanup,
-                materials: selectedMaterials,
-                parentEnergy: parentEnergyLevel,
-                context: currentContext
-            };
-        }
-    
-        // Filter activities based on criteria
-        function filterActivities(criteria) {
-            if (!activities || activities.length === 0) return [];
-            
-            return activities.filter(activity => {
-                // Location filter
-                if (criteria.location !== 'any' && activity.location !== 'any' && activity.location !== criteria.location) {
-                    return false;
-                }
-                
-                // Duration filter
-                if (criteria.duration !== 'any' && activity.duration !== 'any' && activity.duration !== criteria.duration) {
-                    return false;
-                }
-                
-                // Kid count filter
-                if (criteria.kidCount === 'multiple' && activity.kid_count === 'single') {
-                    return false;
-                }
-                
-                // Parent availability filter (independent vs needs supervision)
-                if (criteria.availability === 'independent' && !activity.independent) {
-                    return false;
-                }
-                
-                // Cleanup filter
-                if (criteria.cleanup === 'no-mess' && activity.cleanup !== 'no') {
-                    return false;
-                }
-                if (criteria.cleanup === 'easy' && activity.cleanup === 'messy') {
-                    return false;
-                }
-                
-                // Materials filter
-                if (criteria.materials.includes('none')) {
-                    return activity.materials.includes('none');
-                }
-                
-                if (criteria.materials.length > 0 && !criteria.materials.includes('none')) {
-                    const activityMaterials = activity.materials || [];
-                    if (activityMaterials.includes('none')) {
-                        return true; // Activity needs no materials, so it's always available
-                    }
-                    const hasRequiredMaterials = activityMaterials.some(material => 
-                        criteria.materials.some(available => 
-                            material.toLowerCase().includes(available) || 
-                            available.includes(material.toLowerCase())
-                        )
-                    );
-                    if (activityMaterials.length > 0 && !hasRequiredMaterials) {
-                        return false;
-                    }
-                }
-                
-                // Context-specific filtering
-                if (criteria.context !== 'normal' && activity.contexts && !activity.contexts.includes(criteria.context)) {
-                    return false;
-                }
-                
-                // Parent energy level filter
-                if (criteria.parentEnergy === 'low' && activity.energy_required === 'high') {
-                    return false;
-                }
-                
-                // Special context filters
-                if (criteria.context === 'quiet' && activity.noise_level === 'loud') {
-                    return false;
-                }
-                if (criteria.context === 'bedtime' && (activity.energy_required === 'high' || activity.noise_level === 'loud')) {
-                    return false;
-                }
-                
-                return true;
-            });
-        }
-    
-        // Display activity result
-        function displayActivity(activity) {
-            if (!activity) {
-                document.getElementById('result').innerHTML = `
-                    <div class="error">
-                        <h3>😅 No activities found!</h3>
-                        <p>Try adjusting your filters or selecting different materials.</p>
-                    </div>
-                `;
-                document.getElementById('result').style.display = 'block';
-                return;
-            }
-            
-            currentActivity = activity;
-            
-            const cleanupLabels = {
-                'no': 'No cleanup needed',
-                'easy': 'Easy cleanup',
-                'messy': 'Some cleanup needed'
-            };
-            
-            const involvementLabels = {
-                'minimal': 'Minimal supervision',
-                'some': 'Some guidance needed',
-                'active': 'Active participation'
-            };
-            
-            const resultHtml = `
-                <button class="close-result">&times;</button>
-                
-                <div class="activity-text">
-                    ${escapeHtml(activity.text)}
-                </div>
-                
-                <div class="activity-meta">
-                    <span class="meta-tag parent-energy"><i class="fas fa-hands-helping"></i> ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
-                    <span class="meta-tag cleanup-${activity.cleanup}"><i class="fas fa-broom"></i> ${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
-                    <span class="meta-tag"><i class="fas fa-clock"></i> ${activity.duration} activity</span>
-                    <span class="meta-tag"><i class="fas fa-map-marker-alt"></i> ${activity.location}</span>
-                    <span class="meta-tag"><i class="fas fa-volume-up"></i> ${activity.noise_level}</span>
-                    ${activity.kid_count === 'multiple' ? '<span class="meta-tag"><i class="fas fa-users"></i> Multiple kids</span>' : ''}
-                </div>
-                
-                ${activity.benefits ? `
-                    <div class="activity-benefits">
-                        <strong><i class="fas fa-star"></i> Benefits:</strong> ${escapeHtml(activity.benefits)}
-                    </div>
-                ` : ''}
-                
-                ${activity.prep ? `
-                    <div class="prep-instructions">
-                        <strong><i class="fas fa-clipboard-list"></i> How to set up:</strong><br>
-                        ${escapeHtml(activity.prep)}
-                    </div>
-                ` : ''}
-                
-                <div class="activity-actions">
-                    <button class="favorite-btn action-btn">
-                        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '<i class="fas fa-heart"></i> Saved!' : '<i class="far fa-heart"></i> Save as Favorite'}
-                    </button>
-                    <button class="plan-btn action-btn"><i class="fas fa-calendar-plus"></i> Add to Plan</button>
-                </div>
-            `;
-            
-            document.getElementById('result').innerHTML = resultHtml;
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Add event listeners to new buttons
-            document.querySelector('.close-result').addEventListener('click', function() {
-                document.getElementById('result').style.display = 'none';
-            });
-            
-            document.querySelector('.favorite-btn').addEventListener('click', toggleFavorite);
-            document.querySelector('.plan-btn').addEventListener('click', addToPlan);
-        }
-    
-        // Generate activity
-        async function generateActivity() {
-            const criteria = getFormValues();
-            
-            await loadActivities(criteria.age);
-            
-            if (!activitiesLoaded) {
-                return;
-            }
-            
-            const filteredActivities = filterActivities(criteria);
-            
-            if (filteredActivities.length === 0) {
-                displayActivity(null);
-                return;
-            }
-            
-            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-            displayActivity(randomActivity);
-        }
-    
-        // Quick activity functions
-        async function quickActivity(location, duration, special) {
-            const criteria = {
-                age: document.getElementById('age').value,
-                location: location || 'any',
-                duration: duration || 'any',
-                kidCount: special === 'multiple' ? 'multiple' : 'single',
-                availability: special === 'independent' ? 'independent' : 'available',
-                cleanup: special === 'no-mess' ? 'no-mess' : 'any',
-                materials: [],
-                parentEnergy: parentEnergyLevel,
-                context: special === 'quiet' ? 'quiet' : currentContext
-            };
-            
-            await loadActivities(criteria.age);
-            
-            if (!activitiesLoaded) return;
-            
-            const filteredActivities = filterActivities(criteria);
-            
-            if (filteredActivities.length === 0) {
-                displayActivity(null);
-                return;
-            }
-            
-            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-            displayActivity(randomActivity);
-        }
-    
-        async function instantActivity() {
-            const criteria = {
-                age: document.getElementById('age').value,
-                location: 'any',
-                duration: 'any',
-                kidCount: 'any',
-                availability: 'any',
-                cleanup: 'any',
-                materials: [],
-                parentEnergy: parentEnergyLevel,
-                context: currentContext
-            };
-            
-            await loadActivities(criteria.age);
-            
-            if (!activitiesLoaded) return;
-            
-            const filteredActivities = filterActivities(criteria);
-            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-            displayActivity(randomActivity);
-        }
-    
-        // Handle age change
-        function handleAgeChange() {
-            const newAge = document.getElementById('age').value;
-            activitiesLoaded = false;
-            activities = [];
-        }
-    
-        // Favorites functionality
-        function toggleFavorite() {
-            if (!currentActivity) return;
-            
-            // Create composite key using age group + ID
-            const age = document.getElementById('age').value;
-            currentActivity.compositeId = `${age}-${currentActivity.id}`;
-            
-            const existingIndex = favorites.findIndex(fav => fav.compositeId === currentActivity.compositeId);
-            
-            if (existingIndex >= 0) {
-                favorites.splice(existingIndex, 1);
-                showToast('Removed from favorites');
-            } else {
-                favorites.push({
-                    ...currentActivity,
-                    compositeId: currentActivity.compositeId,
-                    ageGroup: age
-                });
-                showToast('Added to favorites');
-            }
-            
-            try {
-                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-            } catch (e) {
-                console.log('LocalStorage not available');
-            }
-            
-            updateFavoriteButton();
-            updateFavoriteCount();
-        }
-    
-        function updateFavoriteButton() {
-            const btn = document.querySelector('.favorite-btn');
-            if (btn && currentActivity) {
-                const isFavorite = favorites.some(fav => fav.compositeId === currentActivity.compositeId);
-                btn.innerHTML = isFavorite ? '<i class="fas fa-heart"></i> Saved!' : '<i class="far fa-heart"></i> Save as Favorite';
-                btn.classList.toggle('saved', isFavorite);
-            }
-        }
-    
-        function addToPlan() {
-            if (!currentActivity) return;
-            
-            savedPlans.push({
-                activity: currentActivity,
-                addedAt: new Date()
-            });
-            
-            try {
-                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-            } catch (e) {
-                console.log('LocalStorage not available');
-            }
-            
-            showToast('Activity added to your plan! <i class="fas fa-calendar-check"></i>');
-            displaySavedPlans();
-        }
-    
-        // NEW: Display saved plans
-        function displaySavedPlans() {
-            const container = document.getElementById('saved-plans-container');
-            if (!container) return;
-            
-            if (savedPlans.length === 0) {
-                container.innerHTML = '<p class="empty-plans">No saved plans yet. Save a plan to see it here.</p>';
-                return;
-            }
-            
-            container.innerHTML = savedPlans.map((plan, index) => {
-                const date = new Date(plan.addedAt);
-                const dateStr = date.toLocaleDateString();
-                const timeStr = date.toLocaleTimeString();
-                
-                return `
-                    <div class="plan-card">
-                        <div class="plan-header">
-                            <div class="plan-title">
-                                <i class="fas fa-calendar-day"></i> Plan #${index + 1}
-                            </div>
-                            <div class="plan-date">${dateStr} at ${timeStr}</div>
-                        </div>
-                        
-                        <div class="plan-summary">
-                            <p><i class="fas fa-child"></i> Age: ${plan.activity.ageGroup || '3-5'}</p>
-                            <p><i class="fas fa-tag"></i> ${plan.activity.text.substring(0, 60)}...</p>
-                        </div>
-                        
-                        <div class="plan-actions">
-                            <button class="view-plan-btn" onclick="viewPlanDetails(${index})">
-                                <i class="fas fa-eye"></i> View Details
-                            </button>
-                            <button class="delete-plan-btn" onclick="deletePlan(${index})">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        // NEW: View plan details
-        function viewPlanDetails(planIndex) {
-            const plan = savedPlans[planIndex];
-            if (!plan) return;
-            
-            const date = new Date(plan.addedAt);
-            const dateStr = date.toLocaleDateString();
-            const timeStr = date.toLocaleTimeString();
-            
-            document.getElementById('plan-detail-date').textContent = `Saved on ${dateStr} at ${timeStr}`;
-            
-            const body = document.getElementById('plan-detail-body');
-            body.innerHTML = `
-                <div class="plan-activity-item">
-                    <h4><i class="fas fa-star"></i> ${plan.activity.text}</h4>
-                    <div class="activity-meta">
-                        <span class="meta-tag"><i class="fas fa-child"></i> ${plan.activity.ageGroup || '3-5'} years</span>
-                        <span class="meta-tag"><i class="fas fa-${plan.activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${plan.activity.location}</span>
-                        <span class="meta-tag"><i class="fas fa-clock"></i> ${plan.activity.duration}</span>
-                    </div>
-                    ${plan.activity.benefits ? `<p><strong>Benefits:</strong> ${plan.activity.benefits}</p>` : ''}
-                </div>
-            `;
-            
-            document.getElementById('plan-detail-modal').classList.add('show');
-        }
-        
-        // NEW: Delete a plan
-        function deletePlan(planIndex) {
-            if (planIndex >= 0 && planIndex < savedPlans.length) {
-                savedPlans.splice(planIndex, 1);
-                
-                try {
-                    localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-                } catch (e) {
-                    console.log('LocalStorage not available');
-                }
-                
-                showToast('Plan deleted <i class="fas fa-trash"></i>');
-                displaySavedPlans();
-            }
-        }
-        
-        // Close modal function
-        function closeModal() {
-            document.getElementById('plan-detail-modal').classList.remove('show');
-        }
-    
-        // Tab functionality
-        function showTab(tabName) {
-            // Hide all tabs
-            document.getElementById('generator-tab').style.display = 'none';
-            document.getElementById('planner-tab').style.display = 'none';
-            document.getElementById('favorites-tab').style.display = 'none';
-            
-            // Remove active class from all tab buttons
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected tab
-            document.getElementById(`${tabName}-tab`).style.display = 'block';
-            
-            // Find and activate the button that corresponds to this tab
-            const tabButton = document.querySelector(`.tab-btn[onclick="showTab('${tabName}')"]`);
-            if (tabButton) {
-                tabButton.classList.add('active');
-            }
-            
-            // Load content for the tab
-            if (tabName === 'favorites') {
-                displayFavorites();
-            }
-            
-            // NEW: When showing planner tab, display saved plans
-            if (tabName === 'planner') {
-                displaySavedPlans();
-            }
-        }
-        
-        // Display favorites
-        function displayFavorites() {
-            const container = document.getElementById('favorites-list');
-            
-            if (favorites.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 2.8rem; color: #666;">
-                        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;"><i class="fas fa-heart"></i> No favorites yet!</h3>
-                        <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            container.innerHTML = ''; // Clear loading message
-            
-            favorites.forEach(activity => {
-                const favElement = document.createElement('div');
-                favElement.className = 'favorite-item';
-                favElement.innerHTML = `
-                    <h4><i class="fas fa-star"></i> Activity #${activity.id}</h4>
-                    <div class="activity-text">${escapeHtml(activity.text)}</div>
-                    
-                    <div class="favorite-meta">
-                        <span class="favorite-tag"><i class="fas fa-child"></i> ${activity.ageGroup} years</span>
-                        <span class="favorite-tag"><i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location === 'indoor' ? 'Indoor' : 'Outdoor'}</span>
-                        <span class="favorite-tag"><i class="fas fa-clock"></i> ${getDurationLabel(activity.duration)}</span>
-                    </div>
-                    
-                    <div class="activity-actions favorite-actions">
-                        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">
-                            <i class="fas fa-trash-alt"></i> Remove Favorite
-                        </button>
-                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">
-                            <i class="fas fa-play-circle"></i> Do This Activity
-                        </button>
-                    </div>
-                `;
-                container.appendChild(favElement);
-            });
-        }
-        
-        function getDurationLabel(duration) {
-            switch (duration) {
-                case 'quick': return 'Quick';
-                case 'medium': return 'Medium';
-                case 'long': return 'Long';
-                default: return duration;
-            }
-        }
-        
-        function removeFavorite(compositeId) {
-            const index = favorites.findIndex(fav => fav.compositeId === compositeId);
-            if (index >= 0) {
-                favorites.splice(index, 1);
-                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-                updateFavoriteCount();
-                displayFavorites();
-                showToast('Removed from favorites');
-                
-                // If this was the current activity, update its button
-                if (currentActivity && currentActivity.compositeId === compositeId) {
-                    updateFavoriteButton();
-                }
-            }
-        }
-        
-        function loadFavorite(compositeId) {
-            const activity = favorites.find(fav => fav.compositeId === compositeId);
-            if (activity) {
-                // Set the age group
-                document.getElementById('age').value = activity.ageGroup;
-                
-                // Show the generator tab
-                showTab('generator');
-                
-                // Set as current activity and display
-                setTimeout(() => {
-                    currentActivity = activity;
-                    displayActivity(activity);
-                }, 100);
-            }
-        }
-    
-        // Batch planning functions
-        async function planMorning() {
-            await generateBatchActivities('morning', 4);
-        }
-    
-        async function planAfternoon() {
-            await generateBatchActivities('afternoon', 3);
-        }
-    
-        async function planRainyDay() {
-            await generateBatchActivities('rainy', 5);
-        }
-    
-        async function planQuietTime() {
-            await generateBatchActivities('quiet', 3);
-        }
-    
-        async function generateBatchActivities(planType, count) {
-            const age = document.getElementById('age').value;
-            await loadActivities(age);
-            
-            if (!activitiesLoaded) return;
-            
-            let criteria = {
-                age: age,
-                location: 'any',
-                duration: 'any',
-                kidCount: 'any',
-                availability: 'any',
-                cleanup: 'any',
-                materials: [],
-                parentEnergy: parentEnergyLevel,
-                context: 'normal'
-            };
-            
-            // Adjust criteria based on plan type
-            switch (planType) {
-                case 'morning':
-                    // Mix of energy levels for morning
-                    break;
-                case 'afternoon':
-                    criteria.duration = 'medium';
-                    break;
-                case 'rainy':
-                    criteria.location = 'indoor';
-                    criteria.context = 'rainy';
-                    break;
-                case 'quiet':
-                    criteria.context = 'quiet';
-                    break;
-            }
-            
-            const filteredActivities = filterActivities(criteria);
-            
-            if (filteredActivities.length === 0) {
-                document.getElementById('batch-results').innerHTML = `
-                    <div class="error">No activities found for this plan type. Try different settings!</div>
-                `;
-                document.getElementById('batch-results').style.display = 'block';
-                return;
-            }
-            
-            // Select random activities, avoiding duplicates
-            const selectedActivities = [];
-            const availableActivities = [...filteredActivities];
-            
-            for (let i = 0; i < Math.min(count, availableActivities.length); i++) {
-                const randomIndex = Math.floor(Math.random() * availableActivities.length);
-                const activity = availableActivities.splice(randomIndex, 1)[0];
-                activity.compositeId = `${age}-${activity.id}`;
-                selectedActivities.push(activity);
-            }
-            
-            const planHtml = selectedActivities.map((activity, index) => `
-                <div class="batch-activity">
-                    <div class="batch-activity-number"><i class="fas fa-${index === 0 ? 'sun' : 'star'}"></i> Activity ${index + 1}:</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
-                    <p>${escapeHtml(activity.text)}</p>
-                    <small style="color: #666; display: block; margin-top: 0.7rem;">
-                        <i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location} • 
-                        <i class="fas fa-clock"></i> ${activity.duration} • 
-                        <i class="fas fa-hands-helping"></i> ${activity.independent ? 'Independent' : activity.involvement} • 
-                        <i class="fas fa-volume-up"></i> ${activity.noise_level}
-                    </small>
-                </div>
-            `).join('');
-            
-            document.getElementById('batch-results').innerHTML = `
-                <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">
-                    <i class="fas fa-clipboard-list"></i> Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:
-                </h4>
-                ${planHtml}
-                <div style="text-align: center; margin-top: 1.8rem;">
-                    <button onclick="saveBatchPlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
-                            class="generate-btn" style="max-width: 300px; margin: 0 auto;">
-                        <i class="fas fa-save"></i> Save This Plan
-                    </button>
-                </div>
-            `;
-            
-            document.getElementById('batch-results').style.display = 'block';
-        }
-    
-        // Save batch plan
-        function saveBatchPlan(planType, activities) {
-            const plan = {
-                type: planType,
-                activities: activities,
-                createdAt: new Date()
-            };
-            
-            savedPlans.push(plan);
-            
-            try {
-                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-            } catch (e) {
-                console.log('LocalStorage not available');
-            }
-            
-            showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! <i class="fas fa-calendar-check"></i>`);
-            displaySavedPlans();
-        }
 
         // Initialize app
         function init() {
-            try {
-                // Load favorites
-                const savedFavorites = localStorage.getItem('playideas-favorites');
-                if (savedFavorites) {
-                    favorites = JSON.parse(savedFavorites);
-                }
-                
-                // Load energy level
-                const savedEnergy = localStorage.getItem('playideas-energy-level');
-                if (savedEnergy) {
-                    parentEnergyLevel = savedEnergy;
-                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
-                    document.querySelectorAll('.energy-btn').forEach(btn => {
-                        if (btn.getAttribute('data-energy') !== savedEnergy) {
-                            btn.classList.remove('selected');
-                        }
-                    });
-                }
-                
-                // Load context
-                const savedContext = localStorage.getItem('playideas-context');
-                if (savedContext) {
-                    currentContext = savedContext;
-                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
-                }
-                
-                // Load plans
-                const savedPlansData = localStorage.getItem('playideas-plans');
-                if (savedPlansData) {
-                    try {
-                        savedPlans = JSON.parse(savedPlansData);
-                    } catch (e) {
-                        console.error('Error parsing plans', e);
-                        savedPlans = [];
-                    }
-                }
-                
-                updateFavoriteCount();
-                
-            } catch (e) {
-                console.log('LocalStorage not available, using defaults');
-            }
+            updateFavoriteCount();
             
-            // Load initial activities for default age
-            loadActivities('3-5');
+            // Add event listeners to buttons
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.favorite-item');
+                    item.style.animation = 'fadeOut 0.5s forwards';
+                    
+                    setTimeout(() => {
+                        item.remove();
+                        updateFavoriteCount();
+                    }, 500);
+                });
+            });
             
-            // Set up modal close button
-            document.querySelector('.close-modal').addEventListener('click', closeModal);
+            document.querySelectorAll('.do-activity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.favorite-item');
+                    item.style.borderLeftColor = '#20c997';
+                    
+                    setTimeout(() => {
+                        alert('Starting activity! Have fun! 😊');
+                    }, 300);
+                });
+            });
         }
+
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(20px); }
+            }
+        `;
+        document.head.appendChild(style);
 
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
