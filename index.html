@@ -3,87 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayIdeas - Enhanced Favorites Tab</title>
+    <title>PlayIdeas - Activity Generator for Parents</title>
     <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --orange: #fd7e14;
+            --purple: #6f42c1;
+            --teal: #20c997;
+            --pink: #e83e8c;
+        }
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
-        :root {
-            --primary: #4361ee;
-            --primary-light: #5a75f5;
-            --secondary: #3f37c9;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #28a745;
-            --success-light: #34d058;
-            --warning: #ffc107;
-            --warning-light: #ffd351;
-            --danger: #dc3545;
-            --danger-light: #e85d6a;
-            --orange: #fd7e14;
-            --purple: #6f42c1;
-            --teal: #20c997;
-            --teal-light: #2ce5ae;
-            --pink: #e83e8c;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --lighter-gray: #f8f9fa;
-            --dark-gray: #343a40;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-hover: 0 6px 16px rgba(0,0,0,0.12);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: all 0.3s ease;
-        }
-        
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            max-width: 700px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
+            background-color: #f0f8ff;
             line-height: 1.6;
             color: #333;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
+        }
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        .app-container {
+        /* Parent Energy Indicator */
+        .energy-check {
+            background: linear-gradient(135deg, #ffecd2, #ffd8a8);
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(255, 184, 77, 0.2);
+        }
+        
+        .energy-check h3 {
+            margin-bottom: 0.75rem;
+            color: #d35400;
+            font-size: 1.2rem;
+        }
+        
+        .energy-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .energy-btn {
             background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            border: 2px solid #ddd;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
         
-        header {
+        .energy-btn.selected {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
+        }
+        
+        /* Context Mode Selector */
+        .context-selector {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .context-selector h3 {
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .context-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .context-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .context-btn.selected {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: white;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
+        }
+        
+        /* Enhanced Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .quick-actions h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 480px) {
+            .quick-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .quick-btn {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.5rem;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
             text-align: center;
-            border-radius: var(--radius) var(--radius) 0 0;
         }
         
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .quick-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
         }
         
-        .tagline {
+        .quick-btn.low-energy {
+            background: linear-gradient(135deg, var(--success), #20c997);
+        }
+        
+        .quick-btn.quiet {
+            background: linear-gradient(135deg, var(--purple), #8e44ad);
+        }
+        
+        .quick-btn.independent {
+            background: linear-gradient(135deg, var(--orange), #e17055);
+        }
+        
+        .quick-btn.multiple-kids {
+            background: linear-gradient(135deg, var(--pink), #d63384);
+        }
+        
+        .instant-btn {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            padding: 1.3rem;
+            font-size: 1.15rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .instant-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Compact Form */
+        .compact-form {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        
+        select {
+            width: 100%;
+            padding: 0.85rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
             font-size: 1rem;
-            opacity: 0.9;
+            background: white;
+            transition: all 0.3s;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        
+        .radio-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            flex: 1;
+            text-align: center;
+            min-width: fit-content;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        
+        .radio-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .radio-btn:hover {
+            border-color: var(--primary);
+        }
+        
+        /* Materials as tags */
+        .materials-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+        }
+        
+        .material-tag {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.5rem 0.9rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .material-tag.selected {
+            background: var(--warning);
+            border-color: var(--warning);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .material-tag:hover {
+            border-color: var(--warning);
+        }
+        
+        /* Results */
+        #result {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: none;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .activity-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: #222;
+        }
+        
+        .activity-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #555;
+            flex-wrap: wrap;
+        }
+        
+        .meta-tag {
+            background: var(--light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            font-size: 0.85rem;
+        }
+        
+        .meta-tag.parent-energy {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        
+        .meta-tag.cleanup-no { background: #d4edda; color: #155724; }
+        .meta-tag.cleanup-easy { background: #fff3cd; color: #856404; }
+        .meta-tag.cleanup-messy { background: #f8d7da; color: #721c24; }
+        
+        .meta-tag.involvement-minimal { background: #d4edda; color: #155724; }
+        .meta-tag.involvement-some { background: #fff3cd; color: #856404; }
+        .meta-tag.involvement-active { background: #f8d7da; color: #721c24; }
+        
+        .activity-benefits {
+            background: #e8f4f8;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #0c5460;
+            border-left: 4px solid var(--teal);
+        }
+        
+        .prep-instructions {
+            background: #fff3cd;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #856404;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .prep-instructions strong {
+            color: #533f03;
+        }
+        
+        .activity-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .favorite-btn, .plan-btn {
+            background-color: var(--warning);
+            color: var(--dark);
+            border: none;
+            padding: 0.9rem 1.7rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 150px;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .plan-btn {
+            background-color: var(--teal);
+            color: white;
+        }
+        
+        .favorite-btn:hover, .plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .favorite-btn.saved {
+            background-color: var(--success);
+            color: white;
         }
         
         /* Tab system */
         .tab-buttons {
             display: flex;
-            margin: 1.5rem;
+            margin-bottom: 1.8rem;
             gap: 0.3rem;
             background: white;
             padding: 0.3rem;
             border-radius: 12px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .tab-btn {
@@ -94,7 +453,7 @@
             padding: 0.9rem;
             cursor: pointer;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.3s;
             position: relative;
             font-size: 1.05rem;
         }
@@ -121,129 +480,113 @@
             font-weight: bold;
         }
         
-        /* Tab Content */
-        .tab-content {
-            padding: 0 1.5rem 1.5rem;
+        /* Batch Planning */
+        .batch-planning {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
         
-        /* Favorites Tab */
-        #favorites-tab {
-            display: block;
+        .batch-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
+        @media (max-width: 480px) {
+            .batch-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .batch-btn {
+            background: linear-gradient(135deg, var(--teal), #17a2b8);
+            color: white;
+            border: none;
+            padding: 1.3rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+            font-size: 1.05rem;
+        }
+        
+        .batch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
+        }
+        
+        .batch-results {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .batch-activity {
+            background: white;
+            padding: 1.3rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--teal);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+        
+        .batch-activity:last-child {
+            margin-bottom: 0;
+        }
+        
+        .batch-activity-number {
+            font-weight: bold;
+            color: var(--teal);
+            margin-bottom: 0.7rem;
+            font-size: 1.15rem;
+        }
+        
+        /* Favorites */
         #favorites-list {
             background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
         }
         
         .favorite-item {
             margin-bottom: 1.8rem;
             padding: 1.7rem;
-            background: var(--lighter-gray);
-            border-radius: var(--radius-sm);
+            background: var(--light);
+            border-radius: 12px;
             border-left: 5px solid var(--primary);
-            transition: var(--transition);
+            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            position: relative;
         }
         
         .favorite-item:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
         
         .favorite-item h4 {
             color: var(--primary);
             margin-bottom: 0.8rem;
             font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
         .favorite-item .activity-text {
             margin-bottom: 0.8rem;
             font-size: 1.15rem;
-            line-height: 1.6;
-            padding-left: 5px;
-            border-left: 3px solid var(--warning);
-        }
-        
-        .favorite-meta {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .favorite-tag {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .favorite-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        /* Action Buttons */
-        .action-btn {
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1rem;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        
-        /* Do Activity Button - More prominent */
-        .do-activity-btn {
-            background: linear-gradient(135deg, var(--success), #20c997);
-            color: white;
-            flex: 2;
-            min-width: 200px;
-        }
-        
-        .do-activity-btn:hover {
-            background: linear-gradient(135deg, var(--success-light), #2ce5ae);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        /* Remove Favorite Button - Less prominent */
-        .remove-btn {
-            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-            color: var(--dark);
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .remove-btn:hover {
-            background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
         }
         
         .loading, .error {
             text-align: center;
             padding: 2.8rem;
-            color: var(--gray);
+            color: #666;
             font-size: 1.15rem;
         }
         
@@ -268,275 +611,949 @@
             color: var(--danger);
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            
-            .app-container {
-                border-radius: 12px;
-            }
-            
-            header {
-                padding: 1.2rem;
-            }
-            
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            .tab-content {
-                padding: 0 1rem 1rem;
-            }
-            
-            #favorites-list {
-                padding: 1rem;
-            }
-            
-            .favorite-actions {
-                flex-direction: column;
-            }
-            
-            .action-btn {
-                width: 100%;
-            }
+        /* Hide native radio buttons */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* Helper text styling */
+        .helper-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.4rem;
         }
         
-        /* Colorful Emoji Backgrounds */
-        .emoji-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            margin-right: 10px;
-            font-size: 1.2rem;
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 1.05rem;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .age-badge { background-color: #FFD6E7; }
-        .location-badge { background-color: #C1E7FF; }
-        .duration-badge { background-color: #FFEBB9; }
-        .kids-badge { background-color: #D0F0C0; }
+        .toast.show {
+            opacity: 1;
+        }
         
-        /* Footer */
         .app-footer {
             text-align: center;
-            padding: 1.5rem;
-            color: var(--gray);
+            padding: 1.5rem 0;
+            color: #666;
             font-size: 0.9rem;
             margin-top: 1.5rem;
-            border-top: 1px solid var(--light-gray);
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1>🌟 PlayIdeas Favorites</h1>
-            <p class="tagline">Your saved activities at a glance</p>
-        </header>
-        
-        <div class="tab-buttons">
-            <button class="tab-btn">Activities</button>
-            <button class="tab-btn">Planner</button>
-            <button class="tab-btn active" id="favorites-tab-btn">
-                My Favorites
-                <span class="favorite-count">7</span>
+    <h1>🎮 PlayIdeas Activity Generator</h1>
+    
+    <!-- Parent Energy Check -->
+    <div class="energy-check">
+        <h3>☕ How's your energy level today?</h3>
+        <div class="energy-buttons">
+            <div class="energy-btn selected" data-energy="low">😴 Exhausted</div>
+            <div class="energy-btn" data-energy="medium">🙂 Medium</div>
+            <div class="energy-btn" data-energy="high">⚡ Ready!</div>
+        </div>
+    </div>
+    
+    <!-- Context Mode Selector -->
+    <div class="context-selector">
+        <h3>🌟 What's the situation?</h3>
+        <div class="context-buttons">
+            <div class="context-btn selected" data-context="normal">📅 Regular day</div>
+            <div class="context-btn" data-context="rainy">🌧️ Rainy day</div>
+            <div class="context-btn" data-context="sick">🤒 Sick day</div>
+            <div class="context-btn" data-context="bedtime">🌙 Pre-bedtime</div>
+            <div class="context-btn" data-context="coffee">☕ Need break</div>
+        </div>
+    </div>
+    
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="showTab('generator')">Get Ideas</button>
+        <button class="tab-btn" onclick="showTab('planner')">Plan Activities</button>
+        <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
+            My Favorites
+            <span class="favorite-count" id="favorite-count"></span>
+        </button>
+    </div>
+    
+    <div id="generator-tab">
+        <!-- Enhanced Quick Actions Section -->
+        <div class="quick-actions">
+            <h2>🚀 Need something NOW?</h2>
+            <div class="quick-buttons">
+                <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')">🛋️ Easy Indoor</button>
+                <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')">🧒 Independent Play</button>
+                <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')">🤫 Quiet Activity</button>
+                <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')">👥 Multiple Kids</button>
+                <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')">🌳 Outdoor Fun</button>
+                <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')">✨ No Mess</button>
+            </div>
+            <button class="quick-btn instant-btn" onclick="instantActivity()">
+                ✨ SURPRISE ME! (Any activity)
             </button>
         </div>
         
-        <div class="tab-content">
-            <div id="favorites-tab">
-                <div id="favorites-list">
-                    <!-- Favorite Item 1 -->
-                    <div class="favorite-item">
-                        <h4><span class="emoji-badge age-badge">👶</span> Sensory Play Activity</h4>
-                        <div class="activity-text">
-                            Create a sensory bin: Fill a container with rice or beans and hide small toys inside for your child to find.
-                        </div>
-                        
-                        <div class="favorite-meta">
-                            <span class="favorite-tag">
-                                <span class="emoji-badge age-badge">👶</span> 3-5 years
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge location-badge">🏠</span> Indoor
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge duration-badge">⏱️</span> Medium
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge kids-badge">👥</span> Multiple kids
-                            </span>
-                        </div>
-                        
-                        <div class="favorite-actions">
-                            <button class="action-btn remove-btn">
-                                <span>🗑️</span> Remove Favorite
-                            </button>
-                            <button class="action-btn do-activity-btn">
-                                <span>🎮</span> Do This Activity
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Favorite Item 2 -->
-                    <div class="favorite-item">
-                        <h4><span class="emoji-badge age-badge">👦</span> Indoor Obstacle Course</h4>
-                        <div class="activity-text">
-                            Create a safe obstacle course using pillows, chairs, and blankets for your child to climb over and under.
-                        </div>
-                        
-                        <div class="favorite-meta">
-                            <span class="favorite-tag">
-                                <span class="emoji-badge age-badge">👦</span> 4-6 years
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge location-badge">🏠</span> Indoor
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge duration-badge">⏱️</span> Quick
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge kids-badge">👤</span> One child
-                            </span>
-                        </div>
-                        
-                        <div class="favorite-actions">
-                            <button class="action-btn remove-btn">
-                                <span>🗑️</span> Remove Favorite
-                            </button>
-                            <button class="action-btn do-activity-btn">
-                                <span>🎮</span> Do This Activity
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Favorite Item 3 -->
-                    <div class="favorite-item">
-                        <h4><span class="emoji-badge age-badge">👧</span> Nature Scavenger Hunt</h4>
-                        <div class="activity-text">
-                            Create a list of natural items for your child to find in the backyard or park - leaves, rocks, flowers, etc.
-                        </div>
-                        
-                        <div class="favorite-meta">
-                            <span class="favorite-tag">
-                                <span class="emoji-badge age-badge">👧</span> 5-8 years
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge location-badge">🌳</span> Outdoor
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge duration-badge">⌛</span> Long
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge kids-badge">👥</span> Multiple kids
-                            </span>
-                        </div>
-                        
-                        <div class="favorite-actions">
-                            <button class="action-btn remove-btn">
-                                <span>🗑️</span> Remove Favorite
-                            </button>
-                            <button class="action-btn do-activity-btn">
-                                <span>🎮</span> Do This Activity
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Favorite Item 4 -->
-                    <div class="favorite-item">
-                        <h4><span class="emoji-badge age-badge">👶</span> Bubble Wrap Painting</h4>
-                        <div class="activity-text">
-                            Put paint on bubble wrap and let your child stomp on it to create colorful patterns on paper.
-                        </div>
-                        
-                        <div class="favorite-meta">
-                            <span class="favorite-tag">
-                                <span class="emoji-badge age-badge">👶</span> 2-4 years
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge location-badge">🏠</span> Indoor
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge duration-badge">⏱️</span> Medium
-                            </span>
-                            <span class="favorite-tag">
-                                <span class="emoji-badge kids-badge">👤</span> One child
-                            </span>
-                        </div>
-                        
-                        <div class="favorite-actions">
-                            <button class="action-btn remove-btn">
-                                <span>🗑️</span> Remove Favorite
-                            </button>
-                            <button class="action-btn do-activity-btn">
-                                <span>🎮</span> Do This Activity
-                            </button>
-                        </div>
+        <!-- Results appear here when generated -->
+        <div id="result">
+            <div class="loading">Loading activities</div>
+        </div>
+        
+        <!-- Compact Custom Form -->
+        <div class="compact-form">
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">🎯 Or customize your search:</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Child's Age:</label>
+                    <select id="age" onchange="handleAgeChange()">
+                        <option value="0-2">0-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-8">6-8 years</option>
+                        <option value="9-12">9-12 years</option>
+                        <option value="12+">12+ years</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Number of Kids:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="kid-count" data-value="single">👤 One</div>
+                        <div class="radio-btn" data-name="kid-count" data-value="multiple">👥 Multiple</div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="app-footer">
-            Made with ❤️ by PlayIdeas • Activities for happy parenting
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Location:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="location" data-value="indoor">🏠 Indoor</div>
+                        <div class="radio-btn" data-name="location" data-value="outdoor">🌳 Outdoor</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Duration:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="duration" data-value="quick">⏱️ Quick</div>
+                        <div class="radio-btn" data-name="duration" data-value="medium">⏳ Medium</div>
+                        <div class="radio-btn" data-name="duration" data-value="long">⌛ Long</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your involvement:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="availability" data-value="available">👨‍👧 Can help</div>
+                        <div class="radio-btn" data-name="availability" data-value="independent">🧒 Independent</div>
+                    </div>
+                    <div class="helper-text">Independent = activities your child can do mostly alone</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Clean-up level:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="cleanup" data-value="any">🤷 Any</div>
+                        <div class="radio-btn" data-name="cleanup" data-value="no-mess">✨ No mess</div>
+                        <div class="radio-btn" data-name="cleanup" data-value="easy">🧹 Easy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>What do you have handy? (tap any that apply)</label>
+                <div class="materials-tags">
+                    <div class="material-tag" data-value="paper">📄 Paper</div>
+                    <div class="material-tag" data-value="pencils">✏️ Pencils</div>
+                    <div class="material-tag" data-value="scissors">✂️ Scissors</div>
+                    <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
+                    <div class="material-tag" data-value="ball">🏀 Ball</div>
+                    <div class="material-tag" data-value="blocks">🧱 Blocks</div>
+                    <div class="material-tag" data-value="dolls">🧸 Toys</div>
+                    <div class="material-tag" data-value="cards">🃏 Cards</div>
+                    <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
+                    <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
+                    <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
+                    <div class="material-tag" data-value="none">❌ Nothing special</div>
+                </div>
+                <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
+            </div>
+            
+            <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; width: 100%; font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; cursor: pointer; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); transition: all 0.3s;">
+                🎲 Generate Custom Activity
+            </button>
         </div>
     </div>
-
+    
+    <div id="planner-tab" style="display: none;">
+        <div class="batch-planning">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">📋 Activity Planning</h2>
+            <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
+            
+            <div class="batch-buttons">
+                <button class="batch-btn" onclick="planMorning()">🌅 Plan My Morning<br><small>3-4 sequential activities</small></button>
+                <button class="batch-btn" onclick="planAfternoon()">🌞 Plan My Afternoon<br><small>Perfect for post-nap time</small></button>
+                <button class="batch-btn" onclick="planRainyDay()">🌧️ Rainy Day Plan<br><small>All indoor activities</small></button>
+                <button class="batch-btn" onclick="planQuietTime()">🤫 Quiet Time Plan<br><small>Calm, focused activities</small></button>
+            </div>
+            
+            <div id="batch-results" class="batch-results">
+                <!-- Batch results will appear here -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="favorites-tab" style="display: none;">
+        <div id="favorites-list">
+            <p class="loading">Loading favorites</p>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <div class="app-footer">
+        Made with ❤️ by PlayIdeas • Activities loaded from JSON files
+    </div>
+    
     <script>
+        // Global variables
+        let activities = [];
+        let allActivities = {};
+        let favorites = [];
+        let savedPlans = [];
+        let currentActivity = null;
+        let activitiesLoaded = false;
+        let parentEnergyLevel = 'low';
+        let currentContext = 'normal';
+        
+        // Map age groups to JSON filenames
+        const ageGroupFiles = {
+            "0-2": "activities-0-2.json",
+            "3-5": "activities-3-5.json",
+            "6-8": "activities-6-8.json",
+            "9-12": "activities-9-12.json",
+            "12+": "activities-12plus.json"
+        };
+        
+        // HTML escaping function for security
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Show toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+        
         // Update favorite count badge
         function updateFavoriteCount() {
             const countElem = document.getElementById('favorite-count');
-            const favoriteItems = document.querySelectorAll('.favorite-item');
-            if (favoriteItems.length > 0) {
-                countElem.textContent = favoriteItems.length;
+            if (favorites.length > 0) {
+                countElem.textContent = favorites.length;
                 countElem.style.display = 'flex';
             } else {
                 countElem.style.display = 'none';
             }
         }
+        
+        // Load activities for specific age group from JSON files
+        async function loadActivities(ageGroup) {
+            if (allActivities[ageGroup]) {
+                activities = allActivities[ageGroup];
+                activitiesLoaded = true;
+                return;
+            }
+            
+            try {
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years</div>`;
+                resultDiv.style.display = "block";
+                
+                // Get the filename for this age group
+                const filename = ageGroupFiles[ageGroup];
+                if (!filename) {
+                    throw new Error(`No JSON file defined for age group: ${ageGroup}`);
+                }
+                
+                // Fetch the JSON file
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`Failed to load activities: ${response.status} ${response.statusText}`);
+                }
+                
+                // Parse the JSON and extract the activities array
+                const data = await response.json();
+                activities = data.activities; // Extract the activities array
+                allActivities[ageGroup] = activities;
+                activitiesLoaded = true;
+                
+                resultDiv.style.display = "none";
+                
+            } catch (error) {
+                console.error(`Error loading activities for ${ageGroup}:`, error);
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
+                        <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
+                        <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
+                        <div style="text-align: center;">
+                            <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
+                                🔄 Try Again
+                            </button>
+                        </div>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+                activitiesLoaded = false;
+            }
+        }
+        
+        // Handle radio button groups and selections
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('radio-btn')) {
+                const group = e.target.getAttribute('data-name');
+                const value = e.target.getAttribute('data-value');
+                
+                const siblings = e.target.parentElement.querySelectorAll('.radio-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+            }
+            
+            if (e.target.classList.contains('material-tag')) {
+                e.target.classList.toggle('selected');
+            }
+            
+            if (e.target.classList.contains('energy-btn')) {
+                parentEnergyLevel = e.target.getAttribute('data-energy');
+                
+                const siblings = e.target.parentElement.querySelectorAll('.energy-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                try {
+                    localStorage.setItem('playideas-energy-level', parentEnergyLevel);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+            
+            if (e.target.classList.contains('context-btn')) {
+                currentContext = e.target.getAttribute('data-context');
+                
+                const siblings = e.target.parentElement.querySelectorAll('.context-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                try {
+                    localStorage.setItem('playideas-context', currentContext);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+        });
+    
+        // Get form values
+        function getFormValues() {
+            const age = document.getElementById('age').value;
+            const kidCount = document.querySelector('.radio-btn[data-name="kid-count"].selected')?.getAttribute('data-value') || 'single';
+            const location = document.querySelector('.radio-btn[data-name="location"].selected')?.getAttribute('data-value') || 'indoor';
+            const duration = document.querySelector('.radio-btn[data-name="duration"].selected')?.getAttribute('data-value') || 'quick';
+            const availability = document.querySelector('.radio-btn[data-name="availability"].selected')?.getAttribute('data-value') || 'available';
+            const cleanup = document.querySelector('.radio-btn[data-name="cleanup"].selected')?.getAttribute('data-value') || 'any';
+            
+            const selectedMaterials = Array.from(document.querySelectorAll('.material-tag.selected'))
+                .map(tag => tag.getAttribute('data-value'));
+            
+            return {
+                age,
+                kidCount,
+                location,
+                duration,
+                availability,
+                cleanup,
+                materials: selectedMaterials,
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+        }
+    
+        // Filter activities based on criteria
+        function filterActivities(criteria) {
+            if (!activities || activities.length === 0) return [];
+            
+            return activities.filter(activity => {
+                // Location filter
+                if (criteria.location !== 'any' && activity.location !== 'any' && activity.location !== criteria.location) {
+                    return false;
+                }
+                
+                // Duration filter
+                if (criteria.duration !== 'any' && activity.duration !== 'any' && activity.duration !== criteria.duration) {
+                    return false;
+                }
+                
+                // Kid count filter
+                if (criteria.kidCount === 'multiple' && activity.kid_count === 'single') {
+                    return false;
+                }
+                
+                // Parent availability filter (independent vs needs supervision)
+                if (criteria.availability === 'independent' && !activity.independent) {
+                    return false;
+                }
+                
+                // Cleanup filter
+                if (criteria.cleanup === 'no-mess' && activity.cleanup !== 'no') {
+                    return false;
+                }
+                if (criteria.cleanup === 'easy' && activity.cleanup === 'messy') {
+                    return false;
+                }
+                
+                // Materials filter
+                if (criteria.materials.includes('none')) {
+                    return activity.materials.includes('none');
+                }
+                
+                if (criteria.materials.length > 0 && !criteria.materials.includes('none')) {
+                    const activityMaterials = activity.materials || [];
+                    if (activityMaterials.includes('none')) {
+                        return true; // Activity needs no materials, so it's always available
+                    }
+                    const hasRequiredMaterials = activityMaterials.some(material => 
+                        criteria.materials.some(available => 
+                            material.toLowerCase().includes(available) || 
+                            available.includes(material.toLowerCase())
+                        )
+                    );
+                    if (activityMaterials.length > 0 && !hasRequiredMaterials) {
+                        return false;
+                    }
+                }
+                
+                // Context-specific filtering
+                if (criteria.context !== 'normal' && activity.contexts && !activity.contexts.includes(criteria.context)) {
+                    return false;
+                }
+                
+                // Parent energy level filter
+                if (criteria.parentEnergy === 'low' && activity.energy_required === 'high') {
+                    return false;
+                }
+                
+                // Special context filters
+                if (criteria.context === 'quiet' && activity.noise_level === 'loud') {
+                    return false;
+                }
+                if (criteria.context === 'bedtime' && (activity.energy_required === 'high' || activity.noise_level === 'loud')) {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+    
+        // Display activity result
+        function displayActivity(activity) {
+            if (!activity) {
+                document.getElementById('result').innerHTML = `
+                    <div class="error">
+                        <h3>😅 No activities found!</h3>
+                        <p>Try adjusting your filters or selecting different materials.</p>
+                    </div>
+                `;
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+            
+            currentActivity = activity;
+            
+            const cleanupLabels = {
+                'no': 'No cleanup needed',
+                'easy': 'Easy cleanup',
+                'messy': 'Some cleanup needed'
+            };
+            
+            const involvementLabels = {
+                'minimal': 'Minimal supervision',
+                'some': 'Some guidance needed',
+                'active': 'Active participation'
+            };
+            
+            const resultHtml = `
+                <div class="activity-text">
+                    ${escapeHtml(activity.text)}
+                </div>
+                
+                <div class="activity-meta">
+                    <span class="meta-tag parent-energy">👨‍👧 ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
+                    <span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
+                    <span class="meta-tag">⏱️ ${activity.duration} activity</span>
+                    <span class="meta-tag">📍 ${activity.location}</span>
+                    <span class="meta-tag">🔊 ${activity.noise_level}</span>
+                    ${activity.kid_count === 'multiple' ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
+                </div>
+                
+                ${activity.benefits ? `
+                    <div class="activity-benefits">
+                        <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
+                    </div>
+                ` : ''}
+                
+                ${activity.prep ? `
+                    <div class="prep-instructions">
+                        <strong>📝 How to set up:</strong><br>
+                        ${escapeHtml(activity.prep)}
+                    </div>
+                ` : ''}
+                
+                <div class="activity-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite()">
+                        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '💝 Saved!' : '💖 Save as Favorite'}
+                    </button>
+                    <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
+                </div>
+            `;
+            
+            document.getElementById('result').innerHTML = resultHtml;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    
+        // Generate activity
+        async function generateActivity() {
+            const criteria = getFormValues();
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) {
+                return;
+            }
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                displayActivity(null);
+                return;
+            }
+            
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
+            displayActivity(randomActivity);
+        }
+    
+        // Quick activity functions
+        async function quickActivity(location, duration, special) {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: location || 'any',
+                duration: duration || 'any',
+                kidCount: special === 'multiple' ? 'multiple' : 'single',
+                availability: special === 'independent' ? 'independent' : 'available',
+                cleanup: special === 'no-mess' ? 'no-mess' : 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: special === 'quiet' ? 'quiet' : currentContext
+            };
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) return;
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                displayActivity(null);
+                return;
+            }
+            
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
+            displayActivity(randomActivity);
+        }
+    
+        async function instantActivity() {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: 'any',
+                duration: 'any',
+                kidCount: 'any',
+                availability: 'any',
+                cleanup: 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) return;
+            
+            const filteredActivities = filterActivities(criteria);
+            const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
+            displayActivity(randomActivity);
+        }
+    
+        // Handle age change
+        function handleAgeChange() {
+            const newAge = document.getElementById('age').value;
+            activitiesLoaded = false;
+            activities = [];
+        }
+    
+        // Favorites functionality
+        function toggleFavorite() {
+            if (!currentActivity) return;
+            
+            // Create composite key using age group + ID
+            const age = document.getElementById('age').value;
+            currentActivity.compositeId = `${age}-${currentActivity.id}`;
+            
+            const existingIndex = favorites.findIndex(fav => fav.compositeId === currentActivity.compositeId);
+            
+            if (existingIndex >= 0) {
+                favorites.splice(existingIndex, 1);
+                showToast('Removed from favorites');
+            } else {
+                favorites.push({
+                    ...currentActivity,
+                    compositeId: currentActivity.compositeId,
+                    ageGroup: age
+                });
+                showToast('Added to favorites');
+            }
+            
+            try {
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            updateFavoriteButton();
+            updateFavoriteCount();
+        }
+    
+        function updateFavoriteButton() {
+            const btn = document.querySelector('.favorite-btn');
+            if (btn && currentActivity) {
+                const isFavorite = favorites.some(fav => fav.compositeId === currentActivity.compositeId);
+                btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
+                btn.classList.toggle('saved', isFavorite);
+            }
+        }
+    
+        function addToPlan() {
+            if (!currentActivity) return;
+            
+            savedPlans.push({
+                activity: currentActivity,
+                addedAt: new Date()
+            });
+            
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            showToast('Activity added to your plan! 📋');
+        }
+    
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('generator-tab').style.display = 'none';
+            document.getElementById('planner-tab').style.display = 'none';
+            document.getElementById('favorites-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            
+            // Find and activate the button that corresponds to this tab
+            const tabButton = document.querySelector(`.tab-btn[onclick="showTab('${tabName}')"]`);
+            if (tabButton) {
+                tabButton.classList.add('active');
+            }
+            
+            // Load content for the tab
+            if (tabName === 'favorites') {
+                displayFavorites();
+            }
+        }
+        
+        // Display favorites
+        function displayFavorites() {
+            const container = document.getElementById('favorites-list');
+            
+            if (favorites.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 2.8rem; color: #666;">
+                        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;">💖 No favorites yet!</h3>
+                        <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = ''; // Clear loading message
+            
+            favorites.forEach(activity => {
+                const favElement = document.createElement('div');
+                favElement.className = 'favorite-item';
+                favElement.innerHTML = `
+                    <h4>Activity #${activity.id}</h4>
+                    <div class="activity-text">${escapeHtml(activity.text)}</div>
+                    <div class="activity-meta">
+                        <span class="meta-tag">${activity.ageGroup} years</span>
+                        <span class="meta-tag">${activity.location === 'indoor' ? '🏠 Indoor' : '🌳 Outdoor'}</span>
+                        <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="favorite-btn saved" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
+                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
+                    </div>
+                `;
+                container.appendChild(favElement);
+            });
+        }
+        
+        function getDurationLabel(duration) {
+            switch (duration) {
+                case 'quick': return '⏱️ Quick';
+                case 'medium': return '⏳ Medium';
+                case 'long': return '⌛ Long';
+                default: return duration;
+            }
+        }
+        
+        function removeFavorite(compositeId) {
+            const index = favorites.findIndex(fav => fav.compositeId === compositeId);
+            if (index >= 0) {
+                favorites.splice(index, 1);
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+                updateFavoriteCount();
+                displayFavorites();
+                showToast('Removed from favorites');
+                
+                // If this was the current activity, update its button
+                if (currentActivity && currentActivity.compositeId === compositeId) {
+                    updateFavoriteButton();
+                }
+            }
+        }
+        
+        function loadFavorite(compositeId) {
+            const activity = favorites.find(fav => fav.compositeId === compositeId);
+            if (activity) {
+                // Set the age group
+                document.getElementById('age').value = activity.ageGroup;
+                
+                // Show the generator tab
+                showTab('generator');
+                
+                // Set as current activity and display
+                setTimeout(() => {
+                    currentActivity = activity;
+                    displayActivity(activity);
+                }, 100);
+            }
+        }
+    
+        // Batch planning functions
+        async function planMorning() {
+            await generateBatchActivities('morning', 4);
+        }
+    
+        async function planAfternoon() {
+            await generateBatchActivities('afternoon', 3);
+        }
+    
+        async function planRainyDay() {
+            await generateBatchActivities('rainy', 5);
+        }
+    
+        async function planQuietTime() {
+            await generateBatchActivities('quiet', 3);
+        }
+    
+        async function generateBatchActivities(planType, count) {
+            const age = document.getElementById('age').value;
+            await loadActivities(age);
+            
+            if (!activitiesLoaded) return;
+            
+            let criteria = {
+                age: age,
+                location: 'any',
+                duration: 'any',
+                kidCount: 'any',
+                availability: 'any',
+                cleanup: 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: 'normal'
+            };
+            
+            // Adjust criteria based on plan type
+            switch (planType) {
+                case 'morning':
+                    // Mix of energy levels for morning
+                    break;
+                case 'afternoon':
+                    criteria.duration = 'medium';
+                    break;
+                case 'rainy':
+                    criteria.location = 'indoor';
+                    criteria.context = 'rainy';
+                    break;
+                case 'quiet':
+                    criteria.context = 'quiet';
+                    break;
+            }
+            
+            const filteredActivities = filterActivities(criteria);
+            
+            if (filteredActivities.length === 0) {
+                document.getElementById('batch-results').innerHTML = `
+                    <div class="error">No activities found for this plan type. Try different settings!</div>
+                `;
+                document.getElementById('batch-results').style.display = 'block';
+                return;
+            }
+            
+            // Select random activities, avoiding duplicates
+            const selectedActivities = [];
+            const availableActivities = [...filteredActivities];
+            
+            for (let i = 0; i < Math.min(count, availableActivities.length); i++) {
+                const randomIndex = Math.floor(Math.random() * availableActivities.length);
+                const activity = availableActivities.splice(randomIndex, 1)[0];
+                activity.compositeId = `${age}-${activity.id}`;
+                selectedActivities.push(activity);
+            }
+            
+            const planHtml = selectedActivities.map((activity, index) => `
+                <div class="batch-activity">
+                    <div class="batch-activity-number">Activity ${index + 1}:</div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
+                    <p>${escapeHtml(activity.text)}</p>
+                    <small style="color: #666; display: block; margin-top: 0.7rem;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
+                </div>
+            `).join('');
+            
+            document.getElementById('batch-results').innerHTML = `
+                <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
+                ${planHtml}
+                <div style="text-align: center; margin-top: 1.8rem;">
+                    <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
+                            style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
+                        💾 Save This Plan
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('batch-results').style.display = 'block';
+        }
+    
+        function savePlan(planType, activities) {
+            const plan = {
+                type: planType,
+                activities: activities,
+                createdAt: new Date()
+            };
+            
+            savedPlans.push(plan);
+            
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
+        }
 
         // Initialize app
         function init() {
-            updateFavoriteCount();
-            
-            // Add event listeners to buttons
-            document.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const item = this.closest('.favorite-item');
-                    item.style.animation = 'fadeOut 0.5s forwards';
-                    
-                    setTimeout(() => {
-                        item.remove();
-                        updateFavoriteCount();
-                    }, 500);
-                });
-            });
-            
-            document.querySelectorAll('.do-activity-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const item = this.closest('.favorite-item');
-                    item.style.borderLeftColor = '#20c997';
-                    
-                    setTimeout(() => {
-                        alert('Starting activity! Have fun! 😊');
-                    }, 300);
-                });
-            });
-        }
-
-        // Add fadeOut animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeOut {
-                from { opacity: 1; transform: translateY(0); }
-                to { opacity: 0; transform: translateY(20px); }
+            try {
+                // Load favorites
+                const savedFavorites = localStorage.getItem('playideas-favorites');
+                if (savedFavorites) {
+                    favorites = JSON.parse(savedFavorites);
+                }
+                
+                // Load energy level
+                const savedEnergy = localStorage.getItem('playideas-energy-level');
+                if (savedEnergy) {
+                    parentEnergyLevel = savedEnergy;
+                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
+                    document.querySelectorAll('.energy-btn').forEach(btn => {
+                        if (btn.getAttribute('data-energy') !== savedEnergy) {
+                            btn.classList.remove('selected');
+                        }
+                    });
+                }
+                
+                // Load context
+                const savedContext = localStorage.getItem('playideas-context');
+                if (savedContext) {
+                    currentContext = savedContext;
+                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
+                }
+                
+                // Load plans
+                const savedPlansData = localStorage.getItem('playideas-plans');
+                if (savedPlansData) {
+                    try {
+                        savedPlans = JSON.parse(savedPlansData);
+                    } catch (e) {
+                        console.error('Error parsing plans', e);
+                        savedPlans = [];
+                    }
+                }
+                
+                updateFavoriteCount();
+                
+            } catch (e) {
+                console.log('LocalStorage not available, using defaults');
             }
-        `;
-        document.head.appendChild(style);
+            
+            // Load initial activities for default age
+            loadActivities('3-5');
+        }
 
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
