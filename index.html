@@ -1125,24 +1125,20 @@
             // Remove active class from all tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Show selected tab and activate button
+            // Show selected tab
             document.getElementById(tabName + '-tab').style.display = 'block';
             
-            // Handle both event-based and direct calls
-            if (event && event.target) {
-                event.target.classList.add('active');
-            } else {
-                // Find the correct tab button and activate it
-                const tabButtons = document.querySelectorAll('.tab-btn');
-                tabButtons.forEach(btn => {
-                    if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
-                        (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
-                        (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
+            // Find and activate the correct tab button
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
+                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
+                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                    btn.classList.add('active');
+                }
+            });
             
+            // IMPORTANT: Call showFavorites when favorites tab is selected
             if (tabName === 'favorites') {
                 showFavorites();
             }
@@ -1208,7 +1204,7 @@
         function displayActivityFromFavorite(index) {
             const activity = favorites[index];
             if (activity) {
-                showTabProgrammatically('generator');
+                showTab('generator'); // Use the main showTab function
                 displayActivity(activity);
             }
         }
