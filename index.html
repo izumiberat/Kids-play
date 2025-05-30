@@ -425,11 +425,27 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.2s;
+            position: relative;
         }
         
         .tab-btn.active {
             background-color: var(--primary);
             color: white;
+        }
+        
+        .favorite-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         /* Batch Planning */
@@ -506,11 +522,28 @@
         }
         
         .favorite-item {
-            margin-bottom: 1rem;
-            padding: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
             background: var(--light);
             border-radius: 10px;
             border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .favorite-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .favorite-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .favorite-item .activity-text {
+            margin-bottom: 0.5rem;
         }
         
         .loading, .error {
@@ -535,6 +568,24 @@
             font-style: italic;
             margin-top: 0.25rem;
         }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -554,7 +605,7 @@
     <div class="context-selector">
         <h3>🌟 What's the situation?</h3>
         <div class="context-buttons">
-            <div class="context-btn" data-context="normal">📅 Regular day</div>
+            <div class="context-btn selected" data-context="normal">📅 Regular day</div>
             <div class="context-btn" data-context="rainy">🌧️ Rainy day</div>
             <div class="context-btn" data-context="sick">🤒 Sick day</div>
             <div class="context-btn" data-context="bedtime">🌙 Pre-bedtime</div>
@@ -565,7 +616,10 @@
     <div class="tab-buttons">
         <button class="tab-btn active" onclick="showTab('generator')">Get Ideas</button>
         <button class="tab-btn" onclick="showTab('planner')">Plan Activities</button>
-        <button class="tab-btn" onclick="showTab('favorites')">My Favorites</button>
+        <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
+            My Favorites
+            <span class="favorite-count" id="favorite-count"></span>
+        </button>
     </div>
     
     <div id="generator-tab">
@@ -703,6 +757,8 @@
         </div>
     </div>
     
+    <div id="toast" class="toast"></div>
+    
     <script>
         // Global variables
         let activities = [];
@@ -713,6 +769,39 @@
         let activitiesLoaded = false;
         let parentEnergyLevel = 'low';
         let currentContext = 'normal';
+        
+        // HTML escaping function for security
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Show toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+        
+        // Update favorite count badge
+        function updateFavoriteCount() {
+            const countElem = document.getElementById('favorite-count');
+            if (favorites.length > 0) {
+                countElem.textContent = favorites.length;
+                countElem.style.display = 'flex';
+            } else {
+                countElem.style.display = 'none';
+            }
+        }
         
         // Load activities for specific age group
         async function loadActivities(ageGroup) {
@@ -727,27 +816,52 @@
                 resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years...</div>`;
                 resultDiv.style.display = "block";
                 
-                const fileMap = {
-                    "0-2": "activities-0-2.json",
-                    "3-5": "activities-3-5.json", 
-                    "6-8": "activities-6-8.json",
-                    "9-12": "activities-9-12.json",
-                    "12+": "activities-12plus.json"
-                };
+                // Simulate loading activities (in a real app, you'd fetch from a JSON file)
+                // For demo purposes, we'll create some sample activities
+                activities = [
+                    {
+                        id: 1,
+                        text: "Sensory Bin Exploration: Fill a bin with rice, beans, or water and add small toys. Let your child explore textures and find hidden treasures.",
+                        location: "indoor",
+                        duration: "medium",
+                        kid_count: "single",
+                        independent: false,
+                        involvement: "minimal",
+                        cleanup: "easy",
+                        noise_level: "low",
+                        materials: ["none"],
+                        benefits: "Develops sensory skills, fine motor skills, and encourages exploration.",
+                        prep: "Gather a large container, filler material (rice, beans, water beads, etc.), and small toys or objects to hide."
+                    },
+                    {
+                        id: 2,
+                        text: "Indoor Obstacle Course: Create a course using pillows, furniture, and toys to climb over, under, and through.",
+                        location: "indoor",
+                        duration: "medium",
+                        kid_count: "multiple",
+                        independent: true,
+                        involvement: "minimal",
+                        cleanup: "easy",
+                        noise_level: "medium",
+                        materials: ["blanket", "pillows"],
+                        benefits: "Builds gross motor skills, coordination, and problem-solving abilities.",
+                        prep: "Clear a safe space and arrange pillows, chairs, and blankets to create obstacles."
+                    },
+                    {
+                        id: 3,
+                        text: "Nature Scavenger Hunt: Go outside and find items from a list (leaf, rock, flower, etc.).",
+                        location: "outdoor",
+                        duration: "medium",
+                        kid_count: "multiple",
+                        independent: true,
+                        involvement: "minimal",
+                        cleanup: "no",
+                        noise_level: "low",
+                        materials: ["paper", "pencils"],
+                        benefits: "Encourages observation skills, appreciation for nature, and physical activity."
+                    }
+                ];
                 
-                const filename = fileMap[ageGroup];
-                if (!filename) {
-                    throw new Error(`No filename mapping for age group: ${ageGroup}`);
-                }
-                
-                const response = await fetch(`./${filename}?t=${Date.now()}`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} - Could not load ${filename}`);
-                }
-                
-                const data = await response.json();
-                activities = data.activities || data || [];
                 allActivities[ageGroup] = activities;
                 activitiesLoaded = true;
                 
@@ -945,7 +1059,7 @@
             
             const resultHtml = `
                 <div class="activity-text">
-                    ${activity.text}
+                    ${escapeHtml(activity.text)}
                 </div>
                 
                 <div class="activity-meta">
@@ -959,20 +1073,20 @@
                 
                 ${activity.benefits ? `
                     <div class="activity-benefits">
-                        <strong>🌟 Benefits:</strong> ${activity.benefits}
+                        <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
                     </div>
                 ` : ''}
                 
                 ${activity.prep ? `
                     <div class="prep-instructions">
                         <strong>📝 How to set up:</strong><br>
-                        ${activity.prep}
+                        ${escapeHtml(activity.prep)}
                     </div>
                 ` : ''}
                 
                 <div class="activity-actions">
                     <button class="favorite-btn" onclick="toggleFavorite()">
-                        ${favorites.some(fav => fav.id === activity.id) ? '💝 Saved!' : '💖 Save as Favorite'}
+                        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '💝 Saved!' : '💖 Save as Favorite'}
                     </button>
                     <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
                 </div>
@@ -1001,6 +1115,7 @@
             }
             
             const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
             displayActivity(randomActivity);
         }
     
@@ -1030,6 +1145,7 @@
             }
             
             const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
             displayActivity(randomActivity);
         }
     
@@ -1052,6 +1168,7 @@
             
             const filteredActivities = filterActivities(criteria);
             const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
+            randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
             displayActivity(randomActivity);
         }
     
@@ -1066,12 +1183,22 @@
         function toggleFavorite() {
             if (!currentActivity) return;
             
-            const existingIndex = favorites.findIndex(fav => fav.id === currentActivity.id);
+            // Create composite key using age group + ID
+            const age = document.getElementById('age').value;
+            currentActivity.compositeId = `${age}-${currentActivity.id}`;
+            
+            const existingIndex = favorites.findIndex(fav => fav.compositeId === currentActivity.compositeId);
             
             if (existingIndex >= 0) {
                 favorites.splice(existingIndex, 1);
+                showToast('Removed from favorites');
             } else {
-                favorites.push(currentActivity);
+                favorites.push({
+                    ...currentActivity,
+                    compositeId: currentActivity.compositeId,
+                    ageGroup: age
+                });
+                showToast('Added to favorites');
             }
             
             try {
@@ -1081,6 +1208,7 @@
             }
             
             updateFavoriteButton();
+            updateFavoriteCount();
             if (document.querySelector('.tab-btn[onclick="showTab(\'favorites\')"]').classList.contains('active')) {
                 showFavorites();
             }
@@ -1089,7 +1217,7 @@
         function updateFavoriteButton() {
             const btn = document.querySelector('.favorite-btn');
             if (btn && currentActivity) {
-                const isFavorite = favorites.some(fav => fav.id === currentActivity.id);
+                const isFavorite = favorites.some(fav => fav.compositeId === currentActivity.compositeId);
                 btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
                 btn.classList.toggle('saved', isFavorite);
             }
@@ -1109,7 +1237,7 @@
                 console.log('LocalStorage not available');
             }
             
-            alert('Activity added to your plan! 📋');
+            showToast('Activity added to your plan! 📋');
         }
     
         // Tab functionality
@@ -1152,6 +1280,7 @@
                 console.error('Error loading favorites:', error);
                 favorites = [];
             }
+            updateFavoriteCount();
         }
         
         // Show favorites
@@ -1170,28 +1299,40 @@
             
             // Build the favorites HTML
             const favoritesHtml = favorites.map(activity => {
-                // Escape special characters in activity text
-                const safeText = activity.text
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
+                const cleanupLabels = {
+                    'no': 'No cleanup needed',
+                    'easy': 'Easy cleanup',
+                    'messy': 'Some cleanup needed'
+                };
                 
                 return `
                     <div class="favorite-item">
-                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
-                        <p style="margin-bottom: 0.5rem;">${safeText}</p>
+                        <h4>${escapeHtml(activity.text.split(':')[0] || 'Activity')}</h4>
+                        <p class="activity-text">${escapeHtml(activity.text)}</p>
+                        
                         <div class="activity-meta" style="margin-bottom: 0.5rem;">
                             <span class="meta-tag">📍 ${activity.location}</span>
                             <span class="meta-tag">⏱️ ${activity.duration}</span>
                             <span class="meta-tag">🔊 ${activity.noise_level}</span>
+                            ${activity.cleanup ? `<span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup]}</span>` : ''}
                         </div>
-                        <button onclick="displayActivityFromFavorite(${activity.id})" 
-                                style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
-                            🎮 Do This Activity
-                        </button>
-                        <button onclick="removeFavorite(${activity.id})" 
-                                style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
-                            🗑️ Remove
-                        </button>
+                        
+                        ${activity.benefits ? `
+                            <div class="activity-benefits">
+                                <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="activity-actions">
+                            <button onclick="loadFavoriteActivity('${escapeHtml(activity.compositeId)}')" 
+                                    style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
+                                🎮 Do This Activity
+                            </button>
+                            <button onclick="removeFavorite('${escapeHtml(activity.compositeId)}')" 
+                                    style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
+                                🗑️ Remove
+                            </button>
+                        </div>
                     </div>
                 `;
             }).join('');
@@ -1200,27 +1341,46 @@
         }
 
         // Display a favorite activity
-        function displayActivityFromFavorite(id) {
-            // Find the activity by ID (number comparison)
-            const activity = favorites.find(fav => fav.id === id);
+        async function loadFavoriteActivity(compositeId) {
+            const activity = favorites.find(fav => fav.compositeId === compositeId);
             if (activity) {
+                // Set the correct age group
+                document.getElementById('age').value = activity.ageGroup;
+                
+                // Load activities for this age group
+                await loadActivities(activity.ageGroup);
+                
+                // Show the generator tab
                 showTab('generator');
-                // Small delay to ensure tab switch completes
-                setTimeout(() => displayActivity(activity), 50);
+                
+                // Display activity after short delay
+                setTimeout(() => displayActivity(activity), 100);
             }
         }
 
         // Remove a favorite
-        function removeFavorite(id) {
-            // Remove by ID (number comparison)
-            favorites = favorites.filter(fav => fav.id !== id);
-            try {
-                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-            } catch (e) {
-                console.log('LocalStorage not available');
+        function removeFavorite(compositeId) {
+            const index = favorites.findIndex(fav => fav.compositeId === compositeId);
+            if (index >= 0) {
+                // Check if this is the current activity
+                const wasCurrent = currentActivity && currentActivity.compositeId === compositeId;
+                
+                favorites.splice(index, 1);
+                
+                try {
+                    localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+                
+                if (wasCurrent) {
+                    updateFavoriteButton();
+                }
+                
+                showFavorites();
+                updateFavoriteCount();
+                showToast('Removed from favorites');
             }
-            showFavorites(); // Refresh the list
-            updateFavoriteButton(); // Update the favorite button if needed
         }
     
         // Batch planning functions
@@ -1291,14 +1451,16 @@
             
             for (let i = 0; i < Math.min(count, availableActivities.length); i++) {
                 const randomIndex = Math.floor(Math.random() * availableActivities.length);
-                selectedActivities.push(availableActivities.splice(randomIndex, 1)[0]);
+                const activity = availableActivities.splice(randomIndex, 1)[0];
+                activity.compositeId = `${age}-${activity.id}`;
+                selectedActivities.push(activity);
             }
             
             const planHtml = selectedActivities.map((activity, index) => `
                 <div class="batch-activity">
                     <div class="batch-activity-number">Activity ${index + 1}:</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || `Activity ${index + 1}`}</h4>
-                    <p>${activity.text}</p>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
+                    <p>${escapeHtml(activity.text)}</p>
                     <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
                 </div>
             `).join('');
@@ -1330,99 +1492,56 @@
                 console.log('LocalStorage not available');
             }
             
-            alert(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
+            showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
         }
 
-    // Initialize app
-    function init() {
-        try {
-            // Load favorites FIRST
-            loadFavorites();
-            
-            // Load energy level
-            const savedEnergy = localStorage.getItem('playideas-energy-level');
-            if (savedEnergy) {
-                parentEnergyLevel = savedEnergy;
-                document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
-                document.querySelectorAll('.energy-btn').forEach(btn => {
-                    if (btn.getAttribute('data-energy') !== savedEnergy) {
-                        btn.classList.remove('selected');
-                    }
-                });
-            }
-            
-            // Load context
-            const savedContext = localStorage.getItem('playideas-context');
-            if (savedContext) {
-                currentContext = savedContext;
-                document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
-            }
-            
-            // Load plans
-            const savedPlansData = localStorage.getItem('playideas-plans');
-            if (savedPlansData) {
-                try {
-                    savedPlans = JSON.parse(savedPlansData);
-                } catch (e) {
-                    console.error('Error parsing plans', e);
-                    savedPlans = [];
+        // Initialize app
+        function init() {
+            try {
+                // Load favorites
+                loadFavorites();
+                
+                // Load energy level
+                const savedEnergy = localStorage.getItem('playideas-energy-level');
+                if (savedEnergy) {
+                    parentEnergyLevel = savedEnergy;
+                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
+                    document.querySelectorAll('.energy-btn').forEach(btn => {
+                        if (btn.getAttribute('data-energy') !== savedEnergy) {
+                            btn.classList.remove('selected');
+                        }
+                    });
                 }
+                
+                // Load context
+                const savedContext = localStorage.getItem('playideas-context');
+                if (savedContext) {
+                    currentContext = savedContext;
+                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
+                }
+                
+                // Load plans
+                const savedPlansData = localStorage.getItem('playideas-plans');
+                if (savedPlansData) {
+                    try {
+                        savedPlans = JSON.parse(savedPlansData);
+                    } catch (e) {
+                        console.error('Error parsing plans', e);
+                        savedPlans = [];
+                    }
+                }
+                
+                // Show favorites if they exist
+                showFavorites();
+                
+            } catch (e) {
+                console.log('LocalStorage not available, using defaults');
             }
             
-            // Show favorites if they exist
-            if (favorites.length > 0) {
-                showFavorites();
-            }
-        } catch (e) {
-            console.log('LocalStorage not available, using defaults');
+            // Load initial activities for default age
+            loadActivities('3-5');
         }
-        
-        // Load initial activities for default age
-        loadActivities('3-5');
-    }
 
-    // Show favorites
-    function showFavorites() {
-        const favoritesDiv = document.getElementById('favorites-list');
-        
-        // Clear the loading message
-        favoritesDiv.innerHTML = '';
-        
-        if (favorites.length === 0) {
-            favoritesDiv.innerHTML = `
-                <div style="text-align: center; padding: 2rem; color: #666;">
-                    <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
-                    <p>Save activities you love by clicking the "Save as Favorite" button.</p>
-                </div>
-            `;
-            return;
-        }
-        
-        // Build the favorites HTML
-        const favoritesHtml = favorites.map(activity => {
-            return `
-                <div class="favorite-item">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
-                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
-                    <div class="activity-meta" style="margin-bottom: 0.5rem;">
-                        <span class="meta-tag">📍 ${activity.location}</span>
-                        <span class="meta-tag">⏱️ ${activity.duration}</span>
-                        <span class="meta-tag">🔊 ${activity.noise_level}</span>
-                    </div>
-                    <button onclick="displayActivityFromFavorite(${activity.id})" 
-                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
-                        🎮 Do This Activity
-                    </button>
-                    <button onclick="removeFavorite(${activity.id})" 
-                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
-                        🗑️ Remove
-                    </button>
-                </div>
-            `;
-        }).join('');
-        
-        favoritesDiv.innerHTML = favoritesHtml;
-    }
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
     </script>
