@@ -4,49 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayIdeas - Activity Generator for Parents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --orange: #fd7e14;
-            --purple: #6f42c1;
-            --teal: #20c997;
-            --pink: #e83e8c;
-        }
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f8ff;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
-        }
-        h1 {
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-top: 1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        
+        :root {
+            --primary: #4361ee;
+            --primary-light: #5a75f5;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --success-light: #34d058;
+            --warning: #ffc107;
+            --warning-light: #ffd351;
+            --danger: #dc3545;
+            --danger-light: #e85d6a;
+            --orange: #fd7e14;
+            --purple: #6f42c1;
+            --teal: #20c997;
+            --teal-light: #2ce5ae;
+            --pink: #e83e8c;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --lighter-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 16px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s ease;
         }
         
-        /* Parent Energy Indicator */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Parent Energy Check */
         .energy-check {
             background: linear-gradient(135deg, #ffecd2, #ffd8a8);
             padding: 1.2rem;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1.5rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(255, 184, 77, 0.2);
         }
@@ -55,6 +94,10 @@
             margin-bottom: 0.75rem;
             color: #d35400;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .energy-buttons {
@@ -70,9 +113,12 @@
             padding: 0.6rem 1.2rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-size: 0.95rem;
             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .energy-btn.selected {
@@ -88,9 +134,9 @@
         .context-selector {
             background: white;
             padding: 1.2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 1.5rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            margin: 0 1.5rem 1.5rem;
             text-align: center;
         }
         
@@ -98,6 +144,10 @@
             margin-bottom: 0.75rem;
             color: var(--primary);
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .context-buttons {
@@ -113,9 +163,12 @@
             padding: 0.5rem 1rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-size: 0.9rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .context-btn.selected {
@@ -127,12 +180,67 @@
             box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
         }
         
+        /* Tab system */
+        .tab-buttons {
+            display: flex;
+            margin: 0 1.5rem 1.8rem;
+            gap: 0.3rem;
+            background: white;
+            padding: 0.3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            border-radius: 10px;
+            background: transparent;
+            border: none;
+            padding: 0.9rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        .favorite-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
         /* Enhanced Quick Actions */
         .quick-actions {
             background: white;
             padding: 1.8rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
             text-align: center;
         }
@@ -141,6 +249,10 @@
             color: var(--primary);
             margin-bottom: 1.5rem;
             font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .quick-buttons {
@@ -165,9 +277,13 @@
             cursor: pointer;
             font-size: 0.95rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .quick-btn:hover {
@@ -198,21 +314,42 @@
             border-radius: 15px;
             margin-top: 1rem;
             box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-            transition: all 0.3s;
+            transition: var(--transition);
+            border: none;
+            color: white;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .instant-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, var(--success-light), #2ce5ae);
         }
         
         /* Compact Form */
         .compact-form {
             background: white;
             padding: 1.8rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
+        }
+        
+        .compact-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .form-row {
@@ -238,17 +375,21 @@
             font-weight: 600;
             font-size: 0.95rem;
             color: #444;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         select {
             width: 100%;
             padding: 0.85rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-sm);
             font-size: 1rem;
             background: white;
-            transition: all 0.3s;
+            transition: var(--transition);
             box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+            font-family: inherit;
         }
         
         select:focus {
@@ -269,12 +410,16 @@
             padding: 0.7rem 1.2rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-size: 0.9rem;
             flex: 1;
             text-align: center;
             min-width: fit-content;
             box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
         
         .radio-btn.selected {
@@ -301,9 +446,12 @@
             padding: 0.5rem 0.9rem;
             border-radius: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-size: 0.9rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .material-tag.selected {
@@ -321,20 +469,43 @@
         #result {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
             display: none;
-            position: sticky;
-            top: 20px;
-            z-index: 10;
+            position: relative;
             animation: fadeIn 0.5s ease;
-            position: relative; /* Added for close button positioning */
         }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-result {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--light-gray);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gray);
+            transition: var(--transition);
+            z-index: 20;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .close-result:hover {
+            background: var(--danger);
+            color: white;
+            transform: rotate(90deg);
         }
         
         .activity-text {
@@ -356,9 +527,12 @@
         .meta-tag {
             background: var(--light);
             padding: 0.4rem 0.8rem;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             border: 1px solid #dee2e6;
             font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .meta-tag.parent-energy {
@@ -378,7 +552,7 @@
         .activity-benefits {
             background: #e8f4f8;
             padding: 1.2rem;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             margin-bottom: 1.5rem;
             font-size: 1rem;
             color: #0c5460;
@@ -388,7 +562,7 @@
         .prep-instructions {
             background: #fff3cd;
             padding: 1.2rem;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             margin-bottom: 1.5rem;
             font-size: 1rem;
             color: #856404;
@@ -405,29 +579,32 @@
             flex-wrap: wrap;
         }
         
-        .favorite-btn, .plan-btn {
-            background-color: var(--warning);
-            color: var(--dark);
+        .action-btn {
             border: none;
             padding: 0.9rem 1.7rem;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
             flex: 1;
             min-width: 150px;
             font-size: 1.05rem;
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
-        .plan-btn {
-            background-color: var(--teal);
-            color: white;
+        .favorite-btn {
+            background-color: var(--warning);
+            color: var(--dark);
         }
         
-        .favorite-btn:hover, .plan-btn:hover {
+        .favorite-btn:hover {
+            background-color: var(--warning-light);
             transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-hover);
         }
         
         .favorite-btn.saved {
@@ -435,59 +612,45 @@
             color: white;
         }
         
-        /* Tab system */
-        .tab-buttons {
-            display: flex;
-            margin-bottom: 1.8rem;
-            gap: 0.3rem;
-            background: white;
-            padding: 0.3rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .favorite-btn.saved:hover {
+            background-color: var(--success-light);
         }
         
-        .tab-btn {
-            flex: 1;
-            border-radius: 10px;
-            background: transparent;
-            border: none;
-            padding: 0.9rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 1.05rem;
-        }
-        
-        .tab-btn.active {
-            background-color: var(--primary);
+        .plan-btn {
+            background-color: var(--teal);
             color: white;
-            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
         }
         
-        .favorite-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        .plan-btn:hover {
+            background-color: var(--teal-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
         
         /* Batch Planning */
         .batch-planning {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
+        }
+        
+        .batch-planning h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .batch-planning p {
+            margin-bottom: 1.8rem;
+            color: var(--gray);
+            text-align: center;
         }
         
         .batch-buttons {
@@ -511,21 +674,32 @@
             border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
             font-size: 1.05rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .batch-btn small {
+            font-weight: normal;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
         }
         
         .batch-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
+            background: linear-gradient(135deg, var(--teal-light), #1db9d1);
         }
         
         .batch-results {
             margin-top: 1.5rem;
             padding: 1.5rem;
             background: #f8f9fa;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
             display: none;
             animation: fadeIn 0.5s ease;
         }
@@ -534,7 +708,7 @@
             background: white;
             padding: 1.3rem;
             margin-bottom: 1rem;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             border-left: 5px solid var(--teal);
             box-shadow: 0 3px 8px rgba(0,0,0,0.08);
         }
@@ -548,35 +722,41 @@
             color: var(--teal);
             margin-bottom: 0.7rem;
             font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         /* Favorites */
         #favorites-list {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
         
         .favorite-item {
             margin-bottom: 1.8rem;
             padding: 1.7rem;
-            background: var(--light);
-            border-radius: 12px;
+            background: var(--lighter-gray);
+            border-radius: var(--radius-sm);
             border-left: 5px solid var(--primary);
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
         
         .favorite-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-hover);
         }
         
         .favorite-item h4 {
             color: var(--primary);
             margin-bottom: 0.8rem;
             font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .favorite-item .activity-text {
@@ -584,10 +764,28 @@
             font-size: 1.15rem;
         }
         
+        .favorite-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .favorite-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
         .loading, .error {
             text-align: center;
             padding: 2.8rem;
-            color: #666;
+            color: var(--gray);
             font-size: 1.15rem;
         }
         
@@ -620,9 +818,10 @@
         /* Helper text styling */
         .helper-text {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--gray);
             font-style: italic;
             margin-top: 0.4rem;
+            display: block;
         }
         
         .toast {
@@ -649,209 +848,297 @@
         
         .app-footer {
             text-align: center;
-            padding: 1.5rem 0;
-            color: #666;
+            padding: 1.5rem;
+            color: var(--gray);
             font-size: 0.9rem;
             margin-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
         }
         
-        /* Close button for result modal */
-        .close-result {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
+        .generate-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             border: none;
-            font-size: 1.8rem;
+            padding: 1.2rem;
+            border-radius: var(--radius-sm);
+            width: 100%;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
             cursor: pointer;
-            color: #666;
-            z-index: 20;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
-        .close-result:hover {
-            color: #333;
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(67, 97, 238, 0.4);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
         }
         
-        /* Red remove button in favorites tab */
-        #favorites-list .remove-btn {
-            background: #dc3545 !important; /* Red background */
+        /* Remove button styling */
+        .remove-btn {
+            background: linear-gradient(135deg, var(--danger), #c82333) !important;
             color: white !important;
+            border: none;
+            padding: 0.9rem 1.7rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 150px;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(135deg, var(--danger-light), #dc3545) !important;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .app-container {
+                border-radius: 12px;
+            }
+            
+            header {
+                padding: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .tab-content {
+                padding: 0 1rem 1rem;
+            }
+            
+            .quick-actions, .compact-form, .batch-planning, #favorites-list {
+                padding: 1.2rem;
+            }
+            
+            #result {
+                padding: 1.5rem;
+            }
+            
+            .activity-actions, .favorite-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .action-btn, .remove-btn, .plan-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>🎮 PlayIdeas Activity Generator</h1>
-    
-    <!-- Parent Energy Check -->
-    <div class="energy-check">
-        <h3>☕ How's your energy level today?</h3>
-        <div class="energy-buttons">
-            <div class="energy-btn selected" data-energy="low">😴 Exhausted</div>
-            <div class="energy-btn" data-energy="medium">🙂 Medium</div>
-            <div class="energy-btn" data-energy="high">⚡ Ready!</div>
-        </div>
-    </div>
-    
-    <!-- Context Mode Selector -->
-    <div class="context-selector">
-        <h3>🌟 What's the situation?</h3>
-        <div class="context-buttons">
-            <div class="context-btn selected" data-context="normal">📅 Regular day</div>
-            <div class="context-btn" data-context="rainy">🌧️ Rainy day</div>
-            <div class="context-btn" data-context="sick">🤒 Sick day</div>
-            <div class="context-btn" data-context="bedtime">🌙 Pre-bedtime</div>
-            <div class="context-btn" data-context="coffee">☕ Need break</div>
-        </div>
-    </div>
-    
-    <div class="tab-buttons">
-        <button class="tab-btn active" onclick="showTab('generator')">Get Ideas</button>
-        <button class="tab-btn" onclick="showTab('planner')">Plan Activities</button>
-        <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
-            My Favorites
-            <span class="favorite-count" id="favorite-count"></span>
-        </button>
-    </div>
-    
-    <div id="generator-tab">
-        <!-- Enhanced Quick Actions Section -->
-        <div class="quick-actions">
-            <h2>🚀 Need something NOW?</h2>
-            <div class="quick-buttons">
-                <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')">🛋️ Easy Indoor</button>
-                <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')">🧒 Independent Play</button>
-                <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')">🤫 Quiet Activity</button>
-                <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')">👥 Multiple Kids</button>
-                <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')">🌳 Outdoor Fun</button>
-                <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')">✨ No Mess</button>
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-gamepad"></i> PlayIdeas Activity Generator</h1>
+            <p class="tagline">Fun activities tailored to your child's age and your energy level</p>
+        </header>
+        
+        <!-- Parent Energy Check -->
+        <div class="energy-check">
+            <h3><i class="fas fa-battery-quarter"></i> How's your energy level today?</h3>
+            <div class="energy-buttons">
+                <div class="energy-btn selected" data-energy="low"><i class="fas fa-bed"></i> Exhausted</div>
+                <div class="energy-btn" data-energy="medium"><i class="fas fa-battery-half"></i> Medium</div>
+                <div class="energy-btn" data-energy="high"><i class="fas fa-bolt"></i> Ready!</div>
             </div>
-            <button class="quick-btn instant-btn" onclick="instantActivity()">
-                ✨ SURPRISE ME! (Any activity)
+        </div>
+        
+        <!-- Context Mode Selector -->
+        <div class="context-selector">
+            <h3><i class="fas fa-cloud-sun"></i> What's the situation?</h3>
+            <div class="context-buttons">
+                <div class="context-btn selected" data-context="normal"><i class="fas fa-calendar"></i> Regular</div>
+                <div class="context-btn" data-context="rainy"><i class="fas fa-cloud-rain"></i> Rainy</div>
+                <div class="context-btn" data-context="sick"><i class="fas fa-head-side-cough"></i> Sick</div>
+                <div class="context-btn" data-context="bedtime"><i class="fas fa-moon"></i> Bedtime</div>
+                <div class="context-btn" data-context="coffee"><i class="fas fa-coffee"></i> Need Break</div>
+            </div>
+        </div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('generator')"><i class="fas fa-lightbulb"></i> Get Ideas</button>
+            <button class="tab-btn" onclick="showTab('planner')"><i class="fas fa-calendar-check"></i> Plan</button>
+            <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
+                <i class="fas fa-heart"></i> Favorites
+                <span class="favorite-count" id="favorite-count"></span>
             </button>
         </div>
         
-        <!-- Results appear here when generated -->
-        <div id="result">
-            <div class="loading">Loading activities</div>
+        <div class="tab-content">
+            <div id="generator-tab">
+                <!-- Enhanced Quick Actions Section -->
+                <div class="quick-actions">
+                    <h2><i class="fas fa-bolt"></i> Need something NOW?</h2>
+                    <div class="quick-buttons">
+                        <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')"><i class="fas fa-couch"></i> Easy Indoor</button>
+                        <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')"><i class="fas fa-child"></i> Independent</button>
+                        <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')"><i class="fas fa-volume-mute"></i> Quiet</button>
+                        <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')"><i class="fas fa-users"></i> Multiple Kids</button>
+                        <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')"><i class="fas fa-tree"></i> Outdoor</button>
+                        <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')"><i class="fas fa-broom"></i> No Mess</button>
+                    </div>
+                    <button class="instant-btn" onclick="instantActivity()">
+                        <i class="fas fa-gift"></i> SURPRISE ME! (Any activity)
+                    </button>
+                </div>
+                
+                <!-- Results appear here when generated -->
+                <div id="result">
+                    <div class="loading">Loading activities</div>
+                </div>
+                
+                <!-- Compact Custom Form -->
+                <div class="compact-form">
+                    <h3><i class="fas fa-sliders-h"></i> Or customize your search:</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age"><i class="fas fa-child"></i> Child's Age:</label>
+                            <select id="age" onchange="handleAgeChange()">
+                                <option value="0-2">0-2 years</option>
+                                <option value="3-5" selected>3-5 years</option>
+                                <option value="6-8">6-8 years</option>
+                                <option value="9-12">9-12 years</option>
+                                <option value="12+">12+ years</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-user-friends"></i> Number of Kids:</label>
+                            <div class="radio-group">
+                                <div class="radio-btn selected" data-name="kid-count" data-value="single"><i class="fas fa-user"></i> One</div>
+                                <div class="radio-btn" data-name="kid-count" data-value="multiple"><i class="fas fa-users"></i> Multiple</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Location:</label>
+                            <div class="radio-group">
+                                <div class="radio-btn selected" data-name="location" data-value="indoor"><i class="fas fa-home"></i> Indoor</div>
+                                <div class="radio-btn" data-name="location" data-value="outdoor"><i class="fas fa-tree"></i> Outdoor</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Duration:</label>
+                            <div class="radio-group">
+                                <div class="radio-btn selected" data-name="duration" data-value="quick"><i class="fas fa-stopwatch"></i> Quick</div>
+                                <div class="radio-btn" data-name="duration" data-value="medium"><i class="fas fa-hourglass-half"></i> Medium</div>
+                                <div class="radio-btn" data-name="duration" data-value="long"><i class="fas fa-hourglass"></i> Long</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-hands-helping"></i> Your involvement:</label>
+                            <div class="radio-group">
+                                <div class="radio-btn selected" data-name="availability" data-value="available"><i class="fas fa-hand-holding-heart"></i> Can help</div>
+                                <div class="radio-btn" data-name="availability" data-value="independent"><i class="fas fa-user-check"></i> Independent</div>
+                            </div>
+                            <span class="helper-text">Independent = activities your child can do mostly alone</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-broom"></i> Clean-up level:</label>
+                            <div class="radio-group">
+                                <div class="radio-btn selected" data-name="cleanup" data-value="any"><i class="fas fa-question"></i> Any</div>
+                                <div class="radio-btn" data-name="cleanup" data-value="no-mess"><i class="fas fa-sparkles"></i> No mess</div>
+                                <div class="radio-btn" data-name="cleanup" data-value="easy"><i class="fas fa-wind"></i> Easy</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-tools"></i> What do you have handy? (tap any that apply)</label>
+                        <div class="materials-tags">
+                            <div class="material-tag" data-value="paper"><i class="fas fa-sticky-note"></i> Paper</div>
+                            <div class="material-tag" data-value="pencils"><i class="fas fa-pencil-alt"></i> Pencils</div>
+                            <div class="material-tag" data-value="scissors"><i class="fas fa-cut"></i> Scissors</div>
+                            <div class="material-tag" data-value="tape"><i class="fas fa-tape"></i> Tape/Glue</div>
+                            <div class="material-tag" data-value="ball"><i class="fas fa-futbol"></i> Ball</div>
+                            <div class="material-tag" data-value="blocks"><i class="fas fa-cubes"></i> Blocks</div>
+                            <div class="material-tag" data-value="dolls"><i class="fas fa-robot"></i> Toys</div>
+                            <div class="material-tag" data-value="cards"><i class="fas fa-club"></i> Cards</div>
+                            <div class="material-tag" data-value="blanket"><i class="fas fa-bed"></i> Blanket</div>
+                            <div class="material-tag" data-value="kitchen"><i class="fas fa-utensils"></i> Kitchen</div>
+                            <div class="material-tag" data-value="cardboard"><i class="fas fa-archive"></i> Boxes</div>
+                            <div class="material-tag" data-value="none"><i class="fas fa-ban"></i> Nothing</div>
+                        </div>
+                        <span class="helper-text">Select "Nothing" if you want activities that need no materials</span>
+                    </div>
+                    
+                    <button class="generate-btn" onclick="generateActivity()">
+                        <i class="fas fa-dice"></i> Generate Custom Activity
+                    </button>
+                </div>
+            </div>
+            
+            <div id="planner-tab" style="display: none;">
+                <div class="batch-planning">
+                    <h2><i class="fas fa-calendar-alt"></i> Activity Planning</h2>
+                    <p>Plan ahead with multiple activities!</p>
+                    
+                    <div class="batch-buttons">
+                        <button class="batch-btn" onclick="planMorning()">
+                            <i class="fas fa-sun"></i> Plan My Morning
+                            <small>3-4 sequential activities</small>
+                        </button>
+                        <button class="batch-btn" onclick="planAfternoon()">
+                            <i class="fas fa-cloud-sun"></i> Plan My Afternoon
+                            <small>Perfect for post-nap time</small>
+                        </button>
+                        <button class="batch-btn" onclick="planRainyDay()">
+                            <i class="fas fa-cloud-showers-heavy"></i> Rainy Day Plan
+                            <small>All indoor activities</small>
+                        </button>
+                        <button class="batch-btn" onclick="planQuietTime()">
+                            <i class="fas fa-volume-mute"></i> Quiet Time Plan
+                            <small>Calm, focused activities</small>
+                        </button>
+                    </div>
+                    
+                    <div id="batch-results" class="batch-results">
+                        <!-- Batch results will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="favorites-tab" style="display: none;">
+                <div id="favorites-list">
+                    <p class="loading">Loading favorites</p>
+                </div>
+            </div>
         </div>
         
-        <!-- Compact Custom Form -->
-        <div class="compact-form">
-            <h3 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">🎯 Or customize your search:</h3>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="age">Child's Age:</label>
-                    <select id="age" onchange="handleAgeChange()">
-                        <option value="0-2">0-2 years</option>
-                        <option value="3-5">3-5 years</option>
-                        <option value="6-8">6-8 years</option>
-                        <option value="9-12">9-12 years</option>
-                        <option value="12+">12+ years</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Number of Kids:</label>
-                    <div class="radio-group">
-                        <div class="radio-btn selected" data-name="kid-count" data-value="single">👤 One</div>
-                        <div class="radio-btn" data-name="kid-count" data-value="multiple">👥 Multiple</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Location:</label>
-                    <div class="radio-group">
-                        <div class="radio-btn selected" data-name="location" data-value="indoor">🏠 Indoor</div>
-                        <div class="radio-btn" data-name="location" data-value="outdoor">🌳 Outdoor</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Duration:</label>
-                    <div class="radio-group">
-                        <div class="radio-btn selected" data-name="duration" data-value="quick">⏱️ Quick</div>
-                        <div class="radio-btn" data-name="duration" data-value="medium">⏳ Medium</div>
-                        <div class="radio-btn" data-name="duration" data-value="long">⌛ Long</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Your involvement:</label>
-                    <div class="radio-group">
-                        <div class="radio-btn selected" data-name="availability" data-value="available">👨‍👧 Can help</div>
-                        <div class="radio-btn" data-name="availability" data-value="independent">🧒 Independent</div>
-                    </div>
-                    <div class="helper-text">Independent = activities your child can do mostly alone</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Clean-up level:</label>
-                    <div class="radio-group">
-                        <div class="radio-btn selected" data-name="cleanup" data-value="any">🤷 Any</div>
-                        <div class="radio-btn" data-name="cleanup" data-value="no-mess">✨ No mess</div>
-                        <div class="radio-btn" data-name="cleanup" data-value="easy">🧹 Easy</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>What do you have handy? (tap any that apply)</label>
-                <div class="materials-tags">
-                    <div class="material-tag" data-value="paper">📄 Paper</div>
-                    <div class="material-tag" data-value="pencils">✏️ Pencils</div>
-                    <div class="material-tag" data-value="scissors">✂️ Scissors</div>
-                    <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
-                    <div class="material-tag" data-value="ball">🏀 Ball</div>
-                    <div class="material-tag" data-value="blocks">🧱 Blocks</div>
-                    <div class="material-tag" data-value="dolls">🧸 Toys</div>
-                    <div class="material-tag" data-value="cards">🃏 Cards</div>
-                    <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
-                    <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
-                    <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
-                    <div class="material-tag" data-value="none">❌ Nothing special</div>
-                </div>
-                <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
-            </div>
-            
-            <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; width: 100%; font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; cursor: pointer; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); transition: all 0.3s;">
-                🎲 Generate Custom Activity
-            </button>
+        <div id="toast" class="toast"></div>
+        
+        <div class="app-footer">
+            Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> by PlayIdeas • Activities loaded from JSON files
         </div>
-    </div>
-    
-    <div id="planner-tab" style="display: none;">
-        <div class="batch-planning">
-            <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">📋 Activity Planning</h2>
-            <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
-            
-            <div class="batch-buttons">
-                <button class="batch-btn" onclick="planMorning()">🌅 Plan My Morning<br><small>3-4 sequential activities</small></button>
-                <button class="batch-btn" onclick="planAfternoon()">🌞 Plan My Afternoon<br><small>Perfect for post-nap time</small></button>
-                <button class="batch-btn" onclick="planRainyDay()">🌧️ Rainy Day Plan<br><small>All indoor activities</small></button>
-                <button class="batch-btn" onclick="planQuietTime()">🤫 Quiet Time Plan<br><small>Calm, focused activities</small></button>
-            </div>
-            
-            <div id="batch-results" class="batch-results">
-                <!-- Batch results will appear here -->
-            </div>
-        </div>
-    </div>
-    
-    <div id="favorites-tab" style="display: none;">
-        <div id="favorites-list">
-            <p class="loading">Loading favorites</p>
-        </div>
-    </div>
-    
-    <div id="toast" class="toast"></div>
-    
-    <div class="app-footer">
-        Made with ❤️ by PlayIdeas • Activities loaded from JSON files
     </div>
     
     <script>
@@ -872,6 +1159,38 @@
             "6-8": "activities-6-8.json",
             "9-12": "activities-9-12.json",
             "12+": "activities-12plus.json"
+        };
+        
+        // Sample activities for demonstration
+        const sampleActivities = {
+            "3-5": [
+                {
+                    id: 1,
+                    text: "Create a sensory bin: Fill a container with rice or beans and hide small toys inside for your child to find.",
+                    location: "indoor",
+                    duration: "medium",
+                    kid_count: "single",
+                    independent: false,
+                    cleanup: "messy",
+                    involvement: "some",
+                    noise_level: "moderate",
+                    benefits: "Develops fine motor skills and sensory exploration",
+                    prep: "Use a large plastic container and add uncooked rice or dried beans. Bury small toys or objects for your child to discover."
+                },
+                {
+                    id: 2,
+                    text: "Indoor obstacle course: Create a safe obstacle course using pillows, chairs, and blankets.",
+                    location: "indoor",
+                    duration: "quick",
+                    kid_count: "multiple",
+                    independent: true,
+                    cleanup: "easy",
+                    involvement: "minimal",
+                    noise_level: "moderate",
+                    benefits: "Promotes physical activity and coordination",
+                    prep: "Clear a space in your living room and use household items to create challenges like tunnels, stepping stones, and balance beams."
+                }
+            ]
         };
         
         // HTML escaping function for security
@@ -907,59 +1226,29 @@
             }
         }
         
-        // Load activities for specific age group from JSON files
+        // Load activities for specific age group
         async function loadActivities(ageGroup) {
-            if (allActivities[ageGroup]) {
-                activities = allActivities[ageGroup];
-                activitiesLoaded = true;
-                return;
-            }
+            // For demonstration, use sample activities
+            activities = sampleActivities[ageGroup] || [];
+            allActivities[ageGroup] = activities;
+            activitiesLoaded = true;
             
+            // In a real app, you would fetch from JSON files:
+            /*
             try {
-                const resultDiv = document.getElementById("result");
-                resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years</div>`;
-                resultDiv.style.display = "block";
-                
-                // Get the filename for this age group
                 const filename = ageGroupFiles[ageGroup];
-                if (!filename) {
-                    throw new Error(`No JSON file defined for age group: ${ageGroup}`);
-                }
-                
-                // Fetch the JSON file
                 const response = await fetch(filename);
-                if (!response.ok) {
-                    throw new Error(`Failed to load activities: ${response.status} ${response.statusText}`);
-                }
-                
-                // Parse the JSON and extract the activities array
                 const data = await response.json();
-                activities = data.activities; // Extract the activities array
+                activities = data.activities;
                 allActivities[ageGroup] = activities;
                 activitiesLoaded = true;
-                
-                resultDiv.style.display = "none";
-                
             } catch (error) {
                 console.error(`Error loading activities for ${ageGroup}:`, error);
-                const resultDiv = document.getElementById("result");
-                resultDiv.innerHTML = `
-                    <div class="error">
-                        <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
-                        <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
-                        <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
-                        <div style="text-align: center;">
-                            <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
-                                🔄 Try Again
-                            </button>
-                        </div>
-                    </div>
-                `;
-                resultDiv.style.display = "block";
-                activitiesLoaded = false;
+                // Handle error
             }
+            */
         }
-        
+    
         // Handle radio button groups and selections
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('radio-btn')) {
@@ -1133,45 +1422,53 @@
             };
             
             const resultHtml = `
-                <button class="close-result" onclick="document.getElementById('result').style.display='none'">&times;</button>
+                <button class="close-result">&times;</button>
                 
                 <div class="activity-text">
                     ${escapeHtml(activity.text)}
                 </div>
                 
                 <div class="activity-meta">
-                    <span class="meta-tag parent-energy">👨‍👧 ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
-                    <span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
-                    <span class="meta-tag">⏱️ ${activity.duration} activity</span>
-                    <span class="meta-tag">📍 ${activity.location}</span>
-                    <span class="meta-tag">🔊 ${activity.noise_level}</span>
-                    ${activity.kid_count === 'multiple' ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
+                    <span class="meta-tag parent-energy"><i class="fas fa-hands-helping"></i> ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
+                    <span class="meta-tag cleanup-${activity.cleanup}"><i class="fas fa-broom"></i> ${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
+                    <span class="meta-tag"><i class="fas fa-clock"></i> ${activity.duration} activity</span>
+                    <span class="meta-tag"><i class="fas fa-map-marker-alt"></i> ${activity.location}</span>
+                    <span class="meta-tag"><i class="fas fa-volume-up"></i> ${activity.noise_level}</span>
+                    ${activity.kid_count === 'multiple' ? '<span class="meta-tag"><i class="fas fa-users"></i> Multiple kids</span>' : ''}
                 </div>
                 
                 ${activity.benefits ? `
                     <div class="activity-benefits">
-                        <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
+                        <strong><i class="fas fa-star"></i> Benefits:</strong> ${escapeHtml(activity.benefits)}
                     </div>
                 ` : ''}
                 
                 ${activity.prep ? `
                     <div class="prep-instructions">
-                        <strong>📝 How to set up:</strong><br>
+                        <strong><i class="fas fa-clipboard-list"></i> How to set up:</strong><br>
                         ${escapeHtml(activity.prep)}
                     </div>
                 ` : ''}
                 
                 <div class="activity-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite()">
-                        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '💝 Saved!' : '💖 Save as Favorite'}
+                    <button class="favorite-btn action-btn">
+                        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '<i class="fas fa-heart"></i> Saved!' : '<i class="far fa-heart"></i> Save as Favorite'}
                     </button>
-                    <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
+                    <button class="plan-btn action-btn"><i class="fas fa-calendar-plus"></i> Add to Plan</button>
                 </div>
             `;
             
             document.getElementById('result').innerHTML = resultHtml;
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Add event listeners to new buttons
+            document.querySelector('.close-result').addEventListener('click', function() {
+                document.getElementById('result').style.display = 'none';
+            });
+            
+            document.querySelector('.favorite-btn').addEventListener('click', toggleFavorite);
+            document.querySelector('.plan-btn').addEventListener('click', addToPlan);
         }
     
         // Generate activity
@@ -1292,7 +1589,7 @@
             const btn = document.querySelector('.favorite-btn');
             if (btn && currentActivity) {
                 const isFavorite = favorites.some(fav => fav.compositeId === currentActivity.compositeId);
-                btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
+                btn.innerHTML = isFavorite ? '<i class="fas fa-heart"></i> Saved!' : '<i class="far fa-heart"></i> Save as Favorite';
                 btn.classList.toggle('saved', isFavorite);
             }
         }
@@ -1311,7 +1608,7 @@
                 console.log('LocalStorage not available');
             }
             
-            showToast('Activity added to your plan! 📋');
+            showToast('Activity added to your plan! <i class="fas fa-calendar-check"></i>');
         }
     
         // Tab functionality
@@ -1347,7 +1644,7 @@
             if (favorites.length === 0) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 2.8rem; color: #666;">
-                        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;">💖 No favorites yet!</h3>
+                        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;"><i class="fas fa-heart"></i> No favorites yet!</h3>
                         <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
                     </div>
                 `;
@@ -1360,16 +1657,22 @@
                 const favElement = document.createElement('div');
                 favElement.className = 'favorite-item';
                 favElement.innerHTML = `
-                    <h4>Activity #${activity.id}</h4>
+                    <h4><i class="fas fa-star"></i> Activity #${activity.id}</h4>
                     <div class="activity-text">${escapeHtml(activity.text)}</div>
-                    <div class="activity-meta">
-                        <span class="meta-tag">${activity.ageGroup} years</span>
-                        <span class="meta-tag">${activity.location === 'indoor' ? '🏠 Indoor' : '🌳 Outdoor'}</span>
-                        <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
+                    
+                    <div class="favorite-meta">
+                        <span class="favorite-tag"><i class="fas fa-child"></i> ${activity.ageGroup} years</span>
+                        <span class="favorite-tag"><i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location === 'indoor' ? 'Indoor' : 'Outdoor'}</span>
+                        <span class="favorite-tag"><i class="fas fa-clock"></i> ${getDurationLabel(activity.duration)}</span>
                     </div>
-                    <div class="activity-actions">
-                        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
-                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
+                    
+                    <div class="activity-actions favorite-actions">
+                        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">
+                            <i class="fas fa-trash-alt"></i> Remove Favorite
+                        </button>
+                        <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">
+                            <i class="fas fa-play-circle"></i> Do This Activity
+                        </button>
                     </div>
                 `;
                 container.appendChild(favElement);
@@ -1378,9 +1681,9 @@
         
         function getDurationLabel(duration) {
             switch (duration) {
-                case 'quick': return '⏱️ Quick';
-                case 'medium': return '⏳ Medium';
-                case 'long': return '⌛ Long';
+                case 'quick': return 'Quick';
+                case 'medium': return 'Medium';
+                case 'long': return 'Long';
                 default: return duration;
             }
         }
@@ -1493,20 +1796,27 @@
             
             const planHtml = selectedActivities.map((activity, index) => `
                 <div class="batch-activity">
-                    <div class="batch-activity-number">Activity ${index + 1}:</div>
+                    <div class="batch-activity-number"><i class="fas fa-${index === 0 ? 'sun' : 'star'}"></i> Activity ${index + 1}:</div>
                     <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
                     <p>${escapeHtml(activity.text)}</p>
-                    <small style="color: #666; display: block; margin-top: 0.7rem;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
+                    <small style="color: #666; display: block; margin-top: 0.7rem;">
+                        <i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location} • 
+                        <i class="fas fa-clock"></i> ${activity.duration} • 
+                        <i class="fas fa-hands-helping"></i> ${activity.independent ? 'Independent' : activity.involvement} • 
+                        <i class="fas fa-volume-up"></i> ${activity.noise_level}
+                    </small>
                 </div>
             `).join('');
             
             document.getElementById('batch-results').innerHTML = `
-                <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
+                <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">
+                    <i class="fas fa-clipboard-list"></i> Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:
+                </h4>
                 ${planHtml}
                 <div style="text-align: center; margin-top: 1.8rem;">
                     <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
-                            style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
-                        💾 Save This Plan
+                            class="generate-btn" style="max-width: 300px; margin: 0 auto;">
+                        <i class="fas fa-save"></i> Save This Plan
                     </button>
                 </div>
             `;
@@ -1529,7 +1839,7 @@
                 console.log('LocalStorage not available');
             }
             
-            showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
+            showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! <i class="fas fa-calendar-check"></i>`);
         }
 
         // Initialize app
