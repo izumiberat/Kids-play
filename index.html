@@ -1144,13 +1144,21 @@
             }
         }
         
-        // Helper function to switch tabs
-        function showTabProgrammatically(tabName) {
-            showTab(tabName);
-        }
-
-    
-        // Use dataset to avoid quote issues in HTML attributes
+        // Function to show favorites
+        function showFavorites() {
+            const favoritesDiv = document.getElementById('favorites-list');
+            
+            if (favorites.length === 0) {
+                favoritesDiv.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
+                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Build the favorites HTML
             const favoritesHtml = favorites.map(activity => `
                 <div class="favorite-item">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
@@ -1176,15 +1184,14 @@
                 if (e.target.classList.contains('do-activity-btn')) {
                     const activityId = e.target.dataset.activityId;
                     displayActivityFromFavorite(activityId);
-                }
-                if (e.target.classList.contains('remove-favorite-btn')) {
+                } else if (e.target.classList.contains('remove-favorite-btn')) {
                     const activityId = e.target.dataset.activityId;
                     removeFavorite(activityId);
                 }
             });
         }
-        
-        // Add this new helper function:
+
+        // Function to display a favorite activity in the generator tab
         function displayActivityFromFavorite(activityId) {
             const activity = favorites.find(fav => fav.id === activityId);
             if (activity) {
@@ -1193,7 +1200,8 @@
                 setTimeout(() => displayActivity(activity), 50);
             }
         }
-    
+
+        // Function to remove a favorite
         function removeFavorite(id) {
             favorites = favorites.filter(fav => fav.id !== id);
             try {
@@ -1201,8 +1209,8 @@
             } catch (e) {
                 console.log('LocalStorage not available');
             }
-            showFavorites();
-            updateFavoriteButton();
+            showFavorites(); // Refresh the list
+            updateFavoriteButton(); // Update the favorite button if the current activity is the one removed
         }
     
         // Batch planning functions
@@ -1335,16 +1343,7 @@
                     document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
                 }
                 
-                const savedFavorites = localStorage.getItem('playideas-favorites');
-                if (savedFavorites) {
-                    favorites = JSON.parse(savedFavorites);
-                }
-                
-                const savedPlansData = localStorage.getItem('playideas-plans');
-                if (savedPlansData) {
-                    savedPlans = JSON.parse(savedPlansData);
-                }
-
+                // Load favorites
                 const savedFavorites = localStorage.getItem('playideas-favorites');
                 if (savedFavorites) {
                     try {
@@ -1352,6 +1351,16 @@
                     } catch (e) {
                         console.error('Error parsing favorites', e);
                         favorites = [];
+                    }
+                }
+                
+                const savedPlansData = localStorage.getItem('playideas-plans');
+                if (savedPlansData) {
+                    try {
+                        savedPlans = JSON.parse(savedPlansData);
+                    } catch (e) {
+                        console.error('Error parsing plans', e);
+                        savedPlans = [];
                     }
                 }
             } catch (e) {
@@ -1364,6 +1373,6 @@
     
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
-        </script>
-    </body>
+    </script>
+</body>
 </html>
