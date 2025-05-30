@@ -329,6 +329,7 @@
             top: 20px;
             z-index: 10;
             animation: fadeIn 0.5s ease;
+            position: relative; /* Added for close button positioning */
         }
         
         @keyframes fadeIn {
@@ -652,6 +653,29 @@
             color: #666;
             font-size: 0.9rem;
             margin-top: 1.5rem;
+        }
+        
+        /* Close button for result modal */
+        .close-result {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #666;
+            z-index: 20;
+        }
+        
+        .close-result:hover {
+            color: #333;
+        }
+        
+        /* Red remove button in favorites tab */
+        #favorites-list .remove-btn {
+            background: #dc3545 !important; /* Red background */
+            color: white !important;
         }
     </style>
 </head>
@@ -1109,6 +1133,8 @@
             };
             
             const resultHtml = `
+                <button class="close-result" onclick="document.getElementById('result').style.display='none'">&times;</button>
+                
                 <div class="activity-text">
                     ${escapeHtml(activity.text)}
                 </div>
@@ -1342,7 +1368,7 @@
                         <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
                     </div>
                     <div class="activity-actions">
-                        <button class="favorite-btn saved" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
+                        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove Favorite</button>
                         <button class="plan-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
                     </div>
                 `;
