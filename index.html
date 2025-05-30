@@ -1330,10 +1330,13 @@
             
             alert(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
         }
-    
-    // Initialize app
+
+        // Initialize app
         function init() {
             try {
+                // Load favorites FIRST
+                loadFavorites();
+                
                 // Load energy level
                 const savedEnergy = localStorage.getItem('playideas-energy-level');
                 if (savedEnergy) {
@@ -1353,9 +1356,6 @@
                     document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
                 }
                 
-                // Load favorites
-                loadFavorites();
-                
                 // Load plans
                 const savedPlansData = localStorage.getItem('playideas-plans');
                 if (savedPlansData) {
@@ -1365,6 +1365,11 @@
                         console.error('Error parsing plans', e);
                         savedPlans = [];
                     }
+                }
+                
+                // Show favorites if they exist
+                if (favorites.length > 0) {
+                    showFavorites();
                 }
             } catch (e) {
                 console.log('LocalStorage not available, using defaults');
