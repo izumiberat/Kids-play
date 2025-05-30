@@ -906,6 +906,198 @@
             box-shadow: var(--shadow-hover);
         }
         
+        /* Saved Plans Section */
+        #saved-plans-section {
+            margin-top: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        #saved-plans-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .plans-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .plan-card {
+            background: var(--lighter-gray);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .plan-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .plan-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .view-plan-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .view-plan-btn:hover {
+            background: var(--primary-light);
+        }
+        
+        .delete-plan-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .delete-plan-btn:hover {
+            background: var(--danger-light);
+        }
+        
+        .empty-plans {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        /* Plan Details Modal */
+        #plan-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        #plan-detail-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            animation: scaleIn 0.3s;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--light-gray);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .modal-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .modal-header h2 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-body {
+            padding: 1rem 0;
+        }
+        
+        .plan-activity-item {
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            background: var(--lighter-gray);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--teal);
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 600px) {
             body {
@@ -943,6 +1135,10 @@
             
             .action-btn, .remove-btn, .plan-btn {
                 width: 100%;
+            }
+            
+            .plan-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -1124,12 +1320,34 @@
                     <div id="batch-results" class="batch-results">
                         <!-- Batch results will appear here -->
                     </div>
+                    
+                    <!-- NEW: Saved Plans Section -->
+                    <div id="saved-plans-section">
+                        <h3><i class="fas fa-bookmark"></i> My Saved Plans</h3>
+                        <div class="plans-container" id="saved-plans-container">
+                            <p class="empty-plans">No saved plans yet. Save a plan to see it here.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div id="favorites-tab" style="display: none;">
                 <div id="favorites-list">
                     <p class="loading">Loading favorites</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Plan Detail Modal -->
+        <div id="plan-detail-modal">
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <div class="modal-header">
+                    <h2><i class="fas fa-list-alt"></i> Plan Details</h2>
+                    <p class="plan-date" id="plan-detail-date"></p>
+                </div>
+                <div class="modal-body" id="plan-detail-body">
+                    <!-- Plan activities will be listed here -->
                 </div>
             </div>
         </div>
@@ -1189,6 +1407,19 @@
                     noise_level: "moderate",
                     benefits: "Promotes physical activity and coordination",
                     prep: "Clear a space in your living room and use household items to create challenges like tunnels, stepping stones, and balance beams."
+                },
+                {
+                    id: 3,
+                    text: "Nature scavenger hunt: Create a list of natural items for your child to find in the backyard or park.",
+                    location: "outdoor",
+                    duration: "medium",
+                    kid_count: "multiple",
+                    independent: false,
+                    cleanup: "no",
+                    involvement: "some",
+                    noise_level: "moderate",
+                    benefits: "Encourages observation skills and appreciation for nature",
+                    prep: "Make a simple list with pictures of items like a smooth rock, a yellow leaf, a pinecone, etc."
                 }
             ]
         };
@@ -1207,7 +1438,7 @@
         // Show toast notification
         function showToast(message, duration = 3000) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            toast.innerHTML = message;
             toast.classList.add('show');
             
             setTimeout(() => {
@@ -1609,6 +1840,97 @@
             }
             
             showToast('Activity added to your plan! <i class="fas fa-calendar-check"></i>');
+            displaySavedPlans();
+        }
+    
+        // NEW: Display saved plans
+        function displaySavedPlans() {
+            const container = document.getElementById('saved-plans-container');
+            if (!container) return;
+            
+            if (savedPlans.length === 0) {
+                container.innerHTML = '<p class="empty-plans">No saved plans yet. Save a plan to see it here.</p>';
+                return;
+            }
+            
+            container.innerHTML = savedPlans.map((plan, index) => {
+                const date = new Date(plan.addedAt);
+                const dateStr = date.toLocaleDateString();
+                const timeStr = date.toLocaleTimeString();
+                
+                return `
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-title">
+                                <i class="fas fa-calendar-day"></i> Plan #${index + 1}
+                            </div>
+                            <div class="plan-date">${dateStr} at ${timeStr}</div>
+                        </div>
+                        
+                        <div class="plan-summary">
+                            <p><i class="fas fa-child"></i> Age: ${plan.activity.ageGroup || '3-5'}</p>
+                            <p><i class="fas fa-tag"></i> ${plan.activity.text.substring(0, 60)}...</p>
+                        </div>
+                        
+                        <div class="plan-actions">
+                            <button class="view-plan-btn" onclick="viewPlanDetails(${index})">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                            <button class="delete-plan-btn" onclick="deletePlan(${index})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // NEW: View plan details
+        function viewPlanDetails(planIndex) {
+            const plan = savedPlans[planIndex];
+            if (!plan) return;
+            
+            const date = new Date(plan.addedAt);
+            const dateStr = date.toLocaleDateString();
+            const timeStr = date.toLocaleTimeString();
+            
+            document.getElementById('plan-detail-date').textContent = `Saved on ${dateStr} at ${timeStr}`;
+            
+            const body = document.getElementById('plan-detail-body');
+            body.innerHTML = `
+                <div class="plan-activity-item">
+                    <h4><i class="fas fa-star"></i> ${plan.activity.text}</h4>
+                    <div class="activity-meta">
+                        <span class="meta-tag"><i class="fas fa-child"></i> ${plan.activity.ageGroup || '3-5'} years</span>
+                        <span class="meta-tag"><i class="fas fa-${plan.activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${plan.activity.location}</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> ${plan.activity.duration}</span>
+                    </div>
+                    ${plan.activity.benefits ? `<p><strong>Benefits:</strong> ${plan.activity.benefits}</p>` : ''}
+                </div>
+            `;
+            
+            document.getElementById('plan-detail-modal').classList.add('show');
+        }
+        
+        // NEW: Delete a plan
+        function deletePlan(planIndex) {
+            if (planIndex >= 0 && planIndex < savedPlans.length) {
+                savedPlans.splice(planIndex, 1);
+                
+                try {
+                    localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+                
+                showToast('Plan deleted <i class="fas fa-trash"></i>');
+                displaySavedPlans();
+            }
+        }
+        
+        // Close modal function
+        function closeModal() {
+            document.getElementById('plan-detail-modal').classList.remove('show');
         }
     
         // Tab functionality
@@ -1634,6 +1956,11 @@
             // Load content for the tab
             if (tabName === 'favorites') {
                 displayFavorites();
+            }
+            
+            // NEW: When showing planner tab, display saved plans
+            if (tabName === 'planner') {
+                displaySavedPlans();
             }
         }
         
@@ -1814,7 +2141,7 @@
                 </h4>
                 ${planHtml}
                 <div style="text-align: center; margin-top: 1.8rem;">
-                    <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
+                    <button onclick="saveBatchPlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
                             class="generate-btn" style="max-width: 300px; margin: 0 auto;">
                         <i class="fas fa-save"></i> Save This Plan
                     </button>
@@ -1824,7 +2151,8 @@
             document.getElementById('batch-results').style.display = 'block';
         }
     
-        function savePlan(planType, activities) {
+        // Save batch plan
+        function saveBatchPlan(planType, activities) {
             const plan = {
                 type: planType,
                 activities: activities,
@@ -1840,6 +2168,7 @@
             }
             
             showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! <i class="fas fa-calendar-check"></i>`);
+            displaySavedPlans();
         }
 
         // Initialize app
@@ -1889,6 +2218,9 @@
             
             // Load initial activities for default age
             loadActivities('3-5');
+            
+            // Set up modal close button
+            document.querySelector('.close-modal').addEventListener('click', closeModal);
         }
 
         // Start the app
