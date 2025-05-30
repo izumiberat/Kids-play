@@ -1333,53 +1333,96 @@
             alert(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
         }
 
-        // Initialize app
-        function init() {
-            try {
-                // Load favorites FIRST
-                loadFavorites();
-                
-                // Load energy level
-                const savedEnergy = localStorage.getItem('playideas-energy-level');
-                if (savedEnergy) {
-                    parentEnergyLevel = savedEnergy;
-                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
-                    document.querySelectorAll('.energy-btn').forEach(btn => {
-                        if (btn.getAttribute('data-energy') !== savedEnergy) {
-                            btn.classList.remove('selected');
-                        }
-                    });
-                }
-                
-                // Load context
-                const savedContext = localStorage.getItem('playideas-context');
-                if (savedContext) {
-                    currentContext = savedContext;
-                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
-                }
-                
-                // Load plans
-                const savedPlansData = localStorage.getItem('playideas-plans');
-                if (savedPlansData) {
-                    try {
-                        savedPlans = JSON.parse(savedPlansData);
-                    } catch (e) {
-                        console.error('Error parsing plans', e);
-                        savedPlans = [];
+    // Initialize app
+    function init() {
+        try {
+            // Load favorites FIRST
+            loadFavorites();
+            
+            // Load energy level
+            const savedEnergy = localStorage.getItem('playideas-energy-level');
+            if (savedEnergy) {
+                parentEnergyLevel = savedEnergy;
+                document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
+                document.querySelectorAll('.energy-btn').forEach(btn => {
+                    if (btn.getAttribute('data-energy') !== savedEnergy) {
+                        btn.classList.remove('selected');
                     }
-                }
-                
-                // Show favorites if they exist
-                if (favorites.length > 0) {
-                    showFavorites();
-                }
-            } catch (e) {
-                console.log('LocalStorage not available, using defaults');
+                });
             }
             
-            // Load initial activities for default age
-            loadActivities('3-5');
+            // Load context
+            const savedContext = localStorage.getItem('playideas-context');
+            if (savedContext) {
+                currentContext = savedContext;
+                document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
+            }
+            
+            // Load plans
+            const savedPlansData = localStorage.getItem('playideas-plans');
+            if (savedPlansData) {
+                try {
+                    savedPlans = JSON.parse(savedPlansData);
+                } catch (e) {
+                    console.error('Error parsing plans', e);
+                    savedPlans = [];
+                }
+            }
+            
+            // Show favorites if they exist
+            if (favorites.length > 0) {
+                showFavorites();
+            }
+        } catch (e) {
+            console.log('LocalStorage not available, using defaults');
         }
+        
+        // Load initial activities for default age
+        loadActivities('3-5');
+    }
+
+    // Show favorites
+    function showFavorites() {
+        const favoritesDiv = document.getElementById('favorites-list');
+        
+        // Clear the loading message
+        favoritesDiv.innerHTML = '';
+        
+        if (favorites.length === 0) {
+            favoritesDiv.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #666;">
+                    <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
+                    <p>Save activities you love by clicking the "Save as Favorite" button.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Build the favorites HTML
+        const favoritesHtml = favorites.map(activity => {
+            return `
+                <div class="favorite-item">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
+                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
+                    <div class="activity-meta" style="margin-bottom: 0.5rem;">
+                        <span class="meta-tag">📍 ${activity.location}</span>
+                        <span class="meta-tag">⏱️ ${activity.duration}</span>
+                        <span class="meta-tag">🔊 ${activity.noise_level}</span>
+                    </div>
+                    <button onclick="displayActivityFromFavorite(${activity.id})" 
+                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
+                        🎮 Do This Activity
+                    </button>
+                    <button onclick="removeFavorite(${activity.id})" 
+                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
+                        🗑️ Remove
+                    </button>
+                </div>
+            `;
+        }).join('');
+        
+        favoritesDiv.innerHTML = favoritesHtml;
+    }
         // Start the app
         document.addEventListener('DOMContentLoaded', init);
     </script>
