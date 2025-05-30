@@ -1144,54 +1144,63 @@
             }
         }
         
-        // Function to show favorites
+        // Load favorites from localStorage  
+        function loadFavorites() {
+            try {
+                const stored = localStorage.getItem('playideas-favorites');
+                favorites = stored ? JSON.parse(stored) : [];
+                console.log(`Loaded ${favorites.length} favorites:`, favorites);
+            } catch (error) {
+                console.error('Error loading favorites:', error);
+                favorites = [];
+            }
+        }
+        
+        // Update favorites list display
         function showFavorites() {
             const favoritesDiv = document.getElementById('favorites-list');
             
             if (favorites.length === 0) {
                 favoritesDiv.innerHTML = `
                     <div style="text-align: center; padding: 2rem; color: #666;">
-                        <h3 style="margin-bottom: 1rem;">💖 No favorites yet!</h3>
-                        <p>Save activities you love by clicking the "Save as Favorite" button.</p>
+                        <h3 style="margin-bottom: 1rem;">📝 No favorites yet!</h3>
+                        <p>Generate some activities and save your favorites for quick access later.</p>
+                        <button onclick="showTab('generator')" style="background: var(--primary); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; margin-top: 1rem;">
+                            🎮 Generate Activities
+                        </button>
                     </div>
                 `;
                 return;
             }
             
-            // Build the favorites HTML
-            const favoritesHtml = favorites.map(activity => `
-                <div class="favorite-item">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
-                    <p style="margin-bottom: 0.5rem;">${activity.text}</p>
-                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
-                    <button data-activity-id="${activity.id}" 
-                            class="do-activity-btn"
-                            style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
-                        🎮 Do This Activity
-                    </button>
-                    <button data-activity-id="${activity.id}" 
-                            class="remove-favorite-btn"
-                            style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
-                        🗑️ Remove
-                    </button>
-                </div>
-            `).join('');
+            let html = "<h3 style='margin-bottom: 1rem; color: var(--primary);'>⭐ Your Saved Favorites:</h3>";
             
-            favoritesDiv.innerHTML = favoritesHtml;
-            
-            // Add event listeners using event delegation
-            favoritesDiv.addEventListener('click', function(e) {
-                if (e.target.classList.contains('do-activity-btn')) {
-                    const activityId = e.target.dataset.activityId;
-                    displayActivityFromFavorite(activityId);
-                } else if (e.target.classList.contains('remove-favorite-btn')) {
-                    const activityId = e.target.dataset.activityId;
-                    removeFavorite(activityId);
-                }
+            favorites.forEach(activity => {
+                html += `
+                    <div class="favorite-item">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
+                        <p style="margin-bottom: 0.5rem;">${activity.text}</p>
+                        <div class="activity-meta" style="margin-bottom: 0.5rem;">
+                            <span class="meta-tag">📍 ${activity.location}</span>
+                            <span class="meta-tag">⏱️ ${activity.duration}</span>
+                            <span class="meta-tag">🔊 ${activity.noise_level}</span>
+                        </div>
+                        <button onclick="displayActivityFromFavorite('${activity.id}')" 
+                                style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
+                            🎮 Do This Activity
+                        </button>
+                        <button onclick="removeFavorite('${activity.id}')" 
+                                style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
+                            🗑️ Remove
+                        </button>
+                    </div>
+                `;
             });
+            
+            favoritesDiv.innerHTML = html;
         }
-
-        // Function to display a favorite activity in the generator tab
+        
+        // Display a favorite activity
         function displayActivityFromFavorite(activityId) {
             const activity = favorites.find(fav => fav.id === activityId);
             if (activity) {
@@ -1200,8 +1209,7 @@
                 setTimeout(() => displayActivity(activity), 50);
             }
         }
-
-        // Function to remove a favorite
+    
         function removeFavorite(id) {
             favorites = favorites.filter(fav => fav.id !== id);
             try {
@@ -1344,15 +1352,7 @@
                 }
                 
                 // Load favorites
-                const savedFavorites = localStorage.getItem('playideas-favorites');
-                if (savedFavorites) {
-                    try {
-                        favorites = JSON.parse(savedFavorites);
-                    } catch (e) {
-                        console.error('Error parsing favorites', e);
-                        favorites = [];
-                    }
-                }
+                loadFavorites();
                 
                 const savedPlansData = localStorage.getItem('playideas-plans');
                 if (savedPlansData) {
