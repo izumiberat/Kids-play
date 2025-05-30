@@ -1146,31 +1146,41 @@
             if (tabName === 'favorites') {
                 showFavorites();
             }
-        }
-        
-        // Helper function for programmatic tab switching
-        function showTabProgrammatically(tabName) {
+        }function showTab(tabName) {
             // Hide all tabs
             document.getElementById('generator-tab').style.display = 'none';
             document.getElementById('planner-tab').style.display = 'none';
             document.getElementById('favorites-tab').style.display = 'none';
             
             // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Show selected tab and activate button
+            // Show selected tab
             document.getElementById(tabName + '-tab').style.display = 'block';
             
-            // Find the correct tab button and activate it
-            const tabButtons = document.querySelectorAll('.tab-btn');
+            // Activate the correct tab button
             tabButtons.forEach(btn => {
-                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
-                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
-                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                if (btn.textContent.includes('Get Ideas') && tabName === 'generator') {
+                    btn.classList.add('active');
+                } else if (btn.textContent.includes('Plan Activities') && tabName === 'planner') {
+                    btn.classList.add('active');
+                } else if (btn.textContent.includes('My Favorites') && tabName === 'favorites') {
                     btn.classList.add('active');
                 }
             });
+            
+            // Load content for the tab
+            if (tabName === 'favorites') {
+                showFavorites();
+            }
         }
+        
+        // Helper function to switch tabs
+        function showTabProgrammatically(tabName) {
+            showTab(tabName);
+        }
+
     
         function showFavorites() {
             const favoritesDiv = document.getElementById('favorites-list');
@@ -1208,9 +1218,9 @@
         function displayActivityFromFavorite(activityId) {
             const activity = favorites.find(fav => fav.id === activityId);
             if (activity) {
-                // Switch to the generator tab first
-                showTabProgrammatically('generator');
-                displayActivity(activity);
+                showTab('generator');  // Switch to generator tab first
+                // Small delay to ensure tab is visible before displaying activity
+                setTimeout(() => displayActivity(activity), 50);
             }
         }
     
