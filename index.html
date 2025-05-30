@@ -28,10 +28,10 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: var(--light);
+            background-color: #f0f8ff;
             line-height: 1.6;
-            color: var(--dark);
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
         }
         h1 {
             color: var(--primary);
@@ -43,17 +43,17 @@
         
         /* Parent Energy Indicator */
         .energy-check {
-            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-            padding: 1rem;
+            background: linear-gradient(135deg, #ffecd2, #ffd8a8);
+            padding: 1.2rem;
             border-radius: 15px;
             margin-bottom: 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(253, 203, 110, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 184, 77, 0.2);
         }
         
         .energy-check h3 {
             margin-bottom: 0.75rem;
-            color: #d63031;
+            color: #d35400;
             font-size: 1.2rem;
         }
         
@@ -67,12 +67,12 @@
         .energy-btn {
             background: white;
             border: 2px solid #ddd;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
         
         .energy-btn.selected {
@@ -80,15 +80,16 @@
             border-color: var(--orange);
             color: white;
             font-weight: 600;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
         }
         
         /* Context Mode Selector */
         .context-selector {
             background: white;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 1.5rem;
             text-align: center;
         }
@@ -110,9 +111,9 @@
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             font-size: 0.9rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
@@ -122,29 +123,30 @@
             border-color: var(--teal);
             color: white;
             font-weight: 600;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
         }
         
         /* Enhanced Quick Actions */
         .quick-actions {
             background: white;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
             text-align: center;
         }
         
         .quick-actions h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-size: 1.4rem;
         }
         
         .quick-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
         
@@ -158,19 +160,19 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 0.875rem;
+            padding: 1rem;
             border-radius: 12px;
             cursor: pointer;
             font-size: 0.95rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
             text-align: center;
         }
         
         .quick-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
         }
         
         .quick-btn.low-energy {
@@ -191,32 +193,33 @@
         
         .instant-btn {
             background: linear-gradient(135deg, var(--success), #20c997);
-            padding: 1.25rem;
-            font-size: 1.1rem;
+            padding: 1.3rem;
+            font-size: 1.15rem;
             border-radius: 15px;
             margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s;
         }
         
         .instant-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
         }
         
         /* Compact Form */
         .compact-form {
             background: white;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
         
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
         }
         
         @media (max-width: 480px) {
@@ -226,12 +229,12 @@
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
         
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             font-weight: 600;
             font-size: 0.95rem;
             color: #444;
@@ -239,13 +242,13 @@
         
         select {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.85rem;
             border: 2px solid #e9ecef;
             border-radius: 10px;
             font-size: 1rem;
             background: white;
-            transition: all 0.2s;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
         }
         
         select:focus {
@@ -256,22 +259,22 @@
         
         .radio-group {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
             flex-wrap: wrap;
         }
         
         .radio-btn {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
-            padding: 0.6rem 1.1rem;
-            border-radius: 20px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             font-size: 0.9rem;
             flex: 1;
             text-align: center;
             min-width: fit-content;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         }
         
         .radio-btn.selected {
@@ -288,8 +291,8 @@
         .materials-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
         }
         
         .material-tag {
@@ -298,7 +301,7 @@
             padding: 0.5rem 0.9rem;
             border-radius: 15px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             font-size: 0.9rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
@@ -307,6 +310,7 @@
             background: var(--warning);
             border-color: var(--warning);
             color: var(--dark);
+            transform: translateY(-2px);
         }
         
         .material-tag:hover {
@@ -316,9 +320,9 @@
         /* Results */
         #result {
             background: white;
-            padding: 1.8rem;
+            padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
             display: none;
             position: sticky;
@@ -334,23 +338,23 @@
         
         .activity-text {
             font-size: 1.2rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
-            color: #333;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: #222;
         }
         
         .activity-meta {
             display: flex;
-            gap: 10px;
-            margin-bottom: 1.2rem;
+            gap: 12px;
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
-            color: #666;
+            color: #555;
             flex-wrap: wrap;
         }
         
         .meta-tag {
             background: var(--light);
-            padding: 0.3rem 0.7rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 10px;
             border: 1px solid #dee2e6;
             font-size: 0.85rem;
@@ -372,20 +376,20 @@
         
         .activity-benefits {
             background: #e8f4f8;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 10px;
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
             color: #0c5460;
             border-left: 4px solid var(--teal);
         }
         
         .prep-instructions {
             background: #fff3cd;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 10px;
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
             color: #856404;
             border-left: 4px solid var(--warning);
         }
@@ -396,7 +400,7 @@
         
         .activity-actions {
             display: flex;
-            gap: 0.7rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
         
@@ -404,15 +408,15 @@
             background-color: var(--warning);
             color: var(--dark);
             border: none;
-            padding: 0.8rem 1.6rem;
+            padding: 0.9rem 1.7rem;
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.3s;
             flex: 1;
-            min-width: 140px;
-            font-size: 1rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 150px;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .plan-btn {
@@ -421,8 +425,8 @@
         }
         
         .favorite-btn:hover, .plan-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
         }
         
         .favorite-btn.saved {
@@ -434,11 +438,11 @@
         .tab-buttons {
             display: flex;
             margin-bottom: 1.8rem;
-            gap: 0.25rem;
+            gap: 0.3rem;
             background: white;
-            padding: 0.25rem;
+            padding: 0.3rem;
             border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .tab-btn {
@@ -446,18 +450,18 @@
             border-radius: 10px;
             background: transparent;
             border: none;
-            padding: 0.8rem;
+            padding: 0.9rem;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.3s;
             position: relative;
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
         
         .tab-btn.active {
             background-color: var(--primary);
             color: white;
-            box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
         }
         
         .favorite-count {
@@ -467,9 +471,9 @@
             background: var(--danger);
             color: white;
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
+            width: 24px;
+            height: 24px;
+            font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -479,17 +483,17 @@
         /* Batch Planning */
         .batch-planning {
             background: white;
-            padding: 1.8rem;
+            padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
         
         .batch-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.9rem;
-            margin-bottom: 1.2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         @media (max-width: 480px) {
@@ -502,23 +506,23 @@
             background: linear-gradient(135deg, var(--teal), #17a2b8);
             color: white;
             border: none;
-            padding: 1.2rem;
+            padding: 1.3rem;
             border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(32, 201, 151, 0.3);
-            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+            font-size: 1.05rem;
         }
         
         .batch-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(32, 201, 151, 0.4);
+            box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
         }
         
         .batch-results {
-            margin-top: 1.2rem;
-            padding: 1.2rem;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
             background: #f8f9fa;
             border-radius: 12px;
             display: none;
@@ -527,11 +531,11 @@
         
         .batch-activity {
             background: white;
-            padding: 1.2rem;
-            margin-bottom: 0.9rem;
+            padding: 1.3rem;
+            margin-bottom: 1rem;
             border-radius: 10px;
-            border-left: 4px solid var(--teal);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--teal);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
         }
         
         .batch-activity:last-child {
@@ -542,60 +546,60 @@
             font-weight: bold;
             color: var(--teal);
             margin-bottom: 0.7rem;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
         
         /* Favorites */
         #favorites-list {
             background: white;
-            padding: 1.8rem;
+            padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
         }
         
         .favorite-item {
             margin-bottom: 1.8rem;
-            padding: 1.5rem;
+            padding: 1.7rem;
             background: var(--light);
             border-radius: 12px;
             border-left: 5px solid var(--primary);
             transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
         
         .favorite-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
         
         .favorite-item h4 {
             color: var(--primary);
-            margin-bottom: 0.7rem;
-            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
         }
         
         .favorite-item .activity-text {
-            margin-bottom: 0.7rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
         }
         
         .loading, .error {
             text-align: center;
-            padding: 2.5rem;
+            padding: 2.8rem;
             color: #666;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
         
         .loading::after {
             content: "";
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(67, 97, 238, 0.3);
+            width: 22px;
+            height: 22px;
+            border: 4px solid rgba(67, 97, 238, 0.3);
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
+            margin-left: 12px;
             vertical-align: middle;
         }
         
@@ -617,24 +621,25 @@
             font-size: 0.9rem;
             color: #666;
             font-style: italic;
-            margin-top: 0.3rem;
+            margin-top: 0.4rem;
         }
         
         .toast {
             position: fixed;
-            bottom: 25px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.85);
             color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 14px 28px;
+            border-radius: 30px;
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s;
-            font-size: 1rem;
+            font-size: 1.05rem;
             max-width: 90%;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .toast.show {
@@ -646,7 +651,7 @@
             padding: 1.5rem 0;
             color: #666;
             font-size: 0.9rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
     </style>
 </head>
@@ -703,12 +708,12 @@
         
         <!-- Results appear here when generated -->
         <div id="result">
-            <div class="loading">Loading activities...</div>
+            <div class="loading">Loading activities</div>
         </div>
         
         <!-- Compact Custom Form -->
         <div class="compact-form">
-            <h3 style="margin-bottom: 1.2rem; color: var(--primary); text-align: center;">🎯 Or customize your search:</h3>
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">🎯 Or customize your search:</h3>
             
             <div class="form-row">
                 <div class="form-group">
@@ -789,7 +794,7 @@
                 <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
             </div>
             
-            <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.1rem; border-radius: 12px; width: 100%; font-size: 1.1rem; font-weight: 700; margin-top: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);">
+            <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; width: 100%; font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; cursor: pointer; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); transition: all 0.3s;">
                 🎲 Generate Custom Activity
             </button>
         </div>
@@ -797,8 +802,8 @@
     
     <div id="planner-tab" style="display: none;">
         <div class="batch-planning">
-            <h2 style="margin-bottom: 1.2rem; color: var(--primary); text-align: center;">📋 Activity Planning</h2>
-            <p style="margin-bottom: 1.5rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">📋 Activity Planning</h2>
+            <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
             
             <div class="batch-buttons">
                 <button class="batch-btn" onclick="planMorning()">🌅 Plan My Morning<br><small>3-4 sequential activities</small></button>
@@ -903,7 +908,9 @@
                     throw new Error(`Failed to load activities: ${response.status} ${response.statusText}`);
                 }
                 
-                activities = await response.json();
+                // Parse the JSON and extract the activities array
+                const data = await response.json();
+                activities = data.activities; // Extract the activities array
                 allActivities[ageGroup] = activities;
                 activitiesLoaded = true;
                 
@@ -914,12 +921,14 @@
                 const resultDiv = document.getElementById("result");
                 resultDiv.innerHTML = `
                     <div class="error">
-                        <h3 style="color: var(--danger); margin-bottom: 1rem;">😞 Oops! Couldn't load activities</h3>
-                        <p style="margin-bottom: 1rem;">Error: ${error.message}</p>
-                        <p style="font-size: 0.9rem; color: #666;">Make sure the JSON files are in the same folder as this HTML file.</p>
-                        <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
-                            🔄 Try Again
-                        </button>
+                        <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
+                        <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
+                        <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
+                        <div style="text-align: center;">
+                            <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
+                                🔄 Try Again
+                            </button>
+                        </div>
                     </div>
                 `;
                 resultDiv.style.display = "block";
@@ -1136,7 +1145,7 @@
             
             document.getElementById('result').innerHTML = resultHtml;
             document.getElementById('result').style.display = 'block';
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     
         // Generate activity
@@ -1311,7 +1320,7 @@
             
             if (favorites.length === 0) {
                 container.innerHTML = `
-                    <div style="text-align: center; padding: 2.5rem; color: #666;">
+                    <div style="text-align: center; padding: 2.8rem; color: #666;">
                         <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;">💖 No favorites yet!</h3>
                         <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
                     </div>
@@ -1459,18 +1468,18 @@
             const planHtml = selectedActivities.map((activity, index) => `
                 <div class="batch-activity">
                     <div class="batch-activity-number">Activity ${index + 1}:</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
+                    <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
                     <p>${escapeHtml(activity.text)}</p>
-                    <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
+                    <small style="color: #666; display: block; margin-top: 0.7rem;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
                 </div>
             `).join('');
             
             document.getElementById('batch-results').innerHTML = `
-                <h4 style="margin-bottom: 1.2rem; color: var(--teal); text-align: center;">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
+                <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
                 ${planHtml}
-                <div style="text-align: center; margin-top: 1.5rem;">
+                <div style="text-align: center; margin-top: 1.8rem;">
                     <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
-                            style="background: var(--success); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.1rem;">
+                            style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
                         💾 Save This Plan
                     </button>
                 </div>
