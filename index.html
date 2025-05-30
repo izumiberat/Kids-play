@@ -1146,34 +1146,6 @@
             if (tabName === 'favorites') {
                 showFavorites();
             }
-        }function showTab(tabName) {
-            // Hide all tabs
-            document.getElementById('generator-tab').style.display = 'none';
-            document.getElementById('planner-tab').style.display = 'none';
-            document.getElementById('favorites-tab').style.display = 'none';
-            
-            // Remove active class from all tab buttons
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected tab
-            document.getElementById(tabName + '-tab').style.display = 'block';
-            
-            // Activate the correct tab button
-            tabButtons.forEach(btn => {
-                if (btn.textContent.includes('Get Ideas') && tabName === 'generator') {
-                    btn.classList.add('active');
-                } else if (btn.textContent.includes('Plan Activities') && tabName === 'planner') {
-                    btn.classList.add('active');
-                } else if (btn.textContent.includes('My Favorites') && tabName === 'favorites') {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Load content for the tab
-            if (tabName === 'favorites') {
-                showFavorites();
-            }
         }
         
         // Helper function to switch tabs
