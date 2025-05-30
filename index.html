@@ -1125,20 +1125,24 @@
             // Remove active class from all tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Show selected tab
+            // Show selected tab and activate button
             document.getElementById(tabName + '-tab').style.display = 'block';
             
-            // Find and activate the correct tab button
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => {
-                if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
-                    (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
-                    (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
-                    btn.classList.add('active');
-                }
-            });
+            // Handle both event-based and direct calls
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Find the correct tab button and activate it
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach(btn => {
+                    if ((tabName === 'generator' && btn.textContent.includes('Get Ideas')) ||
+                        (tabName === 'planner' && btn.textContent.includes('Plan Activities')) ||
+                        (tabName === 'favorites' && btn.textContent.includes('My Favorites'))) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
             
-            // IMPORTANT: Call showFavorites when favorites tab is selected
             if (tabName === 'favorites') {
                 showFavorites();
             }
@@ -1181,16 +1185,16 @@
                 return;
             }
             
-            const favoritesHtml = favorites.map((activity, index) => `
+            const favoritesHtml = favorites.map(activity => `
                 <div class="favorite-item">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${activity.text.split(':')[0] || 'Activity'}</h4>
                     <p style="margin-bottom: 0.5rem;">${activity.text}</p>
                     <small style="color: #666;">📍 ${activity.location} • ⏱️ ${activity.duration} • 🔊 ${activity.noise_level}</small>
-                    <button onclick="displayActivityFromFavorite(${index})" 
+                    <button onclick="displayActivityFromFavorite('${activity.id}')" 
                             style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; margin-right: 0.5rem;">
                         🎮 Do This Activity
                     </button>
-                    <button onclick="removeFavorite(${index})" 
+                    <button onclick="removeFavorite('${activity.id}')" 
                             style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;">
                         🗑️ Remove
                     </button>
@@ -1201,16 +1205,17 @@
         }
         
         // Add this new helper function:
-        function displayActivityFromFavorite(index) {
-            const activity = favorites[index];
+        function displayActivityFromFavorite(activityId) {
+            const activity = favorites.find(fav => fav.id === activityId);
             if (activity) {
-                showTab('generator'); // Use the main showTab function
+                // Switch to the generator tab first
+                showTabProgrammatically('generator');
                 displayActivity(activity);
             }
         }
     
-        function removeFavorite(index) {
-            favorites.splice(index, 1);
+        function removeFavorite(id) {
+            favorites = favorites.filter(fav => fav.id !== id);
             try {
                 localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
             } catch (e) {
