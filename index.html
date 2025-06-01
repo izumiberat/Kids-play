@@ -696,6 +696,17 @@ input[type="radio"] {
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
 
+.generate-btn-similar {
+  background: linear-gradient(135deg, var(--purple), #5a2d91);
+  color: white;
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.3);
+}
+
+.generatebtn-similar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(111, 66, 193, 0.4);
+}
+
 /* New styles for saved plans */
 .saved-plans-container {
   background: white;
@@ -1047,6 +1058,36 @@ function showToast(message, duration = 3000) {
   }, duration);
 }
 
+// Generate a similar plan with same parameters
+function generateSimilarPlan(type, ageGroup) {
+  // Set the age group if different from current
+  const currentAgeGroup = document.getElementById('age-group').value;
+  if (currentAgeGroup !== ageGroup) {
+    document.getElementById('age-group').value = ageGroup;
+    loadActivities(ageGroup).then(() => {
+      generateNewPlan(type);
+    });
+  } else {
+    generateNewPlan(type);
+  }
+}
+
+function generateNewPlan(type) {
+  const batchCount = parseInt(document.getElementById('batch-count').value);
+  const filteredActivities = getFilteredActivities();
+  
+  if (filteredActivities.length === 0) {
+    showToast('No activities available for similar plan. Try adjusting filters.');
+    return;
+  }
+  
+  // Generate new random selection
+  const shuffled = [...filteredActivities].sort(() => 0.5 - Math.random());
+  const selectedActivities = shuffled.slice(0, Math.min(batchCount, filteredActivities.length));
+  
+  displayBatch(selectedActivities, type);
+  showToast('Generated similar plan with new activities!');
+}
 // Update favorite count badge
 function updateFavoriteCount() {
   const countElem = document.getElementById('favorite-count');
@@ -1824,9 +1865,8 @@ function doPlan(planId) {
       </h4>
       ${planHtml}
       <div style="text-align: center; margin-top: 1.8rem;">
-        <button onclick="savePlan('${plan.type}', ${JSON.stringify(plan.activities).replace(/"/g, '&quot;')})" 
-          style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
-          💾 Save This Plan Again
+        <button class="generate-btn-similar" onclick="generateSimilarPlan('${plan.type}', '${plan.ageGroup}')">
+            ✨ Generate Similar Plan
         </button>
       </div>
     `;
