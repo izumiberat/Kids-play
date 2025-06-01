@@ -41,6 +41,40 @@ h1 {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
+/* Age Selector - Moved to top */
+.age-selector {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.age-selector h3 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+
+.age-selector select {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  background: white;
+  transition: all 0.3s;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.age-selector select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
 /* Parent Energy Indicator */
 .energy-check {
   background: linear-gradient(135deg, #ffecd2, #ffd8a8);
@@ -859,6 +893,18 @@ input[type="radio"] {
 <body>
 <h1>🎮 PlayIdeas Activity Generator</h1>
 
+<!-- Age Selector - Moved to top -->
+<div class="age-selector">
+  <h3>👶 How old is your child?</h3>
+  <select id="age" onchange="handleAgeChange()">
+    <option value="0-2">0-2 years</option>
+    <option value="3-5" selected>3-5 years</option>
+    <option value="6-8">6-8 years</option>
+    <option value="9-12">9-12 years</option>
+    <option value="12+">12+ years</option>
+  </select>
+</div>
+
 <!-- Parent Energy Check -->
 <div class="energy-check">
   <h3>☕ How's your energy level today?</h3>
@@ -918,26 +964,13 @@ input[type="radio"] {
 
     <div class="form-row">
       <div class="form-group">
-        <label for="age">Child's Age:</label>
-        <select id="age" onchange="handleAgeChange()">
-          <option value="0-2">0-2 years</option>
-          <option value="3-5">3-5 years</option>
-          <option value="6-8">6-8 years</option>
-          <option value="9-12">9-12 years</option>
-          <option value="12+">12+ years</option>
-        </select>
-      </div>
-
-      <div class="form-group">
         <label>Number of Kids:</label>
         <div class="radio-group">
           <div class="radio-btn selected" data-name="kid-count" data-value="single">👤 One</div>
           <div class="radio-btn" data-name="kid-count" data-value="multiple">👥 Multiple</div>
         </div>
       </div>
-    </div>
 
-    <div class="form-row">
       <div class="form-group">
         <label>Location:</label>
         <div class="radio-group">
@@ -945,13 +978,24 @@ input[type="radio"] {
           <div class="radio-btn" data-name="location" data-value="outdoor">🌳 Outdoor</div>
         </div>
       </div>
+    </div>
 
+    <div class="form-row">
       <div class="form-group">
         <label>Duration:</label>
         <div class="radio-group">
           <div class="radio-btn selected" data-name="duration" data-value="quick">⏱️ Quick</div>
           <div class="radio-btn" data-name="duration" data-value="medium">⏳ Medium</div>
           <div class="radio-btn" data-name="duration" data-value="long">⌛ Long</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Clean-up level:</label>
+        <div class="radio-group">
+          <div class="radio-btn selected" data-name="cleanup" data-value="any">🤷 Any</div>
+          <div class="radio-btn" data-name="cleanup" data-value="no-mess">✨ No mess</div>
+          <div class="radio-btn" data-name="cleanup" data-value="easy">🧹 Easy</div>
         </div>
       </div>
     </div>
@@ -967,32 +1011,23 @@ input[type="radio"] {
       </div>
 
       <div class="form-group">
-        <label>Clean-up level:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="cleanup" data-value="any">🤷 Any</div>
-          <div class="radio-btn" data-name="cleanup" data-value="no-mess">✨ No mess</div>
-          <div class="radio-btn" data-name="cleanup" data-value="easy">🧹 Easy</div>
+        <label>What do you have handy? (tap any that apply)</label>
+        <div class="materials-tags">
+          <div class="material-tag" data-value="paper">📄 Paper</div>
+          <div class="material-tag" data-value="pencils">✏️ Pencils</div>
+          <div class="material-tag" data-value="scissors">✂️ Scissors</div>
+          <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
+          <div class="material-tag" data-value="ball">🏀 Ball</div>
+          <div class="material-tag" data-value="blocks">🧱 Blocks</div>
+          <div class="material-tag" data-value="dolls">🧸 Toys</div>
+          <div class="material-tag" data-value="cards">🃏 Cards</div>
+          <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
+          <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
+          <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
+          <div class="material-tag" data-value="none">❌ Nothing special</div>
         </div>
+        <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label>What do you have handy? (tap any that apply)</label>
-      <div class="materials-tags">
-        <div class="material-tag" data-value="paper">📄 Paper</div>
-        <div class="material-tag" data-value="pencils">✏️ Pencils</div>
-        <div class="material-tag" data-value="scissors">✂️ Scissors</div>
-        <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
-        <div class="material-tag" data-value="ball">🏀 Ball</div>
-        <div class="material-tag" data-value="blocks">🧱 Blocks</div>
-        <div class="material-tag" data-value="dolls">🧸 Toys</div>
-        <div class="material-tag" data-value="cards">🃏 Cards</div>
-        <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
-        <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
-        <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
-        <div class="material-tag" data-value="none">❌ Nothing special</div>
-      </div>
-      <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
     </div>
 
     <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; width: 100%; font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; cursor: pointer; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); transition: all 0.3s;">
