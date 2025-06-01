@@ -1766,9 +1766,12 @@ function getPlanTypeDisplay(type) {
   return types[type] || type.charAt(0).toUpperCase() + type.slice(1) + ' Plan';
 }
 
-// Remove a saved plan - FIXED VERSION
+// FIXED: Updated to handle both string and number IDs
 function removePlan(planId) {
-  const index = savedPlans.findIndex(plan => plan.id === planId);
+  // Convert to number if it's a numeric string
+  const idNum = isNaN(planId) ? planId : Number(planId);
+  
+  const index = savedPlans.findIndex(plan => plan.id === idNum);
   if (index >= 0) {
     savedPlans.splice(index, 1);
     
@@ -1783,9 +1786,12 @@ function removePlan(planId) {
   }
 }
 
-// Load a saved plan - FIXED VERSION
+// FIXED: Updated to handle both string and number IDs
 function doPlan(planId) {
-  const plan = savedPlans.find(p => p.id === planId);
+  // Convert to number if it's a numeric string
+  const idNum = isNaN(planId) ? planId : Number(planId);
+  
+  const plan = savedPlans.find(p => p.id === idNum);
   if (plan) {
     // Show the batch results section
     const batchResults = document.getElementById('batch-results');
@@ -1858,11 +1864,19 @@ function init() {
       document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
     }
     
-    // Load plans - FIXED: Ensure we parse the saved plans
+    // Load plans - Ensure we parse the saved plans
     const savedPlansData = localStorage.getItem('playideas-plans');
     if (savedPlansData) {
       try {
         savedPlans = JSON.parse(savedPlansData);
+        
+        // FIXED: Convert IDs to numbers for existing saved plans
+        savedPlans = savedPlans.map(plan => {
+          if (typeof plan.id === 'string') {
+            plan.id = Number(plan.id);
+          }
+          return plan;
+        });
       } catch (e) {
         console.error('Error parsing plans', e);
         savedPlans = [];
@@ -1875,7 +1889,7 @@ function init() {
     console.log('LocalStorage not available, using defaults');
   }
   
-  // Load initial activities for default age
+  // Load initial activities for default age  // Load initial activities for default age
   loadActivities('3-5');
 }
 
