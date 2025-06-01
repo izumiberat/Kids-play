@@ -1670,7 +1670,8 @@ function savePlan(planType, activities) {
   const plan = {
     type: planType,
     activities: activities,
-    createdAt: new Date()
+    createdAt: new Date(),
+    id: Date.now() // Add unique ID for each plan
   };
   
   savedPlans.push(plan);
@@ -1699,11 +1700,11 @@ function formatDate(dateString) {
   });
 }
 
-// Display saved plans
+// Display saved plans - FIXED VERSION
 function displaySavedPlans() {
   const container = document.getElementById('saved-plans-list');
   
-  if (savedPlans.length === 0) {
+  if (!savedPlans || savedPlans.length === 0) {
     container.innerHTML = `<p class="empty-plans">No saved plans yet. Create your first plan using the buttons above!</p>`;
     return;
   }
@@ -1713,38 +1714,45 @@ function displaySavedPlans() {
     new Date(b.createdAt) - new Date(a.createdAt)
   );
   
-  container.innerHTML = '<div class="saved-plans-list"></div>';
-  const listContainer = container.querySelector('.saved-plans-list');
+  let plansHTML = '<div class="saved-plans-list">';
   
-  sortedPlans.forEach((plan, index) => {
-    const planElement = document.createElement('div');
-    planElement.className = 'saved-plan-item';
+  sortedPlans.forEach((plan) => {
+    // Generate a unique ID for each activity in the plan
+    const activitiesHtml = plan.activities.map((activity, idx) => {
+      // Ensure activity.text exists before trying to split it
+      const activityTitle = activity.text ? 
+        escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`) : 
+        `Activity ${idx + 1}`;
+      
+      return `
+        <div class="plan-activity">
+          <div><strong>${idx + 1}.</strong> ${activityTitle}</div>
+          <small style="color: #666; display: block; margin-top: 0.3rem;">
+            ${activity.duration || 'N/A'} • ${activity.location || 'N/A'} • ${activity.independent ? 'Independent' : activity.involvement || 'N/A'}
+          </small>
+        </div>
+      `;
+    }).join('');
     
-    const activitiesHtml = plan.activities.map((activity, idx) => `
-      <div class="plan-activity">
-        <div><strong>${idx + 1}.</strong> ${escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`)}</div>
-        <small style="color: #666; display: block; margin-top: 0.3rem;">
-          ${activity.duration} • ${activity.location} • ${activity.independent ? 'Independent' : activity.involvement}
-        </small>
-      </div>
-    `).join('');
-    
-    planElement.innerHTML = `
-      <div class="plan-title">
-        <span>${getPlanTypeDisplay(plan.type)}</span>
-        <span class="plan-date">Saved: ${formatDate(plan.createdAt)}</span>
-      </div>
-      <div class="plan-activities">
-        ${activitiesHtml}
-      </div>
-      <div class="plan-actions">
-        <button class="do-plan-btn" onclick="doPlan(${index})">🎮 Do This Plan</button>
-        <button class="remove-plan-btn" onclick="removePlan(${index})">🗑️ Remove</button>
+    plansHTML += `
+      <div class="saved-plan-item">
+        <div class="plan-title">
+          <span>${getPlanTypeDisplay(plan.type)}</span>
+          <span class="plan-date">Saved: ${formatDate(plan.createdAt)}</span>
+        </div>
+        <div class="plan-activities">
+          ${activitiesHtml}
+        </div>
+        <div class="plan-actions">
+          <button class="do-plan-btn" onclick="doPlan('${plan.id}')">🎮 Do This Plan</button>
+          <button class="remove-plan-btn" onclick="removePlan('${plan.id}')">🗑️ Remove</button>
+        </div>
       </div>
     `;
-    
-    listContainer.appendChild(planElement);
   });
+  
+  plansHTML += '</div>';
+  container.innerHTML = plansHTML;
 }
 
 // Helper to get display name for plan types
@@ -1758,9 +1766,10 @@ function getPlanTypeDisplay(type) {
   return types[type] || type.charAt(0).toUpperCase() + type.slice(1) + ' Plan';
 }
 
-// Remove a saved plan
-function removePlan(index) {
-  if (index >= 0 && index < savedPlans.length) {
+// Remove a saved plan - FIXED VERSION
+function removePlan(planId) {
+  const index = savedPlans.findIndex(plan => plan.id === planId);
+  if (index >= 0) {
     savedPlans.splice(index, 1);
     
     try {
@@ -1774,22 +1783,40 @@ function removePlan(index) {
   }
 }
 
-// Load a saved plan
-function doPlan(index) {
-  if (index >= 0 && index < savedPlans.length) {
-    const plan = savedPlans[index];
-    
+// Load a saved plan - FIXED VERSION
+function doPlan(planId) {
+  const plan = savedPlans.find(p => p.id === planId);
+  if (plan) {
     // Show the batch results section
-    document.getElementById('batch-results').innerHTML = `
-      <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">📋 Your ${plan.type.charAt(0).toUpperCase() + plan.type.slice(1)} Plan:</h4>
-      ${plan.activities.map((activity, idx) => `
+    const batchResults = document.getElementById('batch-results');
+    
+    // Generate the plan HTML
+    const planHtml = plan.activities.map((activity, idx) => {
+      // Ensure activity.text exists
+      const activityText = activity.text ? escapeHtml(activity.text) : `Activity ${idx + 1}`;
+      const activityTitle = activity.text ? 
+        escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`) : 
+        `Activity ${idx + 1}`;
+      
+      return `
         <div class="batch-activity">
           <div class="batch-activity-number">Activity ${idx + 1}:</div>
-          <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`)}</h4>
-          <p>${escapeHtml(activity.text)}</p>
-          <small style="color: #666; display: block; margin-top: 0.7rem;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
+          <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${activityTitle}</h4>
+          <p>${activityText}</p>
+          <small style="color: #666; display: block; margin-top: 0.7rem;">
+            📍 ${activity.location || 'N/A'} • ⏱️ ${activity.duration || 'N/A'} • 
+            👨‍👧 ${activity.independent ? 'Independent' : activity.involvement || 'N/A'} • 
+            🔊 ${activity.noise_level || 'N/A'}
+          </small>
         </div>
-      `).join('')}
+      `;
+    }).join('');
+    
+    batchResults.innerHTML = `
+      <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">
+        📋 Your ${plan.type.charAt(0).toUpperCase() + plan.type.slice(1)} Plan:
+      </h4>
+      ${planHtml}
       <div style="text-align: center; margin-top: 1.8rem;">
         <button onclick="savePlan('${plan.type}', ${JSON.stringify(plan.activities).replace(/"/g, '&quot;')})" 
           style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
@@ -1798,8 +1825,8 @@ function doPlan(index) {
       </div>
     `;
     
-    document.getElementById('batch-results').style.display = 'block';
-    document.getElementById('batch-results').scrollIntoView({ behavior: 'smooth' });
+    batchResults.style.display = 'block';
+    batchResults.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
@@ -1831,7 +1858,7 @@ function init() {
       document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
     }
     
-    // Load plans
+    // Load plans - FIXED: Ensure we parse the saved plans
     const savedPlansData = localStorage.getItem('playideas-plans');
     if (savedPlansData) {
       try {
