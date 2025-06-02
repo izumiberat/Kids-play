@@ -1,1975 +1,1567 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PlayIdeas - Activity Generator for Parents</title>
-<style>
-:root {
-  --primary: #4361ee;
-  --secondary: #3f37c9;
-  --light: #f8f9fa;
-  --dark: #212529;
-  --success: #28a745;
-  --warning: #ffc107;
-  --danger: #dc3545;
-  --orange: #fd7e14;
-  --purple: #6f42c1;
-  --teal: #20c997;
-  --pink: #e83e8c;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f0f8ff;
-  line-height: 1.6;
-  color: #333;
-  background: linear-gradient(135deg, #e6f7ff 0%, #f5f0ff 100%);
-}
-h1 {
-  color: var(--primary);
-  text-align: center;
-  margin-bottom: 1.5rem;
-  padding-top: 1rem;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-}
-
-/* Age Selector - Moved to top */
-.age-selector {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.age-selector h3 {
-  margin-bottom: 1rem;
-  color: var(--primary);
-  font-size: 1.3rem;
-}
-
-.age-selector select {
-  width: 100%;
-  padding: 1rem;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  background: white;
-  transition: all 0.3s;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.age-selector select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-}
-
-/* Parent Energy Indicator */
-.energy-check {
-  background: linear-gradient(135deg, #ffecd2, #ffd8a8);
-  padding: 1.2rem;
-  border-radius: 15px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(255, 184, 77, 0.2);
-}
-
-.energy-check h3 {
-  margin-bottom: 0.75rem;
-  color: #d35400;
-  font-size: 1.2rem;
-}
-
-.energy-buttons {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.energy-btn {
-  background: white;
-  border: 2px solid #ddd;
-  padding: 0.6rem 1.2rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.energy-btn.selected {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: white;
-  font-weight: 600;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
-}
-
-/* Context Mode Selector */
-.context-selector {
-  background: white;
-  padding: 1.2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.context-selector h3 {
-  margin-bottom: 0.75rem;
-  color: var(--primary);
-  font-size: 1.2rem;
-}
-
-.context-buttons {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.context-btn {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.context-btn.selected {
-  background: var(--teal);
-  border-color: var(--teal);
-  color: white;
-  font-weight: 600;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
-}
-
-/* Enhanced Quick Actions */
-.quick-actions {
-  background: white;
-  padding: 1.8rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.quick-actions h2 {
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  font-size: 1.4rem;
-}
-
-.quick-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (max-width: 480px) {
-  .quick-buttons {
-    grid-template-columns: 1fr;
-  }
-}
-
-.quick-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-  text-align: center;
-}
-
-.quick-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
-}
-
-.quick-btn.low-energy {
-  background: linear-gradient(135deg, var(--success), #20c997);
-}
-
-.quick-btn.quiet {
-  background: linear-gradient(135deg, var(--purple), #8e44ad);
-}
-
-.quick-btn.independent {
-  background: linear-gradient(135deg, var(--orange), #e17055);
-}
-
-.quick-btn.multiple-kids {
-  background: linear-gradient(135deg, var(--pink), #d63384);
-}
-
-.instant-btn {
-  background: linear-gradient(135deg, var(--success), #20c997);
-  padding: 1.3rem;
-  font-size: 1.15rem;
-  border-radius: 15px;
-  margin-top: 1rem;
-  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-  transition: all 0.3s;
-}
-
-.instant-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
-}
-
-/* Compact Form */
-.compact-form {
-  background: white;
-  padding: 1.8rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
-  margin-bottom: 1.2rem;
-}
-
-@media (max-width: 480px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  margin-bottom: 1.2rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-select {
-  width: 100%;
-  padding: 0.85rem;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  font-size: 1rem;
-  background: white;
-  transition: all 0.3s;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
-}
-
-select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-}
-
-.radio-group {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.radio-btn {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  padding: 0.7rem 1.2rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
-  flex: 1;
-  text-align: center;
-  min-width: fit-content;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-
-.radio-btn.selected {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-
-.radio-btn:hover {
-  border-color: var(--primary);
-}
-
-/* Materials as tags */
-.materials-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.6rem;
-}
-
-.material-tag {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  padding: 0.5rem 0.9rem;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.material-tag.selected {
-  background: var(--warning);
-  border-color: var(--warning);
-  color: var(--dark);
-  transform: translateY(-2px);
-}
-
-.material-tag:hover {
-  border-color: var(--warning);
-}
-
-/* Results */
-#result {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-  display: none;
-  position: sticky;
-  top: 20px;
-  z-index: 10;
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Mobile Modal Styling */
-@media (max-width: 600px) {
-  #result {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    border-radius: 0;
-    z-index: 100;
-    overflow-y: auto;
-    padding-top: 60px; /* Space for close button */
-  }
-  
-  .result-close-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: var(--danger);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 101;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  }
-}
-
-.activity-text {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  color: #222;
-}
-
-.activity-meta {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  color: #555;
-  flex-wrap: wrap;
-}
-
-.meta-tag {
-  background: var(--light);
-  padding: 0.4rem 0.8rem;
-  border-radius: 10px;
-  border: 1px solid #dee2e6;
-  font-size: 0.85rem;
-}
-
-.meta-tag.parent-energy {
-  background: #fff3cd;
-  border-color: #ffeaa7;
-  color: #856404;
-}
-
-.meta-tag.cleanup-no { background: #d4edda; color: #155724; }
-.meta-tag.cleanup-easy { background: #fff3cd; color: #856404; }
-.meta-tag.cleanup-messy { background: #f8d7da; color: #721c24; }
-
-.meta-tag.involvement-minimal { background: #d4edda; color: #155724; }
-.meta-tag.involvement-some { background: #fff3cd; color: #856404; }
-.meta-tag.involvement-active { background: #f8d7da; color: #721c24; }
-
-.activity-benefits {
-  background: #e8f4f8;
-  padding: 1.2rem;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  color: #0c5460;
-  border-left: 4px solid var(--teal);
-}
-
-.prep-instructions {
-  background: #fff3cd;
-  padding: 1.2rem;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  color: #856404;
-  border-left: 4px solid var(--warning);
-}
-
-.prep-instructions strong {
-  color: #533f03;
-}
-
-.activity-actions {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-}
-
-.favorite-btn, .plan-btn {
-  background-color: var(--warning);
-  color: var(--dark);
-  border: none;
-  padding: 0.9rem 1.7rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  flex: 1;
-  min-width: 150px;
-  font-size: 1.05rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.plan-btn {
-  background-color: var(--teal);
-  color: white;
-}
-
-.favorite-btn:hover, .plan-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-
-.favorite-btn.saved {
-  background-color: var(--success);
-  color: white;
-}
-
-/* Tab system */
-.tab-buttons {
-  display: flex;
-  margin-bottom: 1.8rem;
-  gap: 0.3rem;
-  background: white;
-  padding: 0.3rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.tab-btn {
-  flex: 1;
-  border-radius: 10px;
-  background: transparent;
-  border: none;
-  padding: 0.9rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  position: relative;
-  font-size: 1.05rem;
-}
-
-.tab-btn.active {
-  background-color: var(--primary);
-  color: white;
-  box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
-}
-
-.favorite-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: var(--danger);
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/* Batch Planning */
-.batch-planning {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-}
-
-.batch-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (max-width: 480px) {
-  .batch-buttons {
-    grid-template-columns: 1fr;
-  }
-}
-
-.batch-btn {
-  background: linear-gradient(135deg, var(--teal), #17a2b8);
-  color: white;
-  border: none;
-  padding: 1.3rem;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
-  font-size: 1.05rem;
-}
-
-.batch-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
-}
-
-.batch-results {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 12px;
-  display: none;
-  animation: fadeIn 0.5s ease;
-}
-
-.batch-activity {
-  background: white;
-  padding: 1.3rem;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  border-left: 5px solid var(--teal);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-}
-
-.batch-activity:last-child {
-  margin-bottom: 0;
-}
-
-.batch-activity-number {
-  font-weight: bold;
-  color: var(--teal);
-  margin-bottom: 0.7rem;
-  font-size: 1.15rem;
-}
-
-/* Favorites */
-#favorites-list {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-}
-
-.favorite-item {
-  margin-bottom: 1.8rem;
-  padding: 1.7rem;
-  background: var(--light);
-  border-radius: 12px;
-  border-left: 5px solid var(--primary);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.favorite-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-}
-
-.favorite-item h4 {
-  color: var(--primary);
-  margin-bottom: 0.8rem;
-  font-size: 1.25rem;
-}
-
-.favorite-item .activity-text {
-  margin-bottom: 0.8rem;
-  font-size: 1.15rem;
-}
-
-.loading, .error {
-  text-align: center;
-  padding: 2.8rem;
-  color: #666;
-  font-size: 1.15rem;
-}
-
-.loading::after {
-  content: "";
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  border: 4px solid rgba(67, 97, 238, 0.3);
-  border-radius: 50%;
-  border-top-color: var(--primary);
-  animation: spin 1s ease-in-out infinite;
-  margin-left: 12px;
-  vertical-align: middle;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.error {
-  color: var(--danger);
-}
-
-/* Hide native radio buttons */
-input[type="radio"] {
-  display: none;
-}
-
-/* Helper text styling */
-.helper-text {
-  font-size: 0.9rem;
-  color: #666;
-  font-style: italic;
-  margin-top: 0.4rem;
-}
-
-.toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.85);
-  color: white;
-  padding: 14px 28px;
-  border-radius: 30px;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 1.05rem;
-  max-width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.toast.show {
-  opacity: 1;
-}
-
-.app-footer {
-  text-align: center;
-  padding: 1.5rem 0;
-  color: #666;
-  font-size: 0.9rem;
-  margin-top: 1.5rem;
-}
-
-/* New styles for favorites buttons */
-.do-activity-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 0.9rem 1.7rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  flex: 2; /* Takes more space than remove button */
-  min-width: 200px;
-  font-size: 1.05rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.remove-btn {
-  background: var(--danger);
-  color: white;
-  border: none;
-  padding: 0.9rem 1.7rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  flex: 1;
-  min-width: 120px;
-  font-size: 1.05rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.do-activity-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-
-.remove-btn:hover {
-  background: #bd2130;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-
-/* New styles for saved plans */
-.saved-plans-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-}
-
-.saved-plans-header {
-  text-align: center;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.saved-plans-list {
-  display: grid;
-  gap: 1.2rem;
-}
-
-.saved-plan-item {
-  background: var(--light);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border-left: 5px solid var(--teal);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.saved-plan-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-}
-
-.plan-title {
-  color: var(--teal);
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.plan-date {
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.plan-activities {
-  margin-top: 1rem;
-  border-top: 1px solid #eee;
-  padding-top: 1rem;
-}
-
-.plan-activity {
-  margin-bottom: 0.8rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.plan-activity:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.plan-actions {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.do-plan-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  flex: 1;
-  min-width: 150px;
-  font-size: 0.95rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.remove-plan-btn {
-  background: var(--light);
-  color: var(--danger);
-  border: 2px solid #f8d7da;
-  padding: 0.7rem 1.5rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  flex: 1;
-  min-width: 120px;
-  font-size: 0.95rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-}
-
-.do-plan-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-
-.remove-plan-btn:hover {
-  background: #f8d7da;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-}
-
-.empty-plans {
-  text-align: center;
-  padding: 2rem;
-  color: #666;
-  font-style: italic;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayIdeas - Activity Generator for Parents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #5a75f0;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --orange: #fd7e14;
+            --purple: #6f42c1;
+            --teal: #20c997;
+            --pink: #e83e8c;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-500: #adb5bd;
+            --gray-700: #495057;
+            --border-radius: 16px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f8ff 0%, #f5f0ff 100%);
+            line-height: 1.6;
+            color: #333;
+            background-attachment: fixed;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header p {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 1.6rem;
+        }
+
+        /* Age Selector */
+        .age-selector {
+            background: white;
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .age-selector h3 {
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .age-selector select {
+            width: 100%;
+            padding: 1.1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: white;
+            transition: var(--transition);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .age-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        /* Parent Energy Indicator */
+        .energy-check h3 {
+            margin-bottom: 1rem;
+            color: #d35400;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .energy-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .energy-btn {
+            background: white;
+            border: 2px solid var(--gray-200);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .energy-btn.selected {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
+        }
+
+        /* Context Mode Selector */
+        .context-selector h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .context-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .context-btn {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            padding: 0.7rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .context-btn.selected {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: white;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(32, 201, 151, 0.3);
+        }
+
+        /* Tab system */
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 1.8rem;
+            gap: 0.3rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-btn {
+            flex: 1;
+            border-radius: 50px;
+            background: transparent;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .favorite-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Quick Actions */
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .quick-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .quick-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .quick-btn i {
+            font-size: 1.8rem;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .quick-btn.low-energy {
+            background: linear-gradient(135deg, var(--success), #20c997);
+        }
+
+        .quick-btn.quiet {
+            background: linear-gradient(135deg, var(--purple), #8e44ad);
+        }
+
+        .quick-btn.independent {
+            background: linear-gradient(135deg, var(--orange), #e17055);
+        }
+
+        .quick-btn.multiple-kids {
+            background: linear-gradient(135deg, var(--pink), #d63384);
+        }
+
+        .instant-btn {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            padding: 1.4rem;
+            font-size: 1.15rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .instant-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Form Elements */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-btn {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            flex: 1;
+            text-align: center;
+            min-width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .radio-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .radio-btn:hover {
+            border-color: var(--primary);
+        }
+
+        /* Materials as tags */
+        .materials-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .material-tag {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            padding: 0.7rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .material-tag.selected {
+            background: var(--warning);
+            border-color: var(--warning);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .material-tag:hover {
+            border-color: var(--warning);
+        }
+
+        /* Generate Button */
+        .generate-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.3rem;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .generate-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Results */
+        #result {
+            background: white;
+            padding: 2.2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+            display: none;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+            animation: fadeIn 0.5s ease;
+            position: relative; /* For absolute positioning of close button */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Updated close button styling */
+        .result-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #aaa; /* Changed to lighter grey */
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 22px;
+            font-weight: bold;
+            z-index: 101;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: background 0.2s ease;
+        }
+
+        .result-close-btn:hover {
+            background: #888; /* Slightly darker on hover */
+        }
+
+        /* Mobile Modal Styling */
+        @media (max-width: 600px) {
+            #result {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: 0;
+                border-radius: 0;
+                z-index: 100;
+                overflow-y: auto;
+                padding-top: 60px;
+            }
+            
+            .result-close-btn {
+                position: fixed;
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        .activity-text {
+            font-size: 1.25rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.7;
+            color: #222;
+            padding: 0 1rem;
+        }
+
+        .activity-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            color: #555;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--gray-300);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meta-tag.parent-energy {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+
+        .meta-tag.cleanup-no { background: #d4edda; color: #155724; }
+        .meta-tag.cleanup-easy { background: #fff3cd; color: #856404; }
+        .meta-tag.cleanup-messy { background: #f8d7da; color: #721c24; }
+
+        .activity-benefits {
+            background: #e8f4f8;
+            padding: 1.3rem;
+            border-radius: 10px;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+            color: #0c5460;
+            border-left: 4px solid var(--teal);
+        }
+
+        .prep-instructions {
+            background: #fff3cd;
+            padding: 1.3rem;
+            border-radius: 10px;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+            color: #856404;
+            border-left: 4px solid var(--warning);
+        }
+
+        .activity-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .favorite-btn, .plan-btn {
+            background-color: var(--warning);
+            color: var(--dark);
+            border: none;
+            padding: 1rem 1.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 150px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .plan-btn {
+            background-color: var(--teal);
+            color: white;
+        }
+
+        .favorite-btn:hover, .plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+
+        .favorite-btn.saved {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 1.05rem;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .app-footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Planner Tab */
+        .batch-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .batch-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .batch-btn {
+            background: linear-gradient(135deg, var(--teal), #17a2b8);
+            color: white;
+            border: none;
+            padding: 1.4rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+            font-size: 1.05rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .batch-btn i {
+            font-size: 1.8rem;
+        }
+
+        .batch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(32, 201, 151, 0.4);
+        }
+
+        .batch-results {
+            margin-top: 1.8rem;
+            padding: 1.8rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Favorites Tab */
+        .favorite-item {
+            margin-bottom: 1.8rem;
+            padding: 1.8rem;
+            background: var(--gray-100);
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .favorite-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .favorite-item h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .favorite-item .activity-text {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+
+        .activity-actions .do-activity-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .activity-actions .remove-btn {
+            background: var(--danger);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-<h1>🎮 PlayIdeas Activity Generator</h1>
-
-<!-- Age Selector - Moved to top -->
-<div class="age-selector">
-  <h3>👶 How old is your child?</h3>
-  <select id="age" onchange="handleAgeChange()">
-    <option value="0-2">0-2 years</option>
-    <option value="3-5" selected>3-5 years</option>
-    <option value="6-8">6-8 years</option>
-    <option value="9-12">9-12 years</option>
-    <option value="12+">12+ years</option>
-  </select>
-</div>
-
-<!-- Parent Energy Check -->
-<div class="energy-check">
-  <h3>☕ How's your energy level today?</h3>
-  <div class="energy-buttons">
-    <div class="energy-btn selected" data-energy="low">😴 Exhausted</div>
-    <div class="energy-btn" data-energy="medium">🙂 Medium</div>
-    <div class="energy-btn" data-energy="high">⚡ Ready!</div>
-  </div>
-</div>
-
-<!-- Context Mode Selector -->
-<div class="context-selector">
-  <h3>🌟 What's the situation?</h3>
-  <div class="context-buttons">
-    <div class="context-btn selected" data-context="normal">📅 Regular day</div>
-    <div class="context-btn" data-context="rainy">🌧️ Rainy day</div>
-    <div class="context-btn" data-context="sick">🤒 Sick day</div>
-    <div class="context-btn" data-context="bedtime">🌙 Pre-bedtime</div>
-    <div class="context-btn" data-context="coffee">☕ Need break</div>
-  </div>
-</div>
-
-<div class="tab-buttons">
-  <button class="tab-btn active" onclick="showTab('generator')">Get Ideas</button>
-  <button class="tab-btn" onclick="showTab('planner')">Plan Activities</button>
-  <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
-    My Favorites
-    <span class="favorite-count" id="favorite-count"></span>
-  </button>
-</div>
-
-<div id="generator-tab">
-  <!-- Enhanced Quick Actions Section -->
-  <div class="quick-actions">
-    <h2>🚀 Need something NOW?</h2>
-    <div class="quick-buttons">
-      <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')">🛋️ Easy Indoor</button>
-      <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')">🧒 Independent Play</button>
-      <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')">🤫 Quiet Activity</button>
-      <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')">👥 Multiple Kids</button>
-      <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')">🌳 Outdoor Fun</button>
-      <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')">✨ No Mess</button>
+    <div class="header">
+        <h1><i class="fas fa-gamepad"></i> PlayIdeas Activity Generator</h1>
+        <p>Discover fun, educational activities tailored to your child's age and your energy level</p>
     </div>
-    <button class="quick-btn instant-btn" onclick="instantActivity()">
-      ✨ SURPRISE ME! (Any activity)
-    </button>
-  </div>
 
-  <!-- Results appear here when generated -->
-  <div id="result">
-    <div class="loading">Loading activities</div>
-  </div>
+    <!-- Age Selector - Moved to top -->
+    <div class="age-selector">
+        <h3><i class="fas fa-child"></i> How old is your child?</h3>
+        <select id="age" onchange="handleAgeChange()">
+            <option value="0-2">Babies & Toddlers (0-2)</option>
+            <option value="3-5" selected>Preschoolers (3-5)</option>
+            <option value="6-11">School Age (6-11)</option>
+            <option value="12+">Teens (12+)</option>
+        </select>
+    </div>
 
-  <!-- Compact Custom Form -->
-  <div class="compact-form">
-    <h3 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">🎯 Or customize your search:</h3>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label>Number of Kids:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="kid-count" data-value="single">👤 One</div>
-          <div class="radio-btn" data-name="kid-count" data-value="multiple">👥 Multiple</div>
+    <!-- Parent Energy Check -->
+    <div class="card energy-check">
+        <h3><i class="fas fa-battery-quarter"></i> How's your energy level today?</h3>
+        <div class="energy-buttons">
+            <div class="energy-btn selected" data-energy="low">
+                <i class="fas fa-tired"></i> Exhausted
+            </div>
+            <div class="energy-btn" data-energy="medium">
+                <i class="fas fa-meh"></i> Medium
+            </div>
+            <div class="energy-btn" data-energy="high">
+                <i class="fas fa-bolt"></i> Ready!
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="form-group">
-        <label>Location:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="location" data-value="indoor">🏠 Indoor</div>
-          <div class="radio-btn" data-name="location" data-value="outdoor">🌳 Outdoor</div>
+    <!-- Context Mode Selector -->
+    <div class="card context-selector">
+        <h3><i class="fas fa-cloud-sun"></i> What's the situation?</h3>
+        <div class="context-buttons">
+            <div class="context-btn selected" data-context="normal">
+                <i class="fas fa-calendar"></i> Regular day
+            </div>
+            <div class="context-btn" data-context="rainy">
+                <i class="fas fa-cloud-rain"></i> Rainy day
+            </div>
+            <div class="context-btn" data-context="sick">
+                <i class="fas fa-head-side-cough"></i> Sick day
+            </div>
+            <div class="context-btn" data-context="bedtime">
+                <i class="fas fa-moon"></i> Pre-bedtime
+            </div>
         </div>
-      </div>
     </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Duration:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="duration" data-value="quick">⏱️ Quick</div>
-          <div class="radio-btn" data-name="duration" data-value="medium">⏳ Medium</div>
-          <div class="radio-btn" data-name="duration" data-value="long">⌛ Long</div>
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="showTab('generator')">
+            <i class="fas fa-lightbulb"></i> Get Ideas
+        </button>
+        <button class="tab-btn" onclick="showTab('planner')">
+            <i class="fas fa-clipboard-list"></i> Plan
+        </button>
+        <button class="tab-btn" onclick="showTab('favorites')" id="favorites-tab-btn">
+            <i class="fas fa-heart"></i> Favorites
+            <span class="favorite-count" id="favorite-count"></span>
+        </button>
+    </div>
+
+    <div id="generator-tab">
+        <!-- Enhanced Quick Actions Section -->
+        <div class="card">
+            <h3 class="card-title"><i class="fas fa-bolt"></i> Need something NOW?</h3>
+            <div class="quick-buttons">
+                <button class="quick-btn low-energy" onclick="quickActivity('indoor', 'quick', 'low')">
+                    <i class="fas fa-couch"></i>
+                    Easy Indoor
+                </button>
+                <button class="quick-btn independent" onclick="quickActivity('any', 'any', 'independent')">
+                    <i class="fas fa-child"></i>
+                    Independent Play
+                </button>
+                <button class="quick-btn quiet" onclick="quickActivity('indoor', 'any', 'quiet')">
+                    <i class="fas fa-volume-mute"></i>
+                    Quiet Activity
+                </button>
+                <button class="quick-btn multiple-kids" onclick="quickActivity('any', 'any', 'multiple')">
+                    <i class="fas fa-users"></i>
+                    Multiple Kids
+                </button>
+                <button class="quick-btn" onclick="quickActivity('outdoor', 'medium')">
+                    <i class="fas fa-tree"></i>
+                    Outdoor Fun
+                </button>
+                <button class="quick-btn" onclick="quickActivity('any', 'any', 'no-mess')">
+                    <i class="fas fa-broom"></i>
+                    No Mess
+                </button>
+            </div>
+            <button class="quick-btn instant-btn" onclick="instantActivity()">
+                <i class="fas fa-magic"></i> SURPRISE ME! (Any activity)
+            </button>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>Clean-up level:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="cleanup" data-value="any">🤷 Any</div>
-          <div class="radio-btn" data-name="cleanup" data-value="no-mess">✨ No mess</div>
-          <div class="radio-btn" data-name="cleanup" data-value="easy">🧹 Easy</div>
+        <!-- Results appear here when generated -->
+        <div id="result">
+            <div class="loading">Loading activities</div>
         </div>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Your involvement:</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" data-name="availability" data-value="available">👨‍👧 Can help</div>
-          <div class="radio-btn" data-name="availability" data-value="independent">🧒 Independent</div>
+        <!-- Compact Custom Form -->
+        <div class="card">
+            <h3 class="card-title"><i class="fas fa-sliders-h"></i> Customize your search</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Number of Kids:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="kid-count" data-value="single">
+                            <i class="fas fa-user"></i> One
+                        </div>
+                        <div class="radio-btn" data-name="kid-count" data-value="multiple">
+                            <i class="fas fa-users"></i> Multiple
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Location:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="location" data-value="indoor">
+                            <i class="fas fa-home"></i> Indoor
+                        </div>
+                        <div class="radio-btn" data-name="location" data-value="outdoor">
+                            <i class="fas fa-tree"></i> Outdoor
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Duration:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="duration" data-value="quick">
+                            <i class="fas fa-stopwatch"></i> Quick
+                        </div>
+                        <div class="radio-btn" data-name="duration" data-value="medium">
+                            <i class="fas fa-hourglass-half"></i> Medium
+                        </div>
+                        <div class="radio-btn" data-name="duration" data-value="long">
+                            <i class="fas fa-hourglass"></i> Long
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Clean-up level:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="cleanup" data-value="any">
+                            <i class="fas fa-question"></i> Any
+                        </div>
+                        <div class="radio-btn" data-name="cleanup" data-value="no-mess">
+                            <i class="fas fa-broom"></i> No mess
+                        </div>
+                        <div class="radio-btn" data-name="cleanup" data-value="easy">
+                            <i class="fas fa-soap"></i> Easy
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your involvement:</label>
+                    <div class="radio-group">
+                        <div class="radio-btn selected" data-name="availability" data-value="available">
+                            <i class="fas fa-hands-helping"></i> Can help
+                        </div>
+                        <div class="radio-btn" data-name="availability" data-value="independent">
+                            <i class="fas fa-child"></i> Independent
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What do you have handy?</label>
+                    <div class="materials-tags">
+                        <div class="material-tag" data-value="paper">
+                            <i class="fas fa-file"></i> Paper
+                        </div>
+                        <div class="material-tag" data-value="pencils">
+                            <i class="fas fa-pencil-alt"></i> Pencils
+                        </div>
+                        <div class="material-tag" data-value="scissors">
+                            <i class="fas fa-cut"></i> Scissors
+                        </div>
+                        <div class="material-tag" data-value="tape">
+                            <i class="fas fa-tape"></i> Tape/Glue
+                        </div>
+                        <div class="material-tag" data-value="ball">
+                            <i class="fas fa-futbol"></i> Ball
+                        </div>
+                        <div class="material-tag" data-value="blocks">
+                            <i class="fas fa-cubes"></i> Blocks
+                        </div>
+                        <div class="material-tag" data-value="dolls">
+                            <i class="fas fa-robot"></i> Toys
+                        </div>
+                        <div class="material-tag" data-value="cards">
+                            <i class="fas fa-club"></i> Cards
+                        </div>
+                        <div class="material-tag" data-value="blanket">
+                            <i class="fas fa-bed"></i> Blanket
+                        </div>
+                        <div class="material-tag" data-value="kitchen">
+                            <i class="fas fa-utensils"></i> Kitchen items
+                        </div>
+                        <div class="material-tag" data-value="cardboard">
+                            <i class="fas fa-box-open"></i> Boxes
+                        </div>
+                        <div class="material-tag" data-value="none">
+                            <i class="fas fa-ban"></i> Nothing special
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="generate-btn" onclick="generateActivity()">
+                <i class="fas fa-dice"></i> Generate Custom Activity
+            </button>
         </div>
-        <div class="helper-text">Independent = activities your child can do mostly alone</div>
-      </div>
+    </div>
 
-      <div class="form-group">
-        <label>What do you have handy? (tap any that apply)</label>
-        <div class="materials-tags">
-          <div class="material-tag" data-value="paper">📄 Paper</div>
-          <div class="material-tag" data-value="pencils">✏️ Pencils</div>
-          <div class="material-tag" data-value="scissors">✂️ Scissors</div>
-          <div class="material-tag" data-value="tape">📏 Tape/Glue</div>
-          <div class="material-tag" data-value="ball">🏀 Ball</div>
-          <div class="material-tag" data-value="blocks">🧱 Blocks</div>
-          <div class="material-tag" data-value="dolls">🧸 Toys</div>
-          <div class="material-tag" data-value="cards">🃏 Cards</div>
-          <div class="material-tag" data-value="blanket">🛏️ Blanket</div>
-          <div class="material-tag" data-value="kitchen">🥄 Kitchen items</div>
-          <div class="material-tag" data-value="cardboard">📦 Boxes/Cardboard</div>
-          <div class="material-tag" data-value="none">❌ Nothing special</div>
+    <div id="planner-tab" style="display: none;">
+        <div class="card">
+            <h3 class="card-title"><i class="fas fa-clipboard-list"></i> Activity Planning</h3>
+            <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
+
+            <div class="batch-buttons">
+                <button class="batch-btn" onclick="planMorning()">
+                    <i class="fas fa-sun"></i>
+                    Plan My Morning
+                    <small>3-4 sequential activities</small>
+                </button>
+                <button class="batch-btn" onclick="planAfternoon()">
+                    <i class="fas fa-cloud-sun"></i>
+                    Plan My Afternoon
+                    <small>Perfect for post-nap time</small>
+                </button>
+                <button class="batch-btn" onclick="planRainyDay()">
+                    <i class="fas fa-cloud-showers-heavy"></i>
+                    Rainy Day Plan
+                    <small>All indoor activities</small>
+                </button>
+                <button class="batch-btn" onclick="planQuietTime()">
+                    <i class="fas fa-volume-mute"></i>
+                    Quiet Time Plan
+                    <small>Calm, focused activities</small>
+                </button>
+            </div>
+
+            <div id="batch-results" class="batch-results">
+                <!-- Batch results will appear here -->
+            </div>
         </div>
-        <div class="helper-text">Select "Nothing special" if you want activities that need no materials</div>
-      </div>
     </div>
 
-    <button onclick="generateActivity()" style="background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; width: 100%; font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; cursor: pointer; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); transition: all 0.3s;">
-      🎲 Generate Custom Activity
-    </button>
-  </div>
-</div>
-
-<div id="planner-tab" style="display: none;">
-  <div class="batch-planning">
-    <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">📋 Activity Planning</h2>
-    <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
-
-    <div class="batch-buttons">
-      <button class="batch-btn" onclick="planMorning()">🌅 Plan My Morning<br><small>3-4 sequential activities</small></button>
-      <button class="batch-btn" onclick="planAfternoon()">🌞 Plan My Afternoon<br><small>Perfect for post-nap time</small></button>
-      <button class="batch-btn" onclick="planRainyDay()">🌧️ Rainy Day Plan<br><small>All indoor activities</small></button>
-      <button class="batch-btn" onclick="planQuietTime()">🤫 Quiet Time Plan<br><small>Calm, focused activities</small></button>
-    </div>
-
-    <div id="batch-results" class="batch-results">
-      <!-- Batch results will appear here -->
-    </div>
-  </div>
-
-  <!-- New Saved Plans Section -->
-  <div class="saved-plans-container">
-    <div class="saved-plans-header">
-      <h2>📚 Saved Plans</h2>
-    </div>
-    <div id="saved-plans-list">
-      <p class="loading">Loading your saved plans...</p>
-    </div>
-  </div>
-</div>
-
-<div id="favorites-tab" style="display: none;">
-  <div id="favorites-list">
-    <p class="loading">Loading favorites</p>
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<div class="app-footer">
-  Made with ❤️ by PlayIdeas • Activities loaded from JSON files
-</div>
-
-<script>
-// Global variables
-let activities = [];
-let allActivities = {};
-let favorites = [];
-let savedPlans = [];
-let currentActivity = null;
-let activitiesLoaded = false;
-let parentEnergyLevel = 'low';
-let currentContext = 'normal';
-
-// Map age groups to JSON filenames
-const ageGroupFiles = {
-  "0-2": "activities-0-2.json",
-  "3-5": "activities-3-5.json",
-  "6-8": "activities-6-8.json",
-  "9-12": "activities-9-12.json",
-  "12+": "activities-12plus.json"
-};
-
-// HTML escaping function for security
-function escapeHtml(unsafe) {
-  if (!unsafe) return '';
-  return unsafe.toString()
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-// Show toast notification
-function showToast(message, duration = 3000) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.classList.add('show');
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, duration);
-}
-
-// Update favorite count badge
-function updateFavoriteCount() {
-  const countElem = document.getElementById('favorite-count');
-  if (favorites.length > 0) {
-    countElem.textContent = favorites.length;
-    countElem.style.display = 'flex';
-  } else {
-    countElem.style.display = 'none';
-  }
-}
-
-// Close result modal
-function closeResultModal() {
-  document.getElementById('result').style.display = 'none';
-}
-
-// Load activities for specific age group from JSON files
-async function loadActivities(ageGroup) {
-  if (allActivities[ageGroup]) {
-    activities = allActivities[ageGroup];
-    activitiesLoaded = true;
-    return;
-  }
-
-  try {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years</div>`;
-    resultDiv.style.display = "block";
-
-    // Get the filename for this age group
-    const filename = ageGroupFiles[ageGroup];
-    if (!filename) {
-      throw new Error(`No JSON file defined for age group: ${ageGroup}`);
-    }
-
-    // Fetch the JSON file
-    const response = await fetch(filename);
-    if (!response.ok) {
-      throw new Error(`Failed to load activities: ${response.status} ${response.statusText}`);
-    }
-
-    // Parse the JSON and extract the activities array
-    const data = await response.json();
-    activities = data.activities; // Extract the activities array
-    allActivities[ageGroup] = activities;
-    activitiesLoaded = true;
-
-    resultDiv.style.display = "none";
-
-  } catch (error) {
-    console.error(`Error loading activities for ${ageGroup}:`, error);
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = `
-      <div class="error">
-        <button class="result-close-btn" onclick="closeResultModal()">×</button>
-        <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
-        <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
-        <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
-        <div style="text-align: center;">
-          <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
-            🔄 Try Again
-          </button>
+    <div id="favorites-tab" style="display: none;">
+        <div class="card">
+            <h3 class="card-title"><i class="fas fa-heart"></i> My Favorite Activities</h3>
+            <div id="favorites-list">
+                <p class="loading">Loading favorites</p>
+            </div>
         </div>
-      </div>
-    `;
-    resultDiv.style.display = "block";
-    activitiesLoaded = false;
-  }
-}
-
-// Handle radio button groups and selections
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('radio-btn')) {
-    const group = e.target.getAttribute('data-name');
-    const value = e.target.getAttribute('data-value');
-
-    const siblings = e.target.parentElement.querySelectorAll('.radio-btn');
-    siblings.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
-  }
-
-  if (e.target.classList.contains('material-tag')) {
-    e.target.classList.toggle('selected');
-  }
-
-  if (e.target.classList.contains('energy-btn')) {
-    parentEnergyLevel = e.target.getAttribute('data-energy');
-
-    const siblings = e.target.parentElement.querySelectorAll('.energy-btn');
-    siblings.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
-
-    try {
-      localStorage.setItem('playideas-energy-level', parentEnergyLevel);
-    } catch (e) {
-      console.log('LocalStorage not available');
-    }
-  }
-
-  if (e.target.classList.contains('context-btn')) {
-    currentContext = e.target.getAttribute('data-context');
-
-    const siblings = e.target.parentElement.querySelectorAll('.context-btn');
-    siblings.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
-
-    try {
-      localStorage.setItem('playideas-context', currentContext);
-    } catch (e) {
-      console.log('LocalStorage not available');
-    }
-  }
-});
-
-// Get form values
-function getFormValues() {
-  const age = document.getElementById('age').value;
-  const kidCount = document.querySelector('.radio-btn[data-name="kid-count"].selected')?.getAttribute('data-value') || 'single';
-  const location = document.querySelector('.radio-btn[data-name="location"].selected')?.getAttribute('data-value') || 'indoor';
-  const duration = document.querySelector('.radio-btn[data-name="duration"].selected')?.getAttribute('data-value') || 'quick';
-  const availability = document.querySelector('.radio-btn[data-name="availability"].selected')?.getAttribute('data-value') || 'available';
-  const cleanup = document.querySelector('.radio-btn[data-name="cleanup"].selected')?.getAttribute('data-value') || 'any';
-
-  const selectedMaterials = Array.from(document.querySelectorAll('.material-tag.selected'))
-    .map(tag => tag.getAttribute('data-value'));
-
-  return {
-    age,
-    kidCount,
-    location,
-    duration,
-    availability,
-    cleanup,
-    materials: selectedMaterials,
-    parentEnergy: parentEnergyLevel,
-    context: currentContext
-  };
-}
-
-// Filter activities based on criteria
-function filterActivities(criteria) {
-  if (!activities || activities.length === 0) return [];
-
-  return activities.filter(activity => {
-    // Location filter
-    if (criteria.location !== 'any' && activity.location !== 'any' && activity.location !== criteria.location) {
-      return false;
-    }
-
-    // Duration filter
-    if (criteria.duration !== 'any' && activity.duration !== 'any' && activity.duration !== criteria.duration) {
-      return false;
-    }
-
-    // Kid count filter
-    if (criteria.kidCount === 'multiple' && activity.kid_count === 'single') {
-      return false;
-    }
-
-    // Parent availability filter (independent vs needs supervision)
-    if (criteria.availability === 'independent' && !activity.independent) {
-      return false;
-    }
-
-    // Cleanup filter
-    if (criteria.cleanup === 'no-mess' && activity.cleanup !== 'no') {
-      return false;
-    }
-    if (criteria.cleanup === 'easy' && activity.cleanup === 'messy') {
-      return false;
-    }
-
-    // Materials filter
-    if (criteria.materials.includes('none')) {
-      return activity.materials.includes('none');
-    }
-
-    if (criteria.materials.length > 0 && !criteria.materials.includes('none')) {
-      const activityMaterials = activity.materials || [];
-      if (activityMaterials.includes('none')) {
-        return true; // Activity needs no materials, so it's always available
-      }
-      const hasRequiredMaterials = activityMaterials.some(material => 
-        criteria.materials.some(available => 
-          material.toLowerCase().includes(available) || 
-          available.includes(material.toLowerCase())
-        )
-      );
-      if (activityMaterials.length > 0 && !hasRequiredMaterials) {
-        return false;
-      }
-    }
-
-    // Context-specific filtering
-    if (criteria.context !== 'normal' && activity.contexts && !activity.contexts.includes(criteria.context)) {
-      return false;
-    }
-
-    // Parent energy level filter
-    if (criteria.parentEnergy === 'low' && activity.energy_required === 'high') {
-      return false;
-    }
-
-    // Special context filters
-    if (criteria.context === 'quiet' && activity.noise_level === 'loud') {
-      return false;
-    }
-    if (criteria.context === 'bedtime' && (activity.energy_required === 'high' || activity.noise_level === 'loud')) {
-      return false;
-    }
-
-    return true;
-  });
-}
-
-// Display activity result
-function displayActivity(activity) {
-  const resultDiv = document.getElementById('result');
-  
-  if (!activity) {
-    resultDiv.innerHTML = `
-      <button class="result-close-btn" onclick="closeResultModal()">×</button>
-      <div class="error">
-        <h3>😅 No activities found!</h3>
-        <p>Try adjusting your filters or selecting different materials.</p>
-      </div>
-    `;
-    resultDiv.style.display = 'block';
-    return;
-  }
-
-  currentActivity = activity;
-
-  const cleanupLabels = {
-    'no': 'No cleanup needed',
-    'easy': 'Easy cleanup',
-    'messy': 'Some cleanup needed'
-  };
-
-  const involvementLabels = {
-    'minimal': 'Minimal supervision',
-    'some': 'Some guidance needed',
-    'active': 'Active participation'
-  };
-
-  const resultHtml = `
-    <button class="result-close-btn" onclick="closeResultModal()">×</button>
-    <div class="activity-text">
-      ${escapeHtml(activity.text)}
     </div>
 
-    <div class="activity-meta">
-      <span class="meta-tag parent-energy">👨‍👧 ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}</span>
-      <span class="meta-tag cleanup-${activity.cleanup}">${cleanupLabels[activity.cleanup] || 'Unknown cleanup'}</span>
-      <span class="meta-tag">⏱️ ${activity.duration} activity</span>
-      <span class="meta-tag">📍 ${activity.location}</span>
-      <span class="meta-tag">🔊 ${activity.noise_level}</span>
-      ${activity.kid_count === 'multiple' ? '<span class="meta-tag">👥 Great for multiple kids</span>' : ''}
+    <div id="toast" class="toast"></div>
+
+    <div class="app-footer">
+        Made with ❤️ by PlayIdeas • Activities loaded from JSON files
     </div>
 
-    ${activity.benefits ? `
-      <div class="activity-benefits">
-        <strong>🌟 Benefits:</strong> ${escapeHtml(activity.benefits)}
-      </div>
-    ` : ''}
+    <script>
+        // Global variables
+        let activities = [];
+        let allActivities = {};
+        let favorites = [];
+        let savedPlans = [];
+        let currentActivity = null;
+        let activitiesLoaded = false;
+        let parentEnergyLevel = 'low';
+        let currentContext = 'normal';
 
-    ${activity.prep ? `
-      <div class="prep-instructions">
-        <strong>📝 How to set up:</strong><br>
-        ${escapeHtml(activity.prep)}
-      </div>
-    ` : ''}
+        // Map age groups to JSON filenames
+        const ageGroupFiles = {
+            "0-2": "activities-0-2.json",
+            "3-5": "activities-3-5.json",
+            "6-11": "activities-6-11.json",
+            "12+": "activities-12plus.json"
+        };
 
-    <div class="activity-actions">
-      <button class="favorite-btn" onclick="toggleFavorite()">
-        ${favorites.some(fav => fav.compositeId === activity.compositeId) ? '💝 Saved!' : '💖 Save as Favorite'}
-      </button>
-      <button class="plan-btn" onclick="addToPlan()">📋 Add to Plan</button>
-    </div>
-  `;
+        // Show toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
 
-  resultDiv.innerHTML = resultHtml;
-  resultDiv.style.display = 'block';
-  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Generate activity
-async function generateActivity() {
-  const criteria = getFormValues();
-
-  await loadActivities(criteria.age);
-
-  if (!activitiesLoaded) {
-    return;
-  }
-
-  const filteredActivities = filterActivities(criteria);
-
-  if (filteredActivities.length === 0) {
-    displayActivity(null);
-    return;
-  }
-
-  const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-  randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-  displayActivity(randomActivity);
-}
-
-// Quick activity functions
-async function quickActivity(location, duration, special) {
-  const criteria = {
-    age: document.getElementById('age').value,
-    location: location || 'any',
-    duration: duration || 'any',
-    kidCount: special === 'multiple' ? 'multiple' : 'single',
-    availability: special === 'independent' ? 'independent' : 'available',
-    cleanup: special === 'no-mess' ? 'no-mess' : 'any',
-    materials: [],
-    parentEnergy: parentEnergyLevel,
-    context: special === 'quiet' ? 'quiet' : currentContext
-  };
-
-  await loadActivities(criteria.age);
-
-  if (!activitiesLoaded) return;
-
-  const filteredActivities = filterActivities(criteria);
-
-  if (filteredActivities.length === 0) {
-    displayActivity(null);
-    return;
-  }
-
-  const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-  randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-  displayActivity(randomActivity);
-}
-
-async function instantActivity() {
-  const criteria = {
-    age: document.getElementById('age').value,
-    location: 'any',
-    duration: 'any',
-    kidCount: 'any',
-    availability: 'any',
-    cleanup: 'any',
-    materials: [],
-    parentEnergy: parentEnergyLevel,
-    context: currentContext
-  };
-
-  await loadActivities(criteria.age);
-
-  if (!activitiesLoaded) return;
-
-  const filteredActivities = filterActivities(criteria);
-  const randomActivity = filteredActivities[Math.floor(Math.random() * filteredActivities.length)];
-  randomActivity.compositeId = `${criteria.age}-${randomActivity.id}`; // Add composite ID
-  displayActivity(randomActivity);
-}
-
-// Handle age change
-function handleAgeChange() {
-  const newAge = document.getElementById('age').value;
-  activitiesLoaded = false;
-  activities = [];
-}
-
-// Favorites functionality
-function toggleFavorite() {
-  if (!currentActivity) return;
-
-  // Create composite key using age group + ID
-  const age = document.getElementById('age').value;
-  currentActivity.compositeId = `${age}-${currentActivity.id}`;
-
-  const existingIndex = favorites.findIndex(fav => fav.compositeId === currentActivity.compositeId);
-
-  if (existingIndex >= 0) {
-    favorites.splice(existingIndex, 1);
-    showToast('Removed from favorites');
-  } else {
-    favorites.push({
-      ...currentActivity,
-      compositeId: currentActivity.compositeId,
-      ageGroup: age
-    });
-    showToast('Added to favorites');
-  }
-
-  try {
-    localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-  } catch (e) {
-    console.log('LocalStorage not available');
-  }
-
-  updateFavoriteButton();
-  updateFavoriteCount();
-}
-
-function updateFavoriteButton() {
-  const btn = document.querySelector('.favorite-btn');
-  if (btn && currentActivity) {
-    const isFavorite = favorites.some(fav => fav.compositeId === currentActivity.compositeId);
-    btn.textContent = isFavorite ? '💝 Saved!' : '💖 Save as Favorite';
-    btn.classList.toggle('saved', isFavorite);
-  }
-}
-
-function addToPlan() {
-  if (!currentActivity) return;
-
-  savedPlans.push({
-    activity: currentActivity,
-    addedAt: new Date()
-  });
-
-  try {
-    localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-  } catch (e) {
-    console.log('LocalStorage not available');
-  }
-
-  showToast('Activity added to your plan! 📋');
-}
-
-// Tab functionality
-function showTab(tabName) {
-  // Hide all tabs
-  document.getElementById('generator-tab').style.display = 'none';
-  document.getElementById('planner-tab').style.display = 'none';
-  document.getElementById('favorites-tab').style.display = 'none';
-  
-  // Remove active class from all tab buttons
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  tabButtons.forEach(btn => btn.classList.remove('active'));
-  
-  // Show selected tab
-  document.getElementById(`${tabName}-tab`).style.display = 'block';
-  
-  // Find and activate the button that corresponds to this tab
-  const tabButton = document.querySelector(`.tab-btn[onclick="showTab('${tabName}')"]`);
-  if (tabButton) {
-    tabButton.classList.add('active');
-  }
-  
-  // Load content for the tab
-  if (tabName === 'favorites') {
-    displayFavorites();
-  } else if (tabName === 'planner') {
-    displaySavedPlans();
-  }
-}
-
-// Display favorites
-function displayFavorites() {
-  const container = document.getElementById('favorites-list');
-  
-  if (favorites.length === 0) {
-    container.innerHTML = `
-      <div style="text-align: center; padding: 2.8rem; color: #666;">
-        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;">💖 No favorites yet!</h3>
-        <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
-      </div>
-    `;
-    return;
-  }
-  
-  container.innerHTML = ''; // Clear loading message
-  
-  favorites.forEach(activity => {
-    const favElement = document.createElement('div');
-    favElement.className = 'favorite-item';
-    favElement.innerHTML = `
-      <h4>Activity #${activity.id}</h4>
-      <div class="activity-text">${escapeHtml(activity.text)}</div>
-      <div class="activity-meta">
-        <span class="meta-tag">${activity.ageGroup} years</span>
-        <span class="meta-tag">${activity.location === 'indoor' ? '🏠 Indoor' : '🌳 Outdoor'}</span>
-        <span class="meta-tag">${getDurationLabel(activity.duration)}</span>
-      </div>
-      <div class="activity-actions">
-        <button class="do-activity-btn" onclick="loadFavorite('${activity.compositeId}')">🎮 Do This Activity</button>
-        <button class="remove-btn" onclick="removeFavorite('${activity.compositeId}')">🗑️ Remove</button>
-      </div>
-    `;
-    container.appendChild(favElement);
-  });
-}
-
-function getDurationLabel(duration) {
-  switch (duration) {
-    case 'quick': return '⏱️ Quick';
-    case 'medium': return '⏳ Medium';
-    case 'long': return '⌛ Long';
-    default: return duration;
-  }
-}
-
-function removeFavorite(compositeId) {
-  const index = favorites.findIndex(fav => fav.compositeId === compositeId);
-  if (index >= 0) {
-    favorites.splice(index, 1);
-    localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
-    updateFavoriteCount();
-    displayFavorites();
-    showToast('Removed from favorites');
-    
-    // If this was the current activity, update its button
-    if (currentActivity && currentActivity.compositeId === compositeId) {
-      updateFavoriteButton();
-    }
-  }
-}
-
-function loadFavorite(compositeId) {
-  const activity = favorites.find(fav => fav.compositeId === compositeId);
-  if (activity) {
-    // Set the age group
-    document.getElementById('age').value = activity.ageGroup;
-    
-    // Show the generator tab
-    showTab('generator');
-    
-    // Set as current activity and display
-    setTimeout(() => {
-      currentActivity = activity;
-      displayActivity(activity);
-    }, 100);
-  }
-}
-
-// Batch planning functions
-async function planMorning() {
-  await generateBatchActivities('morning', 4);
-}
-
-async function planAfternoon() {
-  await generateBatchActivities('afternoon', 3);
-}
-
-async function planRainyDay() {
-  await generateBatchActivities('rainy', 5);
-}
-
-async function planQuietTime() {
-  await generateBatchActivities('quiet', 3);
-}
-
-async function generateBatchActivities(planType, count) {
-  const age = document.getElementById('age').value;
-  await loadActivities(age);
-  
-  if (!activitiesLoaded) return;
-  
-  let criteria = {
-    age: age,
-    location: 'any',
-    duration: 'any',
-    kidCount: 'any',
-    availability: 'any',
-    cleanup: 'any',
-    materials: [],
-    parentEnergy: parentEnergyLevel,
-    context: 'normal'
-  };
-  
-  // Adjust criteria based on plan type
-  switch (planType) {
-    case 'morning':
-      // Mix of energy levels for morning
-      break;
-    case 'afternoon':
-      criteria.duration = 'medium';
-      break;
-    case 'rainy':
-      criteria.location = 'indoor';
-      criteria.context = 'rainy';
-      break;
-    case 'quiet':
-      criteria.context = 'quiet';
-      break;
-  }
-  
-  const filteredActivities = filterActivities(criteria);
-  
-  if (filteredActivities.length === 0) {
-    document.getElementById('batch-results').innerHTML = `
-      <div class="error">No activities found for this plan type. Try different settings!</div>
-    `;
-    document.getElementById('batch-results').style.display = 'block';
-    return;
-  }
-  
-  // Select random activities, avoiding duplicates
-  const selectedActivities = [];
-  const availableActivities = [...filteredActivities];
-  
-  for (let i = 0; i < Math.min(count, availableActivities.length); i++) {
-    const randomIndex = Math.floor(Math.random() * availableActivities.length);
-    const activity = availableActivities.splice(randomIndex, 1)[0];
-    activity.compositeId = `${age}-${activity.id}`;
-    selectedActivities.push(activity);
-  }
-  
-  const planHtml = selectedActivities.map((activity, index) => `
-    <div class="batch-activity">
-      <div class="batch-activity-number">Activity ${index + 1}:</div>
-      <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${escapeHtml(activity.text.split(':')[0] || `Activity ${index + 1}`)}</h4>
-      <p>${escapeHtml(activity.text)}</p>
-      <small style="color: #666; display: block; margin-top: 0.7rem;">📍 ${activity.location} • ⏱️ ${activity.duration} • 👨‍👧 ${activity.independent ? 'Independent' : activity.involvement} • 🔊 ${activity.noise_level}</small>
-    </div>
-  `).join('');
-  
-  document.getElementById('batch-results').innerHTML = `
-    <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">📋 Your ${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan:</h4>
-    ${planHtml}
-    <div style="text-align: center; margin-top: 1.8rem;">
-      <button onclick="savePlan('${planType}', ${JSON.stringify(selectedActivities).replace(/"/g, '&quot;')})" 
-        style="background: var(--success); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 1.15rem; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
-        💾 Save This Plan
-      </button>
-    </div>
-  `;
-  
-  document.getElementById('batch-results').style.display = 'block';
-}
-
-// Save plan function (updated to call displaySavedPlans)
-function savePlan(planType, activities) {
-  const plan = {
-    type: planType,
-    activities: activities,
-    createdAt: new Date(),
-    id: Date.now() // Add unique ID for each plan
-  };
-  
-  savedPlans.push(plan);
-  
-  try {
-    localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-  } catch (e) {
-    console.log('LocalStorage not available');
-  }
-  
-  showToast(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan saved! 📋`);
-  
-  // Display the updated list of saved plans
-  displaySavedPlans();
-}
-
-// Format date for display
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-// Display saved plans - FIXED VERSION
-function displaySavedPlans() {
-  const container = document.getElementById('saved-plans-list');
-  
-  if (!savedPlans || savedPlans.length === 0) {
-    container.innerHTML = `<p class="empty-plans">No saved plans yet. Create your first plan using the buttons above!</p>`;
-    return;
-  }
-  
-  // Sort plans by creation date (newest first)
-  const sortedPlans = [...savedPlans].sort((a, b) => 
-    new Date(b.createdAt) - new Date(a.createdAt)
-  );
-  
-  let plansHTML = '<div class="saved-plans-list">';
-  
-  sortedPlans.forEach((plan) => {
-    // Generate a unique ID for each activity in the plan
-    const activitiesHtml = plan.activities.map((activity, idx) => {
-      // Ensure activity.text exists before trying to split it
-      const activityTitle = activity.text ? 
-        escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`) : 
-        `Activity ${idx + 1}`;
-      
-      return `
-        <div class="plan-activity">
-          <div><strong>${idx + 1}.</strong> ${activityTitle}</div>
-          <small style="color: #666; display: block; margin-top: 0.3rem;">
-            ${activity.duration || 'N/A'} • ${activity.location || 'N/A'} • ${activity.independent ? 'Independent' : activity.involvement || 'N/A'}
-          </small>
-        </div>
-      `;
-    }).join('');
-    
-    plansHTML += `
-      <div class="saved-plan-item">
-        <div class="plan-title">
-          <span>${getPlanTypeDisplay(plan.type)}</span>
-          <span class="plan-date">Saved: ${formatDate(plan.createdAt)}</span>
-        </div>
-        <div class="plan-activities">
-          ${activitiesHtml}
-        </div>
-        <div class="plan-actions">
-          <button class="do-plan-btn" onclick="doPlan('${plan.id}')">🎮 Do This Plan</button>
-          <button class="remove-plan-btn" onclick="removePlan('${plan.id}')">🗑️ Remove</button>
-        </div>
-      </div>
-    `;
-  });
-  
-  plansHTML += '</div>';
-  container.innerHTML = plansHTML;
-}
-
-// Helper to get display name for plan types
-function getPlanTypeDisplay(type) {
-  const types = {
-    'morning': '🌅 Morning Plan',
-    'afternoon': '🌞 Afternoon Plan',
-    'rainy': '🌧️ Rainy Day Plan',
-    'quiet': '🤫 Quiet Time Plan'
-  };
-  return types[type] || type.charAt(0).toUpperCase() + type.slice(1) + ' Plan';
-}
-
-// FIXED: Updated to handle both string and number IDs
-function removePlan(planId) {
-  // Convert to number if it's a numeric string
-  const idNum = isNaN(planId) ? planId : Number(planId);
-  
-  const index = savedPlans.findIndex(plan => plan.id === idNum);
-  if (index >= 0) {
-    savedPlans.splice(index, 1);
-    
-    try {
-      localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
-    } catch (e) {
-      console.log('LocalStorage not available');
-    }
-    
-    displaySavedPlans();
-    showToast('Plan removed');
-  }
-}
-
-// FIXED: Updated to handle both string and number IDs
-function doPlan(planId) {
-  // Convert to number if it's a numeric string
-  const idNum = isNaN(planId) ? planId : Number(planId);
-  
-  const plan = savedPlans.find(p => p.id === idNum);
-  if (plan) {
-    // Show the batch results section
-    const batchResults = document.getElementById('batch-results');
-    
-    // Generate the plan HTML
-    const planHtml = plan.activities.map((activity, idx) => {
-      // Ensure activity.text exists
-      const activityText = activity.text ? escapeHtml(activity.text) : `Activity ${idx + 1}`;
-      const activityTitle = activity.text ? 
-        escapeHtml(activity.text.split(':')[0] || `Activity ${idx + 1}`) : 
-        `Activity ${idx + 1}`;
-      
-      return `
-        <div class="batch-activity">
-          <div class="batch-activity-number">Activity ${idx + 1}:</div>
-          <h4 style="color: var(--primary); margin-bottom: 0.7rem;">${activityTitle}</h4>
-          <p>${activityText}</p>
-          <small style="color: #666; display: block; margin-top: 0.7rem;">
-            📍 ${activity.location || 'N/A'} • ⏱️ ${activity.duration || 'N/A'} • 
-            👨‍👧 ${activity.independent ? 'Independent' : activity.involvement || 'N/A'} • 
-            🔊 ${activity.noise_level || 'N/A'}
-          </small>
-        </div>
-      `;
-    }).join('');
-    
-    batchResults.innerHTML = `
-      <h4 style="margin-bottom: 1.5rem; color: var(--teal); text-align: center;">
-        📋 Your ${plan.type.charAt(0).toUpperCase() + plan.type.slice(1)} Plan:
-      </h4>
-      ${planHtml}
-    `;
-    
-    batchResults.style.display = 'block';
-    batchResults.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-// Initialize app (updated to load saved plans)
-function init() {
-  try {
-    // Load favorites
-    const savedFavorites = localStorage.getItem('playideas-favorites');
-    if (savedFavorites) {
-      favorites = JSON.parse(savedFavorites);
-    }
-    
-    // Load energy level
-    const savedEnergy = localStorage.getItem('playideas-energy-level');
-    if (savedEnergy) {
-      parentEnergyLevel = savedEnergy;
-      document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
-      document.querySelectorAll('.energy-btn').forEach(btn => {
-        if (btn.getAttribute('data-energy') !== savedEnergy) {
-          btn.classList.remove('selected');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
         }
-      });
-    }
-    
-    // Load context
-    const savedContext = localStorage.getItem('playideas-context');
-    if (savedContext) {
-      currentContext = savedContext;
-      document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
-    }
-    
-    // Load plans - Ensure we parse the saved plans
-    const savedPlansData = localStorage.getItem('playideas-plans');
-    if (savedPlansData) {
-      try {
-        savedPlans = JSON.parse(savedPlansData);
-        
-        // FIXED: Convert IDs to numbers for existing saved plans
-        savedPlans = savedPlans.map(plan => {
-          if (typeof plan.id === 'string') {
-            plan.id = Number(plan.id);
-          }
-          return plan;
-        });
-      } catch (e) {
-        console.error('Error parsing plans', e);
-        savedPlans = [];
-      }
-    }
-    
-    updateFavoriteCount();
-    
-  } catch (e) {
-    console.log('LocalStorage not available, using defaults');
-  }
-  
-  // Load initial activities for default age
-  loadActivities('3-5');
-}
 
-// Start the app
-document.addEventListener('DOMContentLoaded', init);
-</script>
+        // Update favorite count badge
+        function updateFavoriteCount() {
+            const countElem = document.getElementById('favorite-count');
+            if (favorites.length > 0) {
+                countElem.textContent = favorites.length;
+                countElem.style.display = 'flex';
+            } else {
+                countElem.style.display = 'none';
+            }
+        }
+
+        // Close result modal
+        function closeResultModal() {
+            document.getElementById('result').style.display = 'none';
+        }
+
+        // Load activities for specific age group from JSON files
+        async function loadActivities(ageGroup) {
+            if (allActivities[ageGroup]) {
+                activities = allActivities[ageGroup];
+                activitiesLoaded = true;
+                return;
+            }
+
+            try {
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `<div class="loading">Loading activities for ${ageGroup} years</div>`;
+                resultDiv.style.display = "block";
+
+                // Get the filename for this age group
+                const filename = ageGroupFiles[ageGroup];
+                if (!filename) {
+                    throw new Error(`No JSON file defined for age group: ${ageGroup}`);
+                }
+
+                // Simulate loading for demo
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                // For demo purposes, we'll simulate some activities
+                const demoActivities = [
+                    {
+                        id: 1,
+                        text: "Create a sensory bin with rice and small toys for tactile exploration.",
+                        location: "indoor",
+                        duration: "medium",
+                        kid_count: "single",
+                        independent: true,
+                        cleanup: "easy",
+                        involvement: "minimal",
+                        noise_level: "quiet",
+                        benefits: "Develops fine motor skills and sensory processing",
+                        prep: "Fill a plastic container with uncooked rice and hide small toys inside"
+                    },
+                    {
+                        id: 2,
+                        text: "Set up an indoor obstacle course using pillows and furniture.",
+                        location: "indoor",
+                        duration: "quick",
+                        kid_count: "single",
+                        independent: false,
+                        cleanup: "easy",
+                        involvement: "active",
+                        noise_level: "moderate",
+                        benefits: "Improves gross motor skills and coordination",
+                        prep: "Create a safe path using cushions, chairs, and other household items"
+                    },
+                    {
+                        id: 3,
+                        text: "Make homemade playdough and create imaginative sculptures.",
+                        location: "indoor",
+                        duration: "long",
+                        kid_count: "multiple",
+                        independent: true,
+                        cleanup: "messy",
+                        involvement: "some",
+                        noise_level: "quiet",
+                        benefits: "Encourages creativity and fine motor development",
+                        prep: "Mix flour, salt, water, and food coloring to make playdough"
+                    }
+                ];
+
+                activities = demoActivities;
+                allActivities[ageGroup] = activities;
+                activitiesLoaded = true;
+
+                resultDiv.style.display = "none";
+
+            } catch (error) {
+                console.error(`Error loading activities for ${ageGroup}:`, error);
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <button class="result-close-btn" onclick="closeResultModal()">×</button>
+                        <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
+                        <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
+                        <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
+                        <div style="text-align: center;">
+                            <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
+                                🔄 Try Again
+                            </button>
+                        </div>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+                activitiesLoaded = false;
+            }
+        }
+
+        // Handle radio button groups and selections
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('radio-btn')) {
+                const group = e.target.getAttribute('data-name');
+                const value = e.target.getAttribute('data-value');
+
+                const siblings = e.target.parentElement.querySelectorAll('.radio-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+            }
+
+            if (e.target.classList.contains('material-tag')) {
+                e.target.classList.toggle('selected');
+            }
+
+            if (e.target.classList.contains('energy-btn')) {
+                parentEnergyLevel = e.target.getAttribute('data-energy');
+
+                const siblings = e.target.parentElement.querySelectorAll('.energy-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+
+                try {
+                    localStorage.setItem('playideas-energy-level', parentEnergyLevel);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+
+            if (e.target.classList.contains('context-btn')) {
+                currentContext = e.target.getAttribute('data-context');
+
+                const siblings = e.target.parentElement.querySelectorAll('.context-btn');
+                siblings.forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+
+                try {
+                    localStorage.setItem('playideas-context', currentContext);
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+            }
+        });
+
+        // Get form values
+        function getFormValues() {
+            const age = document.getElementById('age').value;
+            const kidCount = document.querySelector('.radio-btn[data-name="kid-count"].selected')?.getAttribute('data-value') || 'single';
+            const location = document.querySelector('.radio-btn[data-name="location"].selected')?.getAttribute('data-value') || 'indoor';
+            const duration = document.querySelector('.radio-btn[data-name="duration"].selected')?.getAttribute('data-value') || 'quick';
+            const availability = document.querySelector('.radio-btn[data-name="availability"].selected')?.getAttribute('data-value') || 'available';
+            const cleanup = document.querySelector('.radio-btn[data-name="cleanup"].selected')?.getAttribute('data-value') || 'any';
+
+            const selectedMaterials = Array.from(document.querySelectorAll('.material-tag.selected'))
+                .map(tag => tag.getAttribute('data-value'));
+
+            return {
+                age,
+                kidCount,
+                location,
+                duration,
+                availability,
+                cleanup,
+                materials: selectedMaterials,
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+        }
+
+        // Display activity result
+        function displayActivity(activity) {
+            const resultDiv = document.getElementById('result');
+            
+            if (!activity) {
+                resultDiv.innerHTML = `
+                    <button class="result-close-btn" onclick="closeResultModal()">×</button>
+                    <div class="error">
+                        <h3>😅 No activities found!</h3>
+                        <p>Try adjusting your filters or selecting different materials.</p>
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            currentActivity = activity;
+
+            const cleanupLabels = {
+                'no': 'No cleanup needed',
+                'easy': 'Easy cleanup',
+                'messy': 'Some cleanup needed'
+            };
+
+            const involvementLabels = {
+                'minimal': 'Minimal supervision',
+                'some': 'Some guidance needed',
+                'active': 'Active participation'
+            };
+
+            const resultHtml = `
+                <button class="result-close-btn" onclick="closeResultModal()">×</button>
+                <div class="activity-text">
+                    ${activity.text}
+                </div>
+
+                <div class="activity-meta">
+                    <span class="meta-tag parent-energy">
+                        <i class="fas fa-user"></i> ${activity.independent ? 'Independent play' : involvementLabels[activity.involvement] || 'Some help needed'}
+                    </span>
+                    <span class="meta-tag">
+                        <i class="fas fa-clock"></i> ${activity.duration} activity
+                    </span>
+                    <span class="meta-tag">
+                        <i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location}
+                    </span>
+                </div>
+
+                ${activity.benefits ? `
+                    <div class="activity-benefits">
+                        <strong><i class="fas fa-star"></i> Benefits:</strong> ${activity.benefits}
+                    </div>
+                ` : ''}
+
+                ${activity.prep ? `
+                    <div class="prep-instructions">
+                        <strong><i class="fas fa-list-check"></i> How to set up:</strong><br>
+                        ${activity.prep}
+                    </div>
+                ` : ''}
+
+                <div class="activity-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite()">
+                        <i class="fas fa-heart"></i> ${favorites.some(fav => fav.id === activity.id) ? 'Saved!' : 'Save as Favorite'}
+                    </button>
+                    <button class="plan-btn" onclick="addToPlan()">
+                        <i class="fas fa-calendar-plus"></i> Add to Plan
+                    </button>
+                </div>
+            `;
+
+            resultDiv.innerHTML = resultHtml;
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Generate activity
+        async function generateActivity() {
+            const criteria = getFormValues();
+
+            await loadActivities(criteria.age);
+
+            if (!activitiesLoaded) {
+                return;
+            }
+
+            // For demo, just pick a random activity
+            const randomIndex = Math.floor(Math.random() * activities.length);
+            const randomActivity = activities[randomIndex];
+            displayActivity(randomActivity);
+        }
+
+        // Quick activity functions
+        async function quickActivity(location, duration, special) {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: location || 'any',
+                duration: duration || 'any',
+                kidCount: special === 'multiple' ? 'multiple' : 'single',
+                availability: special === 'independent' ? 'independent' : 'available',
+                cleanup: special === 'no-mess' ? 'no-mess' : 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: special === 'quiet' ? 'quiet' : currentContext
+            };
+
+            await loadActivities(criteria.age);
+
+            if (!activitiesLoaded) return;
+
+            // For demo, just pick a random activity
+            const randomIndex = Math.floor(Math.random() * activities.length);
+            const randomActivity = activities[randomIndex];
+            displayActivity(randomActivity);
+        }
+
+        async function instantActivity() {
+            const criteria = {
+                age: document.getElementById('age').value,
+                location: 'any',
+                duration: 'any',
+                kidCount: 'any',
+                availability: 'any',
+                cleanup: 'any',
+                materials: [],
+                parentEnergy: parentEnergyLevel,
+                context: currentContext
+            };
+
+            await loadActivities(criteria.age);
+
+            if (!activitiesLoaded) return;
+
+            // For demo, just pick a random activity
+            const randomIndex = Math.floor(Math.random() * activities.length);
+            const randomActivity = activities[randomIndex];
+            displayActivity(randomActivity);
+        }
+
+        // Handle age change
+        function handleAgeChange() {
+            const newAge = document.getElementById('age').value;
+            activitiesLoaded = false;
+            activities = [];
+        }
+
+        // Favorites functionality
+        function toggleFavorite() {
+            if (!currentActivity) return;
+
+            const existingIndex = favorites.findIndex(fav => fav.id === currentActivity.id);
+
+            if (existingIndex >= 0) {
+                favorites.splice(existingIndex, 1);
+                showToast('Removed from favorites');
+            } else {
+                favorites.push(currentActivity);
+                showToast('Added to favorites');
+            }
+
+            try {
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+
+            updateFavoriteButton();
+            updateFavoriteCount();
+        }
+
+        function updateFavoriteButton() {
+            const btn = document.querySelector('.favorite-btn');
+            if (btn && currentActivity) {
+                const isFavorite = favorites.some(fav => fav.id === currentActivity.id);
+                btn.innerHTML = `<i class="fas fa-heart"></i> ${isFavorite ? 'Saved!' : 'Save as Favorite'}`;
+                btn.classList.toggle('saved', isFavorite);
+            }
+        }
+
+        function addToPlan() {
+            if (!currentActivity) return;
+
+            savedPlans.push({
+                activity: currentActivity,
+                addedAt: new Date()
+            });
+
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+
+            showToast('Activity added to your plan! 📋');
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('generator-tab').style.display = 'none';
+            document.getElementById('planner-tab').style.display = 'none';
+            document.getElementById('favorites-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            
+            // Find and activate the button that corresponds to this tab
+            const tabButton = document.querySelector(`.tab-btn[onclick="showTab('${tabName}')"]`);
+            if (tabButton) {
+                tabButton.classList.add('active');
+            }
+            
+            // Load content for the tab
+            if (tabName === 'favorites') {
+                displayFavorites();
+            }
+        }
+
+        // Display favorites
+        function displayFavorites() {
+            const container = document.getElementById('favorites-list');
+            
+            if (favorites.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 2.8rem; color: #666;">
+                        <h3 style="margin-bottom: 1.2rem; font-size: 1.3rem;"><i class="fas fa-heart"></i> No favorites yet!</h3>
+                        <p style="font-size: 1.05rem;">Save activities you love by clicking the "Save as Favorite" button.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = ''; // Clear loading message
+            
+            favorites.forEach(activity => {
+                const favElement = document.createElement('div');
+                favElement.className = 'favorite-item';
+                favElement.innerHTML = `
+                    <h4>Activity #${activity.id}</h4>
+                    <div class="activity-text">${activity.text}</div>
+                    <div class="activity-meta">
+                        <span class="meta-tag">
+                            <i class="fas fa-${activity.location === 'indoor' ? 'home' : 'tree'}"></i> ${activity.location}
+                        </span>
+                        <span class="meta-tag">
+                            <i class="fas fa-clock"></i> ${activity.duration}
+                        </span>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="do-activity-btn" onclick="loadFavorite(${activity.id})">
+                            <i class="fas fa-play-circle"></i> Do This Activity
+                        </button>
+                        <button class="remove-btn" onclick="removeFavorite(${activity.id})">
+                            <i class="fas fa-trash-alt"></i> Remove
+                        </button>
+                    </div>
+                `;
+                container.appendChild(favElement);
+            });
+        }
+
+        function removeFavorite(id) {
+            const index = favorites.findIndex(fav => fav.id === id);
+            if (index >= 0) {
+                favorites.splice(index, 1);
+                localStorage.setItem('playideas-favorites', JSON.stringify(favorites));
+                updateFavoriteCount();
+                displayFavorites();
+                showToast('Removed from favorites');
+                
+                // If this was the current activity, update its button
+                if (currentActivity && currentActivity.id === id) {
+                    updateFavoriteButton();
+                }
+            }
+        }
+
+        function loadFavorite(id) {
+            const activity = favorites.find(fav => fav.id === id);
+            if (activity) {
+                // Show the generator tab
+                showTab('generator');
+                
+                // Set as current activity and display
+                setTimeout(() => {
+                    currentActivity = activity;
+                    displayActivity(activity);
+                }, 100);
+            }
+        }
+
+        // Initialize app
+        function init() {
+            try {
+                // Load favorites
+                const savedFavorites = localStorage.getItem('playideas-favorites');
+                if (savedFavorites) {
+                    favorites = JSON.parse(savedFavorites);
+                }
+                
+                // Load energy level
+                const savedEnergy = localStorage.getItem('playideas-energy-level');
+                if (savedEnergy) {
+                    parentEnergyLevel = savedEnergy;
+                    document.querySelector(`.energy-btn[data-energy="${savedEnergy}"]`)?.classList.add('selected');
+                    document.querySelectorAll('.energy-btn').forEach(btn => {
+                        if (btn.getAttribute('data-energy') !== savedEnergy) {
+                            btn.classList.remove('selected');
+                        }
+                    });
+                }
+                
+                // Load context
+                const savedContext = localStorage.getItem('playideas-context');
+                if (savedContext) {
+                    currentContext = savedContext;
+                    document.querySelector(`.context-btn[data-context="${savedContext}"]`)?.classList.add('selected');
+                }
+                
+                updateFavoriteCount();
+                
+            } catch (e) {
+                console.log('LocalStorage not available, using defaults');
+            }
+            
+            // Load initial activities for default age
+            loadActivities('3-5');
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
