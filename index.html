@@ -375,6 +375,32 @@ select:focus {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Updated close button styles - less prominent grey */
+.result-close-btn {
+  position: fixed; /* Changed from absolute to fixed for consistent positioning */
+  top: 15px;
+  right: 15px;
+  background: #888; /* Changed from red to grey */
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 101;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.result-close-btn:hover {
+  background: #666; /* Darker on hover */
+}
+
 /* Mobile Modal Styling */
 @media (max-width: 600px) {
   #result {
@@ -391,23 +417,18 @@ select:focus {
   }
   
   .result-close-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: var(--danger);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 101;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    position: fixed; /* Keep fixed for mobile */
+  }
+}
+
+/* Adjust padding for desktop view */
+@media (min-width: 601px) {
+  #result {
+    padding-top: 3.5rem; /* Add space for close button */
+  }
+  
+  .result-close-btn {
+    position: absolute; /* For desktop, position relative to result container */
   }
 }
 
