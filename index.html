@@ -1172,7 +1172,6 @@ async function loadActivities(ageGroup) {
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `
       <div class="error">
-        <button class="result-close-btn" onclick="closeResultModal()">×</button>
         <h3 style="color: var(--danger); margin-bottom: 1.2rem;">😞 Oops! Couldn't load activities</h3>
         <p style="margin-bottom: 1.2rem;">Error: ${error.message}</p>
         <p style="font-size: 1rem; color: #666; margin-bottom: 1.5rem;">Make sure the JSON files are in the same folder as this HTML file.</p>
@@ -1335,17 +1334,14 @@ function filterActivities(criteria) {
 
 // Display activity result
 function displayActivity(activity) {
-  const resultDiv = document.getElementById('result');
-  
   if (!activity) {
-    resultDiv.innerHTML = `
-      <button class="result-close-btn" onclick="closeResultModal()">×</button>
+    document.getElementById('result').innerHTML = `
       <div class="error">
         <h3>😅 No activities found!</h3>
         <p>Try adjusting your filters or selecting different materials.</p>
       </div>
     `;
-    resultDiv.style.display = 'block';
+    document.getElementById('result').style.display = 'block';
     return;
   }
 
@@ -1399,9 +1395,9 @@ function displayActivity(activity) {
     </div>
   `;
 
-  resultDiv.innerHTML = resultHtml;
-  resultDiv.style.display = 'block';
-  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('result').innerHTML = resultHtml;
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Generate activity
@@ -1960,7 +1956,7 @@ function init() {
     
     updateFavoriteCount();
     
-  } catch (e) {
+  } catch  (e) {
     console.log('LocalStorage not available, using defaults');
   }
   
