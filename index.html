@@ -922,11 +922,9 @@ input[type="radio"] {
 <div class="age-selector">
   <h3>👶 How old is your child?</h3>
   <select id="age" onchange="handleAgeChange()">
-    <option value="0-2">0-2 years</option>
-    <option value="3-5" selected>3-5 years</option>
-    <option value="6-8">6-8 years</option>
-    <option value="9-12">9-12 years</option>
-    <option value="12+">12+ years</option>
+    <option value="0-2">Babies & Toddlers (0-2)</option>
+    <option value="3-5">Preschoolers (3-5)</option>
+    <option value="6-11">School Age (6-11)</option>
   </select>
 </div>
 
@@ -1127,9 +1125,7 @@ let currentContext = 'normal';
 const ageGroupFiles = {
   "0-2": "activities-0-2.json",
   "3-5": "activities-3-5.json",
-  "6-8": "activities-6-8.json",
-  "9-12": "activities-9-12.json",
-  "12+": "activities-12plus.json"
+  "6-11": "activities-6-8.json"
 };
 
 // HTML escaping function for security
