@@ -720,6 +720,253 @@
         .error {
             color: var(--danger);
         }
+
+        /* New styles for the Planner section */
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-title {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .plan-date {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+        
+        .plan-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .plan-btn {
+            background: var(--gray-200);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .plan-btn:hover {
+            background: var(--gray-300);
+        }
+        
+        .plan-btn.remove {
+            color: var(--danger);
+        }
+        
+        .plan-btn.view {
+            color: var(--primary);
+        }
+        
+        .plan-activities {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .plan-activity {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-activity:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-badge {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--gray-200);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+            flex-shrink: 0;
+        }
+        
+        .empty-plans {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            border-radius: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .empty-plans i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray-300);
+        }
+        
+        .plan-generator {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-generator h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .plan-name-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .plan-name-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .plan-count {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 15px;
+        }
+        
+        .count-label {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        
+        .count-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .count-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-300);
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .count-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .count-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .plan-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 480px) {
+            .plan-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .plan-option {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .plan-option.selected {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        .plan-option i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .generate-plan-btn {
+            background: var(--teal);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(32, 201, 151, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .generate-plan-btn:hover {
+            background: #1ab08a;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(32, 201, 151, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -767,7 +1014,7 @@
     </div>
 
     <div id="generator-tab">
-        <!-- Enhanced Quick Actions Section -->
+        <!-- Quick Actions Section -->
         <div class="quick-actions">
             <h2>🚀 Need something NOW?</h2>
             <div class="quick-buttons">
@@ -865,19 +1112,51 @@
     </div>
 
     <div id="planner-tab" style="display: none;">
-        <div class="card">
-            <h3 class="card-title"><i class="fas fa-clipboard-list"></i> Activity Planning</h3>
-            <p style="margin-bottom: 1.8rem; color: #666; text-align: center;">Plan ahead with multiple activities!</p>
-
-            <div class="batch-buttons">
-                <button class="batch-btn" onclick="planMorning()">🌅 Plan My Morning<br><small>3-4 sequential activities</small></button>
-                <button class="batch-btn" onclick="planAfternoon()">🌞 Plan My Afternoon<br><small>Perfect for post-nap time</small></button>
-                <button class="batch-btn" onclick="planRainyDay()">🌧️ Rainy Day Plan<br><small>All indoor activities</small></button>
-                <button class="batch-btn" onclick="planQuietTime()">🤫 Quiet Time Plan<br><small>Calm, focused activities</small></button>
+        <div class="plan-generator">
+            <h3><i class="fas fa-magic"></i> Create a New Plan</h3>
+            
+            <input type="text" class="plan-name-input" id="plan-name" placeholder="Enter plan name (e.g. 'Morning Fun', 'Weekend Activities')">
+            
+            <div class="plan-count">
+                <div class="count-label">Number of Activities:</div>
+                <div class="count-controls">
+                    <button class="count-btn" onclick="changeActivityCount(-1)">-</button>
+                    <div class="count-value" id="activity-count">4</div>
+                    <button class="count-btn" onclick="changeActivityCount(1)">+</button>
+                </div>
             </div>
-
-            <div id="batch-results" class="batch-results">
-                <!-- Batch results will appear here -->
+            
+            <div class="plan-options">
+                <div class="plan-option" data-type="morning" onclick="selectPlanType(this)">
+                    <i class="fas fa-sun"></i>
+                    Morning Plan
+                </div>
+                <div class="plan-option" data-type="afternoon" onclick="selectPlanType(this)">
+                    <i class="fas fa-cloud-sun"></i>
+                    Afternoon Plan
+                </div>
+                <div class="plan-option" data-type="rainy" onclick="selectPlanType(this)">
+                    <i class="fas fa-cloud-rain"></i>
+                    Rainy Day Plan
+                </div>
+                <div class="plan-option" data-type="quiet" onclick="selectPlanType(this)">
+                    <i class="fas fa-volume-mute"></i>
+                    Quiet Time Plan
+                </div>
+            </div>
+            
+            <button class="generate-plan-btn" onclick="generatePlan()">
+                <i class="fas fa-plus-circle"></i> Generate New Plan
+            </button>
+        </div>
+        
+        <div id="saved-plans-container">
+            <h3 style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem; color: var(--primary);">
+                <i class="fas fa-clipboard-list"></i> Your Saved Plans
+            </h3>
+            
+            <div id="saved-plans-list">
+                <!-- Saved plans will appear here -->
             </div>
         </div>
     </div>
@@ -907,6 +1186,8 @@
         let activitiesLoaded = false;
         let parentEnergyLevel = 'low';
         let currentContext = 'normal';
+        let currentPlanType = 'morning';
+        let activityCount = 4;
 
         // Map age groups to JSON filenames
         const ageGroupFiles = {
@@ -1385,6 +1666,8 @@
             // Load content for the tab
             if (tabName === 'favorites') {
                 displayFavorites();
+            } else if (tabName === 'planner') {
+                displaySavedPlans();
             }
         }
 
@@ -1466,6 +1749,227 @@
             }
         }
 
+        // ----------------------
+        // PLANNER FUNCTIONALITY
+        // ----------------------
+        
+        // Change activity count for plans
+        function changeActivityCount(change) {
+            activityCount = Math.max(1, Math.min(8, activityCount + change));
+            document.getElementById('activity-count').textContent = activityCount;
+        }
+        
+        // Select plan type
+        function selectPlanType(element) {
+            // Remove selected class from all options
+            document.querySelectorAll('.plan-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Update current plan type
+            currentPlanType = element.getAttribute('data-type');
+        }
+        
+        // Generate a new plan
+        async function generatePlan() {
+            const planName = document.getElementById('plan-name').value.trim();
+            
+            if (!planName) {
+                showToast('Please enter a plan name');
+                document.getElementById('plan-name').focus();
+                return;
+            }
+            
+            const criteria = getFormValues();
+            criteria.planType = currentPlanType;
+            
+            await loadActivities(criteria.age);
+            
+            if (!activitiesLoaded) {
+                showToast('Failed to load activities');
+                return;
+            }
+            
+            // Apply plan-specific filters
+            let filteredActivities = filterActivities(criteria);
+            
+            // Additional filtering based on plan type
+            switch(currentPlanType) {
+                case 'morning':
+                    filteredActivities = filteredActivities.filter(a => 
+                        a.energy_required !== 'high' && a.duration !== 'long'
+                    );
+                    break;
+                case 'afternoon':
+                    filteredActivities = filteredActivities.filter(a => 
+                        a.duration === 'medium' || a.duration === 'long'
+                    );
+                    break;
+                case 'rainy':
+                    filteredActivities = filteredActivities.filter(a => 
+                        a.location === 'indoor'
+                    );
+                    break;
+                case 'quiet':
+                    filteredActivities = filteredActivities.filter(a => 
+                        a.noise_level !== 'loud' && a.energy_required !== 'high'
+                    );
+                    break;
+            }
+            
+            if (filteredActivities.length === 0) {
+                showToast('No activities found for this plan type');
+                return;
+            }
+            
+            // Select random activities for the plan
+            const selectedActivities = [];
+            const maxActivities = Math.min(activityCount, filteredActivities.length);
+            
+            // Create a copy to avoid modifying the original array
+            const availableActivities = [...filteredActivities];
+            
+            for (let i = 0; i < maxActivities; i++) {
+                if (availableActivities.length === 0) break;
+                
+                const randomIndex = Math.floor(Math.random() * availableActivities.length);
+                const selectedActivity = availableActivities.splice(randomIndex, 1)[0];
+                selectedActivity.compositeId = `${criteria.age}-${selectedActivity.id}`;
+                selectedActivities.push(selectedActivity);
+            }
+            
+            // Create the plan object
+            const newPlan = {
+                id: Date.now().toString(),
+                name: planName,
+                type: currentPlanType,
+                activities: selectedActivities,
+                created: new Date().toISOString(),
+                ageGroup: criteria.age
+            };
+            
+            // Add to saved plans
+            savedPlans.unshift(newPlan);
+            
+            // Save to localStorage
+            try {
+                localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+            
+            // Update UI
+            displaySavedPlans();
+            showToast('Plan created successfully!');
+            
+            // Reset form
+            document.getElementById('plan-name').value = '';
+        }
+        
+        // Display saved plans
+        function displaySavedPlans() {
+            const container = document.getElementById('saved-plans-list');
+            
+            if (savedPlans.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-plans">
+                        <i class="fas fa-calendar-plus"></i>
+                        <h3>No saved plans yet!</h3>
+                        <p>Create your first plan using the form above.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = ''; // Clear existing content
+            
+            savedPlans.forEach(plan => {
+                const planElement = document.createElement('div');
+                planElement.className = 'plan-card';
+                
+                let activitiesHtml = '';
+                plan.activities.forEach((activity, index) => {
+                    activitiesHtml += `
+                        <li class="plan-activity">
+                            <span class="activity-badge">${index + 1}</span>
+                            <div>${escapeHtml(activity.text)}</div>
+                        </li>
+                    `;
+                });
+                
+                const planDate = new Date(plan.created);
+                const dateString = planDate.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                planElement.innerHTML = `
+                    <div class="plan-header">
+                        <div class="plan-title">${escapeHtml(plan.name)}</div>
+                        <div class="plan-date">${dateString}</div>
+                    </div>
+                    
+                    <div class="plan-actions">
+                        <button class="plan-btn view" title="View Plan" onclick="viewPlan('${plan.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="plan-btn remove" title="Remove Plan" onclick="removePlan('${plan.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    
+                    <ul class="plan-activities">
+                        ${activitiesHtml}
+                    </ul>
+                `;
+                
+                container.appendChild(planElement);
+            });
+        }
+        
+        // View a saved plan
+        function viewPlan(planId) {
+            const plan = savedPlans.find(p => p.id === planId);
+            if (!plan) return;
+            
+            // Set the age group
+            document.getElementById('age').value = plan.ageGroup;
+            
+            // Show the generator tab
+            showTab('generator');
+            
+            // Display the first activity in the plan
+            if (plan.activities.length > 0) {
+                setTimeout(() => {
+                    currentActivity = plan.activities[0];
+                    displayActivity(currentActivity);
+                }, 100);
+            }
+        }
+        
+        // Remove a saved plan
+        function removePlan(planId) {
+            const index = savedPlans.findIndex(p => p.id === planId);
+            if (index >= 0) {
+                savedPlans.splice(index, 1);
+                
+                // Update localStorage
+                try {
+                    localStorage.setItem('playideas-plans', JSON.stringify(savedPlans));
+                } catch (e) {
+                    console.log('LocalStorage not available');
+                }
+                
+                // Update UI
+                displaySavedPlans();
+                showToast('Plan removed');
+            }
+        }
+
         // Initialize app
         function init() {
             try {
@@ -1473,6 +1977,12 @@
                 const savedFavorites = localStorage.getItem('playideas-favorites');
                 if (savedFavorites) {
                     favorites = JSON.parse(savedFavorites);
+                }
+                
+                // Load saved plans
+                const savedPlansData = localStorage.getItem('playideas-plans');
+                if (savedPlansData) {
+                    savedPlans = JSON.parse(savedPlansData);
                 }
                 
                 // Load energy level
@@ -1502,6 +2012,9 @@
             
             // Load initial activities for default age
             loadActivities('3-5');
+            
+            // Set default plan type
+            document.querySelector('.plan-option[data-type="morning"]').classList.add('selected');
         }
 
         // Start the app
