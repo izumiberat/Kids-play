@@ -41,6 +41,37 @@ h1 {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
+/* ADD THIS NEW STYLE FOR AGE SELECTOR */
+.age-selector {
+  background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+  padding: 1.2rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.age-selector h3 {
+  margin-bottom: 0.75rem;
+  color: #0277bd;
+  font-size: 1.2rem;
+}
+
+.age-selector select {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.85rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+  
 /* Parent Energy Indicator */
 .energy-check {
   background: linear-gradient(135deg, #ffecd2, #ffd8a8);
@@ -214,12 +245,20 @@ h1 {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   margin-bottom: 2rem;
 }
+/* REMOVE THE AGE SELECTOR FROM THE FORM */
+.compact-form .form-group:first-child {
+  display: none;
+}
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
   margin-bottom: 1.2rem;
+}
+/* ADJUST FORM LAYOUT */
+.form-row:first-child {
+  grid-template-columns: 1fr;
 }
 
 @media (max-width: 480px) {
@@ -858,6 +897,17 @@ input[type="radio"] {
 </head>
 <body>
 <h1>🎮 PlayIdeas Activity Generator</h1>
+<!-- NEW AGE SELECTOR AT TOP -->
+<div class="age-selector">
+  <h3>👶 How old is your child?</h3>
+  <select id="age" onchange="handleAgeChange()">
+    <option value="0-2">0-2 years</option>
+    <option value="3-5" selected>3-5 years</option>
+    <option value="6-8">6-8 years</option>
+    <option value="9-12">9-12 years</option>
+    <option value="12+">12+ years</option>
+  </select>
+</div>
 
 <!-- Parent Energy Check -->
 <div class="energy-check">
